@@ -11,7 +11,7 @@ The framework is located in [Cross-Government_AI_Testing_Framework.md](./framewo
 
 We welcome contributions and feedback from the public, researchers, AI community and industry experts:
 
-- Open an [Issue](https://github.com/Testing-AI-Standards/cross-gov-ai-testing-framework/issues) to ask a question or suggest improvements
+- Open an [Issue](https://github.com/Testing-AI-Standards/cross-gov-ai-testing-framework/issues) to ask a question or suggest improvements > New Issue > Feedback on framework > Fill the details
 - Submit a Pull Request with proposed changes
 - Tag specific sections for clarification or refinement
 
