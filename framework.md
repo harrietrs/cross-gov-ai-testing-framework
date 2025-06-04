@@ -65,22 +65,22 @@ Treat AI models as ever-evolving - they may be retrained, updated or refined ove
 - **Adopt a Risk-Based Approach**  
 The rigor of testing should be proportional to the AI system’s risk and impact . Not all AI deployments carry the same weight – a typo-correcting AI assistant is not as critical as an AI diagnosing medical conditions. Perform an initial risk classification (considering factors like impact on legal rights, safety, scale of use, novelty of the tech) and let that guide the depth of assurance. High-risk AI (e.g. those that could endanger lives or cause legal determinations about individuals) demand exhaustive testing – possibly including formal verification or external audits – before deployment . Lower-risk tools can use lighter-weight checks, though still covering all relevant quality dimensions. Under this framework, no AI system is deployed without adequate testing, but the notion of 'proportionality' ensures resources are focused where it matters most.
 
-- **Make AI Decisions Transparent and Understandable**
+- **Make AI Decisions Transparent and Understandable**    
 Ensure the AI’s workings can be explained and interpreted by humans to an appropriate degree . This means investing in explainability techniques: for ML, use tools to highlight which factors influenced specific predictions; for rule-based systems, maintain clear logic documentation; for generative or agentic AI, provide context or summaries of how they operate. In testing, verify that these explanations are accurate and helpful. This principle supports transparency obligations such as providing meaningful information about automated decisions under GDPR.
 
-- **Treat Ethics as Testable Risk**
+- **Treat Ethics as Testable Risk**    
 Ethical considerations (e.g. avoiding harm, respecting rights, non-discrimination) should be managed like any other risk - with explicit tests and controls. Define ethical risk scenarios (such as the AI producing harmful or offensive output, or unfairly denying a service) and include them in test plans . Trace these back to design: ensure the system’s goals, training data, and constraints align with ethical guidelines. If there are defined ethical standards or checklists, treat compliance with those as test requirements.
 
-- **Test for Unintended Behaviors**
+- **Test for Unintended Behaviors**    
 Perform adversarial and stress testing to uncover how the AI behaves in extreme or unanticipated situations . This can reveal ‘unknown unknowns' - for example, a vision model picking up a spurious pattern (shortcut) or a chatbot getting tricked into revealing confidential info. Simulate malicious inputs, weird edge-case data, or reward hacking attempts to see if the AI can be pushed into undesired actions . This proactive probing helps identify vulnerabilities before real adversaries or incidents exploit them.
 
-- **Design for Safe and Predictable Failure**
+- **Design for Safe and Predictable Failure**   
 Verify that if the AI system does fail or encounter abnormal conditions, it fails safely . Testing should include scenarios of component outages, bad data, or exceptions to ensure the system responds with appropriate fallbacks (e.g. default to a conservative decision or hand off to a human) rather than uncontrolled behavior. In other words, build and test fail-safe mechanisms (or ‘graceful degradation’) so that failures do not lead to harm or chaos.
 
-- **Benchmark Performance Holistically**
+- **Benchmark Performance Holistically**  
 Test not only accuracy, but also the system’s efficiency, scalability, and resilience under load . Measure response times, throughput under peak usage, and resource utilization (CPU, memory, etc.), especially for large models or real-time systems. Evaluate performance under degraded conditions too (e.g. network latency, partial outages) to ensure service continuity. Holistic performance testing ensures the AI can meet service level requirements in a production environment, not just produce correct output in ideal lab conditions.
 
-- **Make AI Behavior Observable**
+- **Make AI Behavior Observable**   
 Implement monitoring hooks and telemetry to observe the AI in action . In testing and in production, we should track things like model confidence scores, input distributions, and output trends so that anomalies can be detected quickly. For example, if a model’s predictions start drifting from expected patterns, monitoring should trigger an alert. This observability principle ties into deployment - ensuring there are tools (dashboards, logs) to continually watch the ‘health’ of the AI system.
 
 These principles set the tone for the subsequent sections. They encourage testers and project teams to look at AI quality from multiple angles - technical, ethical, and operational - and to integrate assurance as a continuous effort. 
