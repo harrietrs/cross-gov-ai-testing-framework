@@ -7,7 +7,7 @@
    - [Audience](#audience)  
    - [AI Types Covered](#ai-types-covered)  
 3. [Testing and Quality Assurance Principles for AI](#testing-and-quality-assurance-principles-for-ai)  
-4. [Core AI Quality Characteristics for Testing](#core-ai-quality-characteristics-for-testing)  
+4. [Core AI Quality Attributes for Testing](#core-ai-quality-attributes-for-testing)  
 5. [Lifecycle Based Assurance](#lifecycle-based-assurance)  
 6. [Modular AI Testing Framework](#modular-ai-testing-framework)
 
@@ -84,6 +84,53 @@ Test not only accuracy, but also the system’s efficiency, scalability, and res
 Implement monitoring hooks and telemetry to observe the AI in action . In testing and in production, we should track things like model confidence scores, input distributions, and output trends so that anomalies can be detected quickly. For example, if a model’s predictions start drifting from expected patterns, monitoring should trigger an alert. This observability principle ties into deployment - ensuring there are tools (dashboards, logs) to continually watch the ‘health’ of the AI system.
 
 These principles set the tone for the subsequent sections. They encourage testers and project teams to look at AI quality from multiple angles - technical, ethical, and operational - and to integrate assurance as a continuous effort. 
+
+## Core AI Quality Attributes for Testing
+
+A cornerstone of this framework is understanding what quality means for AI systems. We define a set of Core Quality Characteristics that an AI system should be evaluated against. Each characteristic is accompanied by a definition and the specific testing focus needed to assure that quality attribute in an AI context. Table below summarizes the core quality characteristics, which form a quality matrix that teams can use to plan tests and measures:
+
+| Quality Attribute | Description                                      | Example Test Focus                              |
+|:-------------------|:--------------------------------------------------|:--------------------------------------------------|
+| Functional Suitability| Degree to which the AI fulfills its specified tasks and objectives.| Validate the AI outputs against requirements: e.g. check predictions or decisions for correctness and alignment with the intended functionality. Each rule (in rule-based systems) or each output category (in ML) should be tested to ensure expected behavior. |
+| Performance Efficiency| Speed, responsiveness, and resource usage of the AI system.| Measure inference time per transaction, throughput under load, and resource consumption (CPU, GPU, memory). Test that the model or system meets performance SLAs (e.g. response within X ms) and scales to expected user volumes.|
+| Compatibility| The ability of the AI system to operate in different environments, configurations, or to integrate with other systems.|Test the AI in varied runtime environments (different operating systems, hardware, cloud vs on-prem) and with other software components (APIs, databases). Ensure input/output formats are compatible and the AI component does not break existing interfaces.|
+| Usability | The ease with which users (human operators or end-users) can interact with and benefit from the AI. |Evaluate the user interface or interaction design around the AI: for example, clarity of a chatbot’s responses, interpretability of an AI decision support tool’s output, and user guidance or error messages. Include user experience (UX) testing sessions and accessibility reviews.|
+| Reliability| The consistency and stability of the AI system’s performance over time and under varying conditions.| Test for stability under stress and over extended periods. For instance, run the model through long sequences of inputs to see if it crashes or degrades. Check output consistency: does the AI produce similar results for similar inputs? Introduce fault conditions (like intermittent network or sensor failures for an AI IoT device) to see if the system recovers gracefully (no uncontrolled failures).|
+| Security | Protection against unauthorized access, misuse, or adversarial attacks on the AI system or its data.| Perform security testing, including penetration tests on AI APIs, checks for data leakage (does the model inadvertently reveal sensitive training data?), and adversarial attack simulations (e.g. for an image classifier, try adversarial pixel perturbations to see if it can be fooled ). Ensure proper authentication/authorization around the AI service.|
+| Maintainability| How easily the AI system (especially the model) can be maintained, updated, or fixed over time.| Verify that the code and model training process are well-documented and version-controlled. Test the process of retraining or updating the model: can it be done without introducing errors? Also, check modularity of the system (can components be replaced or improved in isolation?).|
+| Portability| The ability to transfer the AI system across different platforms or adapt it to work in new contexts.| If relevant, test deploying the model on different platforms (e.g. from a developer’s environment to the cloud, or from cloud to an edge device). Ensure dependencies are documented and containerization or virtualization works. For ML models, test that they can be re-trained or fine-tuned on new data domains (if portability extends to adapting to new tasks).|
+| Adaptability| The AIs ability to adjust its behavior in response to changes in its environment or requirements.| This often applies to online learning systems or configurable AI. Testing involves simulating environmental changes (new data patterns, concept drift) and verifying the system still functions correctly and meets NFRs after adapting . Check how quickly the AI adapts (latency of adaptation) and resources used during adaptation.|
+| Autonomy| Degree to which the AI can operate independently of human intervention. (Relevant for agentic or autonomous AI systems.)| Challenge the system outside its normal operating envelope to test its autonomy limits . For example, what happens if an autonomous agent encounters a scenario not covered in training? Does it request human help appropriately? Test any 'human override' triggers , the AI should know when to stop and defer to humans if certain risk thresholds are exceeded.|
+| Evolution (Learning Capability)| The capability of the AI to learn and improve from experience over time (if applicable).| If the system has an online learning component or periodic retraining, validate that learning improves performance without breaking existing functionality. Test for concept drift handling : feed the system data that gradually shifts in distribution and see if performance remains acceptable or if drift is detected. Also ensure mechanisms exist to detect when the AIs evolving behavior might diverge from policy (ethical drift).|
+| Transparency| The degree to which the AI’s workings, data, and logic are visible and understandable to stakeholders.|Check that the system produces audit logs or traceability of its decisions (e.g. which rules fired, or how a conclusion was reached). Ensure documentation like model cards or algorithmic transparency records are produced. A test in this context might be: given a specific decision the AI made, can we trace back to the input data and the steps that led to it? If using the ATRS, verify that the transparency record is complete and published .|
+| Explainability| The ability to explain or articulate the reasoning behind the AI’s outputs in human-understandable terms.| Apply explainability methods and evaluate them. For ML, use tools (e.g. SHAP, LIME) on sample outputs to generate feature importance or explanations . Then have domain experts review these explanations to see if they 'make sense' (e.g. are the important factors clinically relevant in a medical AI?). For rule-based systems, verify that each rule has an associated explanation, and that the system can generate a rationale trace (e.g. 'Application rejected because income below threshold and credit score low'). The testing focus is on fidelity of explanations (they should accurately reflect the true logic) and user comprehension (explanations should be understandable to the target audience).|
+| Freedom from Bias (Fairness)| The mitigation of unwanted bias – the AI’s outputs should be fair and not unjustifiably discriminate against any group or factor.| Conduct thorough bias audits: run the AI on test datasets stratified by sensitive attributes (like gender, ethnicity, age, etc.) and compare outcomes . Compute fairness metrics (e.g. difference in acceptance rates between groups, disparate error rates). Also test for data bias: e.g. use external datasets or synthetic data to check if the model has a skew. If biases are found, ensure mitigation steps are tested (such as retraining with balanced data or applying post-processing corrections). Verify compliance with Equality Act 2010 and PSED – public sector bodies must show they have considered and minimized discrimination in AI .|
+| Side Effects & Reward Hacking| The presence of unintended behaviors arising from the AI’s optimization process (especially in agentic or goal-driven AI).| Attempt to identify and trigger any potential side effects of the AI’s objectives . For example, in a reinforcement learning agent, see if it finds a shortcut that technically maximizes reward but is undesired (reward hacking). Create test scenarios where the straightforward way to achieve the goal is blocked, and see if the agent resorts to an unacceptable strategy. Evaluating this might involve simulation testing and anomaly detection on the agent’s behaviors.|
+| Ethical Compliance| Alignment with ethical guidelines, values, and laws (beyond bias alone) – e.g. ensuring the AI respects privacy, dignity, and does not produce harmful content.| Use an ethical checklist or assessment (for example, the EU’s Trustworthy AI Assessment List or a similar UK government ethics framework) and verify each point. Test cases might include: does the AI avoid producing disallowed content (toxicity tests for a chatbot)? Does it respect privacy (no personal data leaked; conforms to data minimization)? Involve an ethics review panel to examine outcomes. Pass/fail criteria should be established for ethical requirements (even if qualitative).|
+| Safety| The ability of the AI system to not cause harm to life, property, or the environment – particularly relevant for physical robots or decision-making in high-stakes domains.| Conduct worst-case scenario testing: identify what the most harmful possible outputs or errors could be (e.g. a medical AI misdiagnosis, or an autonomous vehicle control failure) and test with scenarios around those extremes . Validate any safety mechanisms (like emergency stop for a robot, or human review for certain high-risk decisions). If standards exist (e.g. functional safety standards for AI in automotive), ensure tests cover those criteria. Safety testing often overlaps with robustness and ethical testing but focuses on preventing harm.|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
