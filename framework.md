@@ -184,7 +184,18 @@ The lifecycle doesn’t end at deployment - continuous monitoring and improvemen
 - End-of-Life Planning (Retirement): - Eventually, the AI system may be retired or replaced. As part of continuous improvement, there should be a plan for decommissioning when appropriate. Metrics or checks include ensuring data retention and deletion policies are followed (‘100% of personal data archived or deleted as per policy upon retirement’) , and lessons learned compiled for future projects. While this is the final step of the lifecycle, it’s noted here for completeness: successful retirement is also part of assuring the AI’s overall lifecycle (no loose ends or forgotten models left running).
 
 ## Modular AI Testing Framework
-While the lifecycle approach tells us when to perform assurance activities, this section describes what tests to perform in detail. We present a Modular Testing Framework for AI, consisting of distinct testing modules, each addressing a specific facet of AI quality. These modules can be thought of as building blocks - depending on the AI system and its risk level. You might emphasize some modules more than others, but together they form a comprehensive testing regimen. The modular design allows flexibility; for example, a simple rule-based system might not need elaborate adversarial testing, whereas a machine learning model would. Each module also notes how approaches may differ for various AI types (rule-based vs ML vs generative vs agentic AI), ensuring the unique challenges of each are covered .
+While the lifecycle approach tells us when to perform assurance activities, this section describes what tests to perform in detail. We present a Modular Testing Framework for AI, consisting of distinct testing modules, each addressing a specific facet of AI quality. These modules can be thought of as building blocks - depending on the AI system and its risk level. You might emphasize some modules more than others, but together they form a comprehensive testing regimen. The modular design allows flexibility; for example, a simple rule-based system might not need elaborate adversarial testing, whereas a machine learning model would. Each module also notes how approaches may differ for various AI types (rule-based vs ML vs generative vs agentic AI), ensuring the unique challenges of each are covered.
+
+There are 9 modules in this framework:
+   - [Data & Input Validation](#data--input-validation-module)
+   - [Model Functionality Testing](#model-functionality-testing-module)
+   - [Bias and Fairness Testing](#bias-and-fairness-testing-module)
+   - [Explainability & Transparency](#explainability--transparency-module)
+   - [Robustness & Adversarial Testing](#robustness--adversarial-testing-module)
+   - [Performance & Efficiency Testing](#performance--efficiency-testing-module)
+   - [Integration & System Testing](#integration--system-testing-module)
+   - [User Acceptance & Ethical Review](#user-acceptance--ethical-review-module)
+   - [Continuous Monitoring & Improvement](#continuous-monitoring--improvement-module)
 
 ### Data & Input Validation Module
 **Objective:** This module focuses on the quality of data and inputs before they reach the AI model. The goal is to ensure that ‘garbage in’ doesn’t produce ‘garbage out’ - i.e., that any data feeding the AI (whether training data or live input) is valid, clean, and appropriate. For AI, data is the fuel, so rigorous validation here prevents downstream errors and biases.  
