@@ -17,4 +17,12 @@ We welcome contributions and feedback from the public, researchers, AI community
 
 ## 📢 Purpose
 
-This project supports the goal to ensure AI systems are ethical, transparent, and accountable.
+This framework supports the goal to ensure AI systems are ethical, transparent, and accountable.
+
+## 📄 Review Log
+| Action | Name                 |  Date          |
+|:-------|:---------------------|:---------------|
+|Draft  | **Mibin Boban**   <br> X-Gov Test Community Chair / Head of Quality Engineering - GDS | 5/6/2025|
+|Working Group Review|1.  |   |
+|                    |2.  |  |
+|                    |3.  |  |
