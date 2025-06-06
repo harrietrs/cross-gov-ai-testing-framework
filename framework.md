@@ -19,6 +19,7 @@
    - [Integration & System Testing](#integration--system-testing-module)
    - [User Acceptance & Ethical Review](#user-acceptance--ethical-review-module)
    - [Continuous Monitoring & Improvement](#continuous-monitoring--improvement-module)
+8. [Toola and Resources for Testing](#tools-and-resources-for-testing)
 7. [Conclusion](#conclusion)
 
 ## Executive Summary
