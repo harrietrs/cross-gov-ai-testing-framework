@@ -19,6 +19,7 @@
    - [Integration & System Testing](#integration--system-testing-module)
    - [User Acceptance & Ethical Review](#user-acceptance--ethical-review-module)
    - [Continuous Monitoring & Improvement](#continuous-monitoring--improvement-module)
+8. [Toola and Resources for Testing](#tools-and-resources-for-testing)
 7. [Conclusion](#conclusion)
 
 ## Executive Summary
@@ -316,6 +317,14 @@ Deploying the AI system is not the end of the assurance process – it’s actua
 - **Ongoing Ethical Oversight:** In addition to technical monitoring, maintain ethical oversight. Perhaps the ethics board reconvenes at intervals to review how the AI is performing in the real world. They might look at metrics like number of complaints or appeals of AI-driven decisions, any unintended societal impacts, etc. The ATRS record might be updated if the AI’s scope or performance changes significantly. This could also tie to external transparency: maybe publish summary information about how the AI has been used and performed (some agencies do annual transparency reports).
 - **Continuous Improvement Process:** Use all the above inputs to drive enhancements. This might not just be model updates; it could be improvements to the user interface based on user feedback, or adjustments to thresholds to reduce false positives/negatives, etc. Essentially treat the AI service as you would a product that undergoes regular improvement cycles. Importantly, incorporate any new best practices or tools that emerge in the AI assurance field (for instance, if a new bias detection technique becomes available, consider adopting it in the next evaluation round). The framework remains a living one – teams should update their testing approaches as lessons are learned. A lesson learned register is a good idea: after major milestones or incidents, note what was learned and update internal guidance.
 - **Retirement Planning:** Though it might be years out, part of continuous oversight is knowing when to decommission the AI. Criteria might be set (like if the AI becomes obsolete or a better system emerges, or if maintenance is too costly vs benefit). When retirement time comes, ensure a plan: export needed data, retrain new model or transition to manual process, and shut down gracefully so no dependency is broken. This includes notifying stakeholders, archiving the final state, and deleting data as required .
+
+## Tools and Resources for Testing
+This framework does not mandate specific tools. Departments should select tools that align with their testing needs, guided by appropriate governance, risk assessments, and testing goals.
+
+We encourage teams to refer to the UK Government AI Playbook, which provides practical guidance on responsible AI development and use. For evaluating LLMs, teams should also consider Inspect – an open-source model evaluation framework released by the UK AI Safety Institute.
+
+[UK AI Playbook](https://www.gov.uk/government/publications/ai-playbook-for-the-uk-government/artificial-intelligence-playbook-for-the-uk-government-html)
+[Inspect](https://inspect.aisi.org.uk/)
 
 ## Conclusion
 The responsible deployment of Artificial Intelligence in public services requires more than innovation—it demands trust, transparency, and accountability. This framework provides a structured approach to testing and assuring the quality of AI systems, supporting departments in meeting their obligations to the public while enabling the safe use of advanced technologies.
