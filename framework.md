@@ -317,6 +317,14 @@ Deploying the AI system is not the end of the assurance process – it’s actua
 - **Continuous Improvement Process:** Use all the above inputs to drive enhancements. This might not just be model updates; it could be improvements to the user interface based on user feedback, or adjustments to thresholds to reduce false positives/negatives, etc. Essentially treat the AI service as you would a product that undergoes regular improvement cycles. Importantly, incorporate any new best practices or tools that emerge in the AI assurance field (for instance, if a new bias detection technique becomes available, consider adopting it in the next evaluation round). The framework remains a living one – teams should update their testing approaches as lessons are learned. A lesson learned register is a good idea: after major milestones or incidents, note what was learned and update internal guidance.
 - **Retirement Planning:** Though it might be years out, part of continuous oversight is knowing when to decommission the AI. Criteria might be set (like if the AI becomes obsolete or a better system emerges, or if maintenance is too costly vs benefit). When retirement time comes, ensure a plan: export needed data, retrain new model or transition to manual process, and shut down gracefully so no dependency is broken. This includes notifying stakeholders, archiving the final state, and deleting data as required .
 
+## Tools and Resources for Testing
+This framework does not mandate specific tools. Departments should select tools that align with their testing needs, guided by appropriate governance, risk assessments, and testing goals.
+
+We encourage teams to refer to the UK Government AI Playbook, which provides practical guidance on responsible AI development and use. For evaluating LLMs, teams should also consider Inspect – an open-source model evaluation framework released by the UK AI Safety Institute.
+
+[UK AI Playbook](https://www.gov.uk/government/publications/ai-playbook-for-the-uk-government/artificial-intelligence-playbook-for-the-uk-government-html)
+[Inspect](https://inspect.aisi.org.uk/)
+
 ## Conclusion
 The responsible deployment of Artificial Intelligence in public services requires more than innovation—it demands trust, transparency, and accountability. This framework provides a structured approach to testing and assuring the quality of AI systems, supporting departments in meeting their obligations to the public while enabling the safe use of advanced technologies.
 By aligning testing and assurance activities with defined quality principles, lifecycle strategies, modular testing methods, and proportionate risk management, government teams can evaluate AI systems consistently and rigorously. This framework recognises the evolving nature of AI—especially with the emergence of complex agentic and generative models—and promotes continuous adaptation, monitoring, and governance to keep testing practices relevant and robust.
