@@ -23,16 +23,18 @@
 
 ## Executive Summary
 
-This framework presents a comprehensive AI Testing approach for use across public sector AI projects. It provides standardised guidance to ensure that Artificial Intelligence (AI) systems are safe, effective, and trustworthy throughout their lifecycle. The framework aligns with the UK Government’s AI Playbook principles and requirements for ethical and responsible AI use . It is applicable to a wide range of AI technologies - from simple rule-based systems to complex machine learning models, generative AI, and autonomous agentic AI - with tailored approaches for each.
+AI is already playing a growing role across public services - from decision support to automation to frontline service delivery. As these systems become more capable and more embedded in critical processes, it is essential that we understand how well they work, how fair they are, and what happens when they go wrong.
 
-The framework defines key testing and quality engineering principles for AI, core quality characteristics to evaluate, and a lifecycle-based testing strategy that integrates testing activities from initial design through deployment and operation. It introduces a modular testing approach with specific test modules that can be selected based on the AI system’s type and risk profile. High-risk AI applications (for example, those impacting public safety or individuals’ rights) are expected to undergo more rigorous testing and oversight than lower-risk uses.
+This framework sets out a practical, shared approach to testing AI systems across public sector. It focuses on helping teams test for quality, trustworthiness, and risk - whether the AI in question is a traditional rule-based system, a machine-learned model, or a newer generative or agentic system.
 
-By following this framework, Government teams can increase confidence that their AI systems are reliable, unbiased, explainable, and compliant with applicable standards and legislation. The framework helps project teams plan appropriate testing activities, select relevant metrics and tools, and address ethical risks proactively. Ultimately, it supports the public sector in harnessing AI innovation while safeguarding the public’s trust, rights, and well-being.
+Testing AI is not the same as testing traditional software. AI behaves probabilistically, learns from data that may shift over time, and may act autonomously or opaquely. That means we need new methods, new language, and new standards. This framework provides the foundations to support that shift.
+
+Importantly, this is not a checklist or a rigid standard. It is a living tool to help organisations ask better questions, design better tests, and share what works. Departments can tailor the framework to fit their context, and contribute their own learning back into the shared understanding of how to test AI in government responsibly.
 
 ## Introduction
 
 ### Purpose
-The purpose of this document is to establish a unified cross-government framework for testing and assuring AI systems. It provides a common approach and set of standards for testing AI-enabled solutions used in the UK public sector. By defining clear procedures, quality criteria, and governance measures, this framework aims to ensure that all AI systems deployed are thoroughly validated for safety, accuracy, fairness, transparency, security, and other critical quality criteria before and during operation. It translates high-level AI ethics and risk management principles into a practical testing strategy that project teams can follow. Ultimately, the framework’s purpose is to embed consistency and rigor in how the teams build and evaluate AI, such that outcomes are reliable and align with legal and ethical obligations.
+The purpose of this framework is to provide a shared reference point for government teams who are responsible for testing AI systems. Whether you are building AI internally, procuring it externally, or overseeing its implementation, this document is designed to help you ask the right questions about how AI systems are tested—before, during, and after deployment. It helps establish a minimum level of testing rigour for AI systems that impact the public, while allowing departments to adapt it to their own governance models, service needs, and levels of technical maturity.
 ### Scope
 This framework applies to all stages of the AI solution lifecycle – from initial planning and design through development, testing, deployment, and ongoing monitoring. It is intended for use across UK Government departments, agencies, and other public sector bodies developing or procuring AI systems. The scope covers all types of AI technologies and addresses both technical testing (model performance, data quality, etc.) and governance processes (risk assessments, documentation, approvals).
 The framework can be adapted to AI initiatives of varying size and risk. It covers pre-deployment testing (e.g. validating models in controlled environments) as well as post-deployment assurance (e.g. monitoring live systems for drift or issues). The framework is cross-disciplinary, encompassing activities for data scientists, developers,  test engineers, policy and ethics reviewers, information testing teams, and senior decision-makers. It does not replace specific legal or regulatory requirements, but rather consolidates and references them so that teams can ensure compliance through testing.
@@ -62,39 +64,41 @@ This framework is designed to cover a broad range of AI system types, noting tha
 
 > Because agentic AI can evolve through interactions, continuous monitoring and periodic re-validation are crucial for this type.
 
-For each AI type above, the framework will highlight any specific considerations in the [Modular AI Testing Framework](#modular-ai-testing-framework). Many AI systems are hybrid or complex (for instance, an AI service might include an ML model and a rule-based decision layer together); in such cases, teams should apply all relevant parts of the framework. The overarching approach is risk-based and context-appropriate, meaning that the extent of testing for any AI system should be commensurate with its potential impact and complexity.
+Where specific testing needs differ by AI type, these are called out in the relevant sections of this framework.
 
 ## Testing and Quality Engineering Principles for AI
 
-- **Design Context-Appropriate Testing**  
-One size does not fit all. Always validate AI systems in conditions that reflect their real-world use context . This means moving beyond idealized training scenarios - for example, testing models on live or representative data to detect concept drift or unusual inputs that differ from training. A rule-based expert system, a predictive ML model, and a generative AI chatbot each require a different testing focus and test design tailored to their use case and operating environment.
+Testing AI is different. Traditional testing assumes software will behave deterministically. AI doesn’t always follow that rule — it adapts, it predicts, it generates. That makes testing both more complex and more critical.
 
-- **Ensure Stability of Autonomous Operation**  
+- **Design Context-Appropriate Testing**  
+One size does not fit all. Always test AI systems in conditions that reflect their real-world use context . This means moving beyond idealised training scenarios - for example, testing models on live or representative data to detect concept drift or unusual inputs that differ from training. And rule-based expert system, a predictive ML model, and a generative AI chatbot each require a different testing focus and test design tailored to their use case and operating environment.
+
+- **Test Autonomy, Don't Assume it**  
 If the AI operate with any autonomy, evaluate how it behaves during prolonged unattended operation and edge cases- Does it gracefully escalate to human control when needed? Can it recover safely from errors without human intervention? We must specifically test ‘agentic’ aspects: for autonomous/agentic AI, simulate extended runs and unexpected scenarios to ensure the system remains safe and effective without constant oversight.
 
-- **Continuously Test Quality Across Versions**  
+- **Test for Drift and Change**  
 Treat AI models as ever-evolving - they may be retrained, updated or refined over time. Establish procedures to retest models whenever they change (new data, new model release, pipeline modifications) . This ongoing testing guards against regressions (performance drops), ethical drift (e.g. a model becoming less fair over time), or other quality degradation. Continuously incorporate feedback from real-world use to improve both the AI and the assurance measures (learning from incidents, updating tests, etc.).
 
 - **Adopt a Risk-Based Approach**  
 The rigor of testing should be proportional to the AI system’s risk and impact . Not all AI deployments carry the same weight – a typo-correcting AI assistant is not as critical as an AI diagnosing medical conditions. Perform an initial risk classification (considering factors like impact on legal rights, safety, scale of use, novelty of the tech) and let that guide the depth of testing. High-risk AI (e.g. those that could endanger lives or cause legal determinations about individuals) demand exhaustive testing – possibly including formal verification or external audits – before deployment . Lower-risk tools can use lighter-weight checks, though still covering all relevant quality dimensions. Under this framework, no AI system is deployed without adequate testing, but the notion of 'proportionality' ensures resources are focused where it matters most.
 
-- **Make AI Decisions Transparent and Understandable**    
-Ensure the AI’s workings can be explained and interpreted by humans to an appropriate degree . This means investing in explainability techniques: for ML, use tools to highlight which factors influenced specific predictions; for rule-based systems, maintain clear logic documentation; for generative or agentic AI, provide context or summaries of how they operate. In testing, verify that these explanations are accurate and helpful. This principle supports transparency obligations such as providing meaningful information about automated decisions under GDPR.
+- **Test What You Can Explain**    
+An AI decision that can’t be explained can’t be trusted—or fixed. Testing should include not only whether the output is correct, but whether it makes sense. Use explainability tools to trace decision paths, surface logic, and ensure outputs align with what users expect.
 
 - **Treat Ethics as Testable Risk**    
 Ethical considerations (e.g. avoiding harm, respecting rights, non-discrimination) should be managed like any other risk - with explicit tests and controls. Define ethical risk scenarios (such as the AI producing harmful or offensive output, or unfairly denying a service) and include them in test plans . Trace these back to design: ensure the system’s goals, training data, and constraints align with ethical guidelines. If there are defined ethical standards or checklists, treat compliance with those as test requirements.
 
-- **Test for Unintended Behaviors**    
+- **Look for What Wasn’t Intended**    
 Perform adversarial and stress testing to uncover how the AI behaves in extreme or unanticipated situations . This can reveal ‘unknown unknowns' - for example, a vision model picking up a spurious pattern (shortcut) or a chatbot getting tricked into revealing confidential info. Simulate malicious inputs, weird edge-case data, or reward hacking attempts to see if the AI can be pushed into undesired actions . This proactive probing helps identify vulnerabilities before real adversaries or incidents exploit them.
 
-- **Design for Safe and Predictable Failure**   
+- **Test Safe and Predictable Failure**   
 Verify that if the AI system does fail or encounter abnormal conditions, it fails safely . Testing should include scenarios of component outages, bad data, or exceptions to ensure the system responds with appropriate fallbacks (e.g. default to a conservative decision or hand off to a human) rather than uncontrolled behavior. In other words, build and test fail-safe mechanisms (or ‘graceful degradation’) so that failures do not lead to harm or chaos.
 
 - **Benchmark Performance Holistically**  
 Test not only accuracy, but also the system’s efficiency, scalability, and resilience under load . Measure response times, throughput under peak usage, and resource utilization (CPU, memory, etc.), especially for large models or real-time systems. Evaluate performance under degraded conditions too (e.g. network latency, partial outages) to ensure service continuity. Holistic performance testing ensures the AI can meet service level requirements in a production environment, not just produce correct output in ideal lab conditions.
 
-- **Make AI Behavior Observable**   
-Implement monitoring hooks and telemetry to observe the AI in action . In testing and in production, we should track things like model confidence scores, input distributions, and output trends so that anomalies can be detected quickly. For example, if a model’s predictions start drifting from expected patterns, monitoring should trigger an alert. This observability principle ties into deployment - ensuring there are tools (dashboards, logs) to continually watch the ‘health’ of the AI system.
+- **Make Quality Observable**   
+Testing doesn’t end at deployment. Quality needs to be visible in production through monitoring, feedback loops, and traceable logs. If something goes wrong, you should know about it—early, clearly, and with enough data to respond quickly.
 
 These principles set the tone for the subsequent sections. They encourage testers and project teams to look at AI quality from multiple angles - technical, ethical, and operational - and to integrate testing as a continuous effort. 
 
