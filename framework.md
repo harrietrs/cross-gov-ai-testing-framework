@@ -74,7 +74,7 @@ Testing AI is different. Traditional testing assumes software will behave determ
 - **Design Context-Appropriate Testing**  
 One size does not fit all. Always test AI systems in conditions that reflect their real-world use context . This means moving beyond idealised training scenarios - for example, testing models on live or representative data to detect concept drift or unusual inputs that differ from training. And rule-based expert system, a predictive ML model, and a generative AI chatbot each require a different testing focus and test design tailored to their use case and operating environment.
 
-- **Test the Quality and Diversity of Your Data**
+- **Test the Quality and Diversity of Your Data**  
 AI systems are only as good as the data they learn from. High-quality testing must start with scrutinising the datasets that shape the model’s behaviour. Teams should assess data for completeness, accuracy, and relevance — but also for representation and balance across different groups and scenarios. Testing should actively uncover gaps or biases in the data that could lead to unfair or unreliable results. Good AI testing isn’t just about what the system does — it’s about what it was taught.
 
 - **Test Autonomy, Don't Assume it**  
