@@ -13,7 +13,7 @@
    - [Data Collection and Preparation](#data-collection-and-preparation)
    - [Model Development and Training](#model-development-and-training)
    - [Validation and Verification (Testing Phase)](#validation-and-verification-testing-phase)
-   - [Operational Readiness and Assurance Testing](#operational-readiness-and-assurance-testing)
+   - [Operational Readiness](#operational-readiness)
    - [Deployment (Release and Integration)](#deployment-release-and-integration)
    - [Monitoring and Continuous Assurance](#monitoring-and-continuous-assurance) 
 6. [Modular AI Testing Framework](#modular-ai-testing-framework)
@@ -182,7 +182,7 @@ Now the model (and any surrounding system components) undergoes rigorous testing
 - User Feedback (Pilot/UAT): - If a pilot user group or user acceptance testing (UAT) was conducted (which is recommended especially for tools with user interfaces), collect their feedback quantitatively. E.g. ‘In UAT, 90% of users were able to complete the task with the AI’s assistance without errors; average satisfaction rating 4.2/5'. Also capture qualitative issues (like ‘users found explanations confusing in 3 out of 10 cases’). This informs last-mile improvements.
 - Bug and Issue Counts: - The number of defects found during this testing phase, often categorized by severity. For example: ‘5 critical issues (must fix), 12 minor issues logged’. And ideally, by the end, all critical issues are resolved or have acceptable workarounds. Particularly important are any ethical or safety issues discovered – these must be addressed or explicitly accepted by governance if not fixable.
 - Go/No-Go Recommendation: - Usually a testing phase ends with a formal test report. A key outcome is a recommendation on whether the system is fit for deployment. This is often phrased as: ‘Proceed to deployment’ or ‘Proceed to deployment - but with a few conditions’ or ‘Not ready – requires rework on X’. This recommendation will feed into the governance decision-making in the next phase.
-### Operational Readiness and Assurance Testing
+### Operational Readiness
 **Focus**
 Most software systems will undergo an Operational Acceptance test phase that determines its suitability to be deployed on to a production environment. This testing focuses on the operational readiness of the system. The generic priciples of OAT testing also apply to the in the context of deploying AI systems. This implies that procedures in place for Alerting & Incident Response, Failover & Redundancy, User access & permission management, Audit trail logging etc are tested for and assured. When managing this phase of testing for AI systems, it will be prudent to also consider aspects like Human Oversigt & Override capability, Safe shutdown & Kill switch, Reversal & Undo mechanism, Continous Model Perfomance monitoring etc.
 
