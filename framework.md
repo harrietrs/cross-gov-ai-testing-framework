@@ -108,8 +108,8 @@ Verify that if the AI system does fail or encounter abnormal conditions, it fail
 - **Benchmark Performance Holistically**  
 Test not only accuracy, but also the system’s efficiency, scalability, and resilience under load . Measure response times, throughput under peak usage, and resource utilization (CPU, memory, etc.), especially for large models or real-time systems. Evaluate performance under degraded conditions too (e.g. network latency, partial outages) to ensure service continuity. Holistic performance testing ensures the AI can meet service level requirements in a production environment, not just produce correct output in ideal lab conditions.
 
-- **Make Quality Observable**   
-Testing doesn’t end at deployment. Quality needs to be visible in production through monitoring, feedback loops, and traceable logs. If something goes wrong, you should know about it—early, clearly, and with enough data to respond quickly.
+- **Build and Observe Quality from the Start**   
+Quality shouldn't be an afterthought - it must bebuilt in from beginning. Apply a shift-left approach by embedding testing into early stages and continuously throughout development. Testing doesn’t end at deployment. Quality needs to be visible in production through monitoring, feedback loops, and traceable logs. If something goes wrong, you should know about it—early, clearly, and with enough data to respond quickly.
 
 These principles set the tone for the subsequent sections. They encourage testers and project teams to look at AI quality from multiple angles - technical, ethical, and operational - and to integrate testing as a continuous effort. 
 
