@@ -24,5 +24,5 @@ This framework supports the goal to ensure AI systems are ethical, transparent, 
 |:-------|:---------------------|:---------------|
 |Draft  | **Mibin Boban**   <br> X-Gov Testing Community Chair / Head of Quality Engineering - GDS | 5/6/2025|
 |Working Group Review|1. **Dinesh KTJ**   <br> Principal Test Engineer - Home Office  | 16/6/2025  |
-|                    |2.  |  |
+|                    |2. **David Lee**   <br> Lead Technical Architect - GDS  | 17/6/2025  |
 |                    |3.  |  |
