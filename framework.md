@@ -347,11 +347,11 @@ This framework does not mandate specific tools. Departments should select tools 
 
 We encourage teams to refer to the UK Government AI Playbook, which provides practical guidance on responsible AI development and use. For evaluating LLMs, teams should also consider Inspect – an open-source model evaluation framework released by the UK AI Safety Institute.
 
-- [UK AI Playbook](https://www.gov.uk/government/publications/ai-playbook-for-the-uk-government/artificial-intelligence-playbook-for-the-uk-government-html) -
-- [Inspect](https://inspect.aisi.org.uk/) -
-- [Secure AI System Development](https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development) -
-- [GenAI Top10 Risks and Mitigations](https://genai.owasp.org/llm-top-10/) -
-- [GOV.UK AI Insights](https://www.gov.uk/government/publications/ai-insights) -
+- [UK AI Playbook](https://www.gov.uk/government/publications/ai-playbook-for-the-uk-government/artificial-intelligence-playbook-for-the-uk-government-html)
+- [Inspect](https://inspect.aisi.org.uk/)
+- [Secure AI System Development](https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development)
+- [GenAI Top10 Risks and Mitigations](https://genai.owasp.org/llm-top-10/)
+- [GOV.UK AI Insights](https://www.gov.uk/government/publications/ai-insights)
 
 
 ## Conclusion
