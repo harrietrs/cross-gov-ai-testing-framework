@@ -357,8 +357,8 @@ We encourage teams to refer to the UK Government AI Playbook, which provides pra
 
 
 ## Conclusion
-The responsible deployment of Artificial Intelligence in public services requires more than innovation—it demands trust, transparency, and accountability. This framework provides a structured approach to testing and assuring the quality of AI systems, supporting departments in meeting their obligations to the public while enabling the safe use of advanced technologies.
-By aligning testing and assurance activities with defined quality principles, lifecycle strategies, modular testing methods, and proportionate risk management, government teams can evaluate AI systems consistently and rigorously. This framework recognises the evolving nature of AI—especially with the emergence of complex agentic and generative models—and promotes continuous adaptation, monitoring, and governance to keep testing practices relevant and robust.
+The responsible deployment of Artificial Intelligence in public services requires more than innovation - it demands trust, transparency, and accountability. This framework provides a structured approach to testing and assuring the quality of AI systems, supporting departments in meeting their obligations to the public while enabling the safe use of advanced technologies.
+By aligning testing and assurance activities with defined quality principles, lifecycle strategies, modular testing methods, and proportionate risk management, government teams can evaluate AI systems consistently and rigorously. This framework recognises the evolving nature of AI - especially with the emergence of complex agentic and generative models - and promotes continuous adaptation, monitoring, and governance to keep testing practices relevant and robust.
 
 
 
