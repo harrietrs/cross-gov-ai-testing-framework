@@ -153,6 +153,8 @@ At the very start of the project, the emphasis is on setting the stage for quali
 
 > **[Secure by Design](https://www.security.gov.uk/policy-and-guidance/secure-by-design/principles/)** helps to proactively embed security from inception. It is part of [Service Standard](https://www.gov.uk/service-manual/service-standard/point-9-create-a-secure-service) and should be considered essential for AI testing and assurance.
 
+> **Accessibility** is important. Some AI systems don’t offer alternatives like text-to-speech, voice input, or visual aids, which are crucial for accessibility. Without adaptive features, AI may not adjust its language level or format to suit the user’s needs.
+
 **Example Outputs/Metrics** 
 - Risk Identification: — Number of high-risk items identified in the initial risk assessment (e.g. if 5 major ethical risks are logged, they will need mitigation plans). A completed risk register or heatmap is an output .
 - Impact Assessment Score: — If using an impact assessment framework (e.g. scoring for societal impact), record the outcome (e.g. a score indicating medium impact with mitigation, or a summary of the impact assessment’s findings such as ‘minimal privacy impact’ or ‘significant equality implications’).
