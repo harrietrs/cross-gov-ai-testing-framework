@@ -1,6 +1,6 @@
 {
     "version": "0.2",
-    "language": "en",
+    "language": "en-GB",
     "ignorePaths": [
       "node_modules",
       ".git",
@@ -8,6 +8,6 @@
       "README.md"
     ],
     "useDefaultConfiguration":true,
-    "dictionaries": ["en","typescript", "node", "html", "css"]
+    "dictionaries": ["en-GB","typescript", "node", "html", "css"]
 }
   
