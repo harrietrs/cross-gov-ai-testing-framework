@@ -22,11 +22,12 @@ We welcome contributions and feedback from the public, researchers, AI community
 This framework supports the goal to ensure AI systems are ethical, transparent, and accountable.
 
 ## 📄 Review Log
+
 | Action | Name                 |  Date          |
 |:-------|:---------------------|:---------------|
 |Author | **Mibin Boban**   <br> X-Gov Testing Community Chair / Head of Quality Engineering - GDS | 5/6/2025|
 |Working Group Review|1. **Dinesh KTJ**   <br> Principal Test Engineer - Home Office  | 16/6/2025  |
-|                    |2. **David Lee**   <br> Lead Technical Architect - GDS  | 17/6/2025  |
-|                    |3. **Vas Ntokas**   <br> Lead Test Engineer - DWP  | 18/6/2025  |
-|                    |4. **David Rutter-Close**   <br> Lead Test Engineer - DfE  | 19/6/2025  |
-|                    |5. **Adam Byfield**   <br> Principal Technical Assurance Specialist - NHS England | 19/6/2025  |
+|               |2. **David Lee**   <br> Lead Technical Architect - GDS  | 17/6/2025  |
+|               |3. **Vas Ntokas**   <br> Lead Test Engineer - DWP  | 18/6/2025  |
+|               |4. **David Rutter-Close**   <br> Lead Test Engineer - DfE  | 19/6/2025  |
+|               |5. **Adam Byfield**   <br> Principal Technical Assurance Specialist - NHS England | 19/6/2025  |
