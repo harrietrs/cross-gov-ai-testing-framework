@@ -113,7 +113,7 @@ Treat AI models as ever-evolving - they may be retrained, updated or refined ove
 - **Adopt a Risk-Based Approach**  
 The rigor of testing should be proportional to the AI system’s risk and impact . Not all AI deployments carry the same weight – a typo-correcting AI assistant is not as critical as an AI diagnosing medical conditions. Perform an initial risk classification (considering factors like impact on legal rights, safety, scale of use, novelty of the tech) and let that guide the depth of testing. High-risk AI (e.g. those that could endanger lives or cause legal determinations about individuals) demand exhaustive testing – possibly including formal verification or external audits – before deployment . Lower-risk tools can use lighter-weight checks, though still covering all relevant quality dimensions. Under this framework, no AI system is deployed without adequate testing, but the notion of 'proportionality' ensures resources are focused where it matters most. Risk Based Assurance (RBA) practices are recommended.
 
-- **Test What You Can Explain or Interpret**      
+- **Test What You Can Explain or Interpret**  
 An AI decision that can’t be explained or interpreted can’t be trusted—or fixed. Testing should include not only whether the output is correct, but whether it makes sense. Use explainability tools to trace decision paths, surface logic, and ensure outputs align with what users expect. AI may assume users can read and write fluently, which excludes those with dyslexia or learning disabilities - accessibility is an essential characteristic.
 
 - **Treat Ethics as Testable Risk**  
