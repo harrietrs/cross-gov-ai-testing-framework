@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm install -g markdownlint-cli
-      - run: markdownlint '**/*.md' --ignore node_modules
+      - run: markdownlint '**/*.md' --ignore node_modules --config markdownlint.json
 
   spell-check:
     name: Spell Check (cspell)
@@ -24,7 +24,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm install -g cspell
-      - run: cspell "**/*.{md,html}" --no-progress --config cspell.json
+      - run: ls -la
+      - run: cspell "**/*.{md,html}" --no-progress
 
   broken-link-check:
     name: Broken Link Check
