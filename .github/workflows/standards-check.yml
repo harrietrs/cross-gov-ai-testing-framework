@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm install -g cspell
-      - run: cspell "**/*.{md,html}" --no-progress --config cspell.json
+      - run: cspell "**/*.{md,html}" --no-progress --config ./cspell.json
 
   broken-link-check:
     name: Broken Link Check
