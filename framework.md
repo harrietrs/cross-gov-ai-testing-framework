@@ -113,25 +113,25 @@ Treat AI models as ever-evolving - they may be retrained, updated or refined ove
 - **Adopt a Risk-Based Approach**  
 The rigor of testing should be proportional to the AI system’s risk and impact . Not all AI deployments carry the same weight – a typo-correcting AI assistant is not as critical as an AI diagnosing medical conditions. Perform an initial risk classification (considering factors like impact on legal rights, safety, scale of use, novelty of the tech) and let that guide the depth of testing. High-risk AI (e.g. those that could endanger lives or cause legal determinations about individuals) demand exhaustive testing – possibly including formal verification or external audits – before deployment . Lower-risk tools can use lighter-weight checks, though still covering all relevant quality dimensions. Under this framework, no AI system is deployed without adequate testing, but the notion of 'proportionality' ensures resources are focused where it matters most. Risk Based Assurance (RBA) practices are recommended.
 
-- **Test What You Can Explain**    
+- **Test What You Can Explain**
 An AI decision that can’t be explained or interpreted can’t be trusted—or fixed. Testing should include not only whether the output is correct, but whether it makes sense. Use explainability tools to trace decision paths, surface logic, and ensure outputs align with what users expect. AI may assume users can read and write fluently, which excludes those with dyslexia or learning disabilities - accessibility is an essential characteristic.
 
-- **Treat Ethics as Testable Risk**    
+- **Treat Ethics as Testable Risk**
 Ethical considerations (e.g. avoiding harm, respecting rights, non-discrimination) should be managed like any other risk - with explicit tests and controls. Define ethical risk scenarios (such as the AI producing harmful or offensive output, or unfairly denying a service) and include them in test plans . Trace these back to design: ensure the system’s goals, training data, and constraints align with ethical guidelines. Scenario and demographic distributions within training data plays important role. If there are defined ethical standards or checklists, treat compliance with those as test requirements.
 
-- **Look for What Wasn’t Intended**    
+- **Look for What Wasn’t Intended**
 Perform adversarial and stress testing to uncover how the AI behaves in extreme or unanticipated situations . This can reveal ‘unknown unknowns' - for example, a vision model picking up a spurious pattern (shortcut) or a chatbot getting tricked into revealing confidential info. Simulate malicious inputs, weird edge-case data, or reward hacking attempts to see if the AI can be pushed into undesired actions . This proactive probing helps identify vulnerabilities before real adversaries or incidents exploit them.
 
-- **Test Safe and Predictable Failure**   
+- **Test Safe and Predictable Failure**
 Verify that if the AI system does fail or encounter abnormal conditions, it fails safely . Testing should include scenarios of component outages, bad data, or exceptions to ensure the system responds with appropriate fallbacks (e.g. default to a conservative decision or hand off to a human) rather than uncontrolled behavior. In other words, build and test fail-safe mechanisms (or ‘graceful degradation’) so that failures do not lead to harm or chaos.
 
-- **Benchmark Performance Holistically**  
+- **Benchmark Performance Holistically**
 Test not only accuracy, but also the system’s efficiency, scalability, and resilience under load . Measure response times, throughput under peak usage, and resource utilization (CPU, memory, etc.), especially for large models or real-time systems. Evaluate performance under degraded conditions too (e.g. network latency, partial outages) to ensure service continuity. Holistic performance testing ensures the AI can meet service level requirements in a production environment, not just produce correct output in ideal lab conditions.
 
-- **Build and Observe Quality from the Start**   
+- **Build and Observe Quality from the Start**
 Quality shouldn't be an afterthought - it must be built in from beginning. Apply a shift-left approach by embedding testing into early stages and continuously throughout development. Testing doesn’t end at deployment. Quality needs to be visible in production through monitoring, feedback loops, and traceable logs. If something goes wrong, you should know about it—early, clearly, and with enough data to respond quickly.
 
-These principles set the tone for the subsequent sections. They encourage testers and project teams to look at AI quality from multiple angles - technical, ethical, and operational - and to integrate testing as a continuous effort. 
+These principles set the tone for the subsequent sections. They encourage testers and project teams to look at AI quality from multiple angles - technical, ethical, and operational - and to integrate testing as a continuous effort.
 
 ## Core AI Quality Attributes for Testing
 
@@ -170,14 +170,12 @@ Assuring an AI system’s quality is not a one-time event - it must be woven thr
 
 ### Planning and Design
 
-**Focus**    
+**Focus**
 At the very start of the project, the emphasis is on setting the stage for quality. This includes defining clear objectives for the AI system, specifying requirements (functional and non-functional), and identifying potential risks. Key activities in this phase are performing Risk Assessments and Impact Assessments - e.g. a Data Protection Impact Assessment (DPIA) if personal data is involved, and an Algorithmic Impact Assessment to consider societal impact. The project team should also define what success looks like in measurable terms (for example, ‘predictive accuracy must exceed 90% on benchmark X’ or ‘no disparate impact greater than Y between groups’). Additionally, governance structures are established here: decide on roles (who is accountable for the AI’s outcomes), form an oversight or ethics committee if needed, and outline an initial test strategy. In short, Planning & Design lays out the ‘quality plan’ for the AI.
 
 > **[Secure by Design](https://www.security.gov.uk/policy-and-guidance/secure-by-design/principles/)** helps to proactively embed security from inception. It is part of [Service Standard](https://www.gov.uk/service-manual/service-standard/point-9-create-a-secure-service) and should be considered essential for AI testing and assurance.
 
-> **Accessibility** is important. Some AI systems don’t offer alternatives like text-to-speech, voice input, or visual aids, which are crucial for accessibility. Without adaptive features, AI may not adjust its language level or format to suit the user’s needs.
-
-**Example Outputs/Metrics**
+Example Outputs/Metrics:
 
 - Risk Identification: — Number of high-risk items identified in the initial risk assessment (e.g. if 5 major ethical risks are logged, they will need mitigation plans). A completed risk register or heatmap is an output.
 
@@ -187,12 +185,14 @@ At the very start of the project, the emphasis is on setting the stage for quali
 
 - Compliance Checklist Initiation: - Note any legal/ethical requirements the project must comply with and include these in the project plan.
 
+> **Accessibility** is important. Some AI systems don’t offer alternatives like text-to-speech, voice input, or visual aids, which are crucial for accessibility. Without adaptive features, AI may not adjust its language level or format to suit the user’s needs.
+
 ### Data Collection and Preparation
 
 **Focus**   
 In this phase, the team is concerned with gathering, generating, or selecting the data that will be used to train or inform the AI model, and preparing that data for use. Data quality testing is paramount here . This involves verifying that the data is accurate, complete, and representative of the domain. If the dataset is large, use statistical profiling to check for anomalies or gaps. Important considerations include handling missing values, correcting errors or outliers, and ensuring the data covers all relevant scenarios and sub-populations (to avoid biases). The team should also address any biases detected in the dataset - for instance, if certain demographic groups are underrepresented or outcomes are skewed, they may collect additional data or apply balancing techniques. Privacy and compliance steps happen here as well: confirm that using the data is lawful (consent, if required, is obtained; personal data is minimized or anonymized per UK GDPR). By the end of this phase, the training (and testing) datasets should be of known quality and documented.
 
-**Example Outputs/Metrics**
+Example Outputs/Metrics:
 
 - Data Quality Metrics: - Quantitative measures such as the percentage of missing or incomplete values in the dataset (e.g. ‘2% of records have missing age field’), error rates in labels (perhaps found via manual spot checks or data cleaning scripts), or consistency scores if applicable (like schema validation pass rate). For example: 95% of records passed all validation checks; 5% had minor formatting issues corrected.
 
@@ -207,7 +207,7 @@ In this phase, the team is concerned with gathering, generating, or selecting th
 **Focus**   
 In this phase, the AI model (or ruleset, in a rules-based system) is developed. For machine learning, this involves selecting an appropriate model architecture or algorithm, training the model on the prepared dataset, and tuning hyperparameters to meet the performance goals. Assurance during model development is about validating that the model is learning correctly and is on track to meet requirements . Key tasks include holding out a validation dataset to check performance on unseen data (to detect overfitting), performing cross-validation, and monitoring training metrics (loss curves, etc.). It’s also the stage to infuse fairness and explainability proactively: for example, the team might choose a more interpretable model if transparency is paramount, or apply techniques (like reweighting data) during training to reduce bias if the initial evaluation shows skew. By the end of this phase, there should be a trained model candidate that meets the initial performance criteria on validation data and has evidence of being free from major flaws.
 
-**Example Outputs/Metrics**
+Example Outputs/Metrics:
 
 - Model Performance on Validation Data: - Typical metrics like accuracy, F1-score, precision/recall, RMSE (for regression), etc., evaluated on a hold-out validation set . For instance: ‘Validation accuracy = 92%, exceeding the 90% target; F1 = 0.88 for class A vs 0.85 for class B’. These results indicate how well the model generalises. Also track metrics across multiple validation splits (k-fold cross-validation) – e.g. ‘Std. deviation of accuracy across 5 folds = 1.2%’ to gauge stability .
 
@@ -222,7 +222,7 @@ In this phase, the AI model (or ruleset, in a rules-based system) is developed. 
 **Focus**   
 Now the model (and any surrounding system components) undergoes rigorous testing in a pre-deployment environment. This phase is essentially the classic testing phase. The AI system is tested against a wide array of scenarios and quality criteria, many of which are detailed in modular framework. Activities include: functional testing (does the AI do what it’s supposed to, across various cases?), performance testing (does it meet speed and throughput requirements consistently?), stress testing and adversarial testing (throw extreme or malicious cases at it), and user testing (pilot groups interacting with the AI to gather feedback). Verification also means checking that all requirements set in earlier phases have been met - essentially a final validation on the model and system. For high-risk applications, this phase might involve a formal acceptance test witnessed by stakeholders or even external auditors. By the end of Validation & Verification, the team should have high confidence (with evidence) that the AI system is ready for real-world use, or identify issues that need fixing before it can proceed. Implement fairness metrics to assess and rectify biases in predictions.
 
-**Example Outputs/Metrics**
+Example Outputs/Metrics:
 
 - Test Coverage: - A metric indicating how much of the AI system’s logic has been tested . For rule-based systems, this might be the percentage of rules executed at least once in tests. For ML, it could be coverage of input space or scenarios (e.g. ‘100% of requirement-specified scenarios tested, 85% of identified edge cases tested’). High coverage lends confidence that most behaviors have been vetted.
 
@@ -240,7 +240,7 @@ Now the model (and any surrounding system components) undergoes rigorous testing
 Most software systems will undergo an Operational Acceptance test phase that determines its suitability to be deployed on to a production environment. This testing focuses on the operational readiness of the system. The generic priciples of OAT testing also apply to the in the context of deploying AI systems. This implies that procedures in place for Alerting & Incident Response, Failover & Redundancy, User access & permission management, Audit trail logging etc are tested for and assured. When managing this phase of testing for AI systems, it will be prudent to also consider aspects like Human Oversigt & Override capability, Safe shutdown & Kill switch, Reversal & Undo mechanism, Continous Model Perfomance monitoring etc.
 
 
-**Example Outputs/Metrics**
+Example Outputs/Metrics:
 
 Is data collected and presented in a way that some of the relevant metrics below can be caluclate
 
@@ -256,7 +256,7 @@ Is data collected and presented in a way that some of the relevant metrics below
 This phase involves the release of the AI system into the live environment and its integration into the broader business or service workflow. Even after thorough pre-release testing, deployment can reveal new issues, so this stage includes final integration testing and checks in the production setting . 
 Key activities: verify that the AI service is correctly interfacing with production data sources, databases, or other IT systems (e.g. does the API call from the web application correctly reach the AI model and handle responses?). Ensure all configuration is correct for prod (sometimes models behave differently if run on different hardware or with scaled loads, so do a sanity check in situ). Security hardening is finalized: confirm that any secrets, keys, or access controls for the AI in production are set as per security policy. There is also a governance aspect: before go-live, ensure all necessary approvals have been obtained (for high-risk AI, perhaps a formal sign-off by a senior responsible owner or an ethics board). Tech Documentation should be finalised. Essentially, the Deployment phase is about carefully rolling the AI out and making sure ‘everything is green’ in the live environment.  
 
-**Example Outputs/Metrics**
+Example Outputs/Metrics:
 
 - Integration Test Results (Production): - Results of final integration tests run in the production environment or staging environment identical to production . This could include tests of end-to-end user journeys. For example: ‘Full workflow test (user submits application -> AI risk scoring -> database update -> user notified) passed all steps; data flows and hand-offs confirmed’. If any integration bugs were found (e.g. data format mismatches between systems), those are resolved or documented.
 
@@ -271,7 +271,7 @@ Key activities: verify that the AI service is correctly interfacing with product
 **Focus**   
 The lifecycle doesn’t end at deployment - continuous monitoring and improvement is crucial. In this operational phase, the AI system is live and delivering services, so the goal is to ensure it continues to perform as intended and to catch any issues early. The team should establish ongoing monitoring of key metrics - both technical (performance, error rates) and outcome-based (accuracy on new data, signs of bias drift). There should be alerts set for anomalous behavior, e.g. if the model’s predictions start significantly deviating from historical patterns or if input data characteristics shift beyond the training range . Additionally, periodic evaluations or audits are conducted: for example, retraining the model at scheduled intervals and re-running the full test suite, or annually auditing the AI for compliance and performance (some agencies might require an annual ‘AI health check’ to verify everything is still in order). Maintenance processes are also enacted here: if the business process changes or new data becomes available, the AI might need to be updated - any such changes should go through a controlled process (with re-testing before redeployment, per change management guidelines). In summary, this phase is about operational assurance - keeping the AI system reliable, efficient, and fair over time in the face of evolving conditions. 
 
-**Example Outputs/Metrics**
+Example Outputs/Metrics:
 
 - Real-Time Performance & Drift Metrics: - Continuous metrics such as latency and throughput in production (monitored on dashboards), plus data drift and model drift indicators . For instance: a data drift metric might be the statistical distance between recent input data distribution and the training data distribution (alert if exceeds threshold), a model drift metric might compare model predictions now vs. a baseline (alert if e.g. the acceptance rate changes by more than X%). Also track system uptime and any failure incidents (downtime or error count).
 
@@ -289,15 +289,15 @@ While the lifecycle approach tells us when to perform testing activities, this s
 
 There are 9 modules in this framework:
 
-   - [Data & Input Validation](#data--input-validation-module)
-   - [Model Functionality Testing](#model-functionality-testing-module)
-   - [Bias and Fairness Testing](#bias-and-fairness-testing-module)
-   - [Explainability & Transparency](#explainability--transparency-module)
-   - [Robustness & Adversarial Testing](#robustness--adversarial-testing-module)
-   - [Performance & Efficiency Testing](#performance--efficiency-testing-module)
-   - [Integration & System Testing](#integration--system-testing-module)
-   - [User Acceptance & Ethical Review](#user-acceptance--ethical-review-module)
-   - [Continuous Monitoring & Improvement](#continuous-monitoring--improvement-module)
+- [Data & Input Validation](#data--input-validation-module)
+- [Model Functionality Testing](#model-functionality-testing-module)
+- [Bias and Fairness Testing](#bias-and-fairness-testing-module)
+- [Explainability & Transparency](#explainability--transparency-module)
+- [Robustness & Adversarial Testing](#robustness--adversarial-testing-module)
+- [Performance & Efficiency Testing](#performance--efficiency-testing-module)
+- [Integration & System Testing](#integration--system-testing-module)
+- [User Acceptance & Ethical Review](#user-acceptance--ethical-review-module)
+- [Continuous Monitoring & Improvement](#continuous-monitoring--improvement-module)
 
 ### Data & Input Validation Module
 
@@ -414,9 +414,10 @@ The result of User Acceptance & Ethical Review is essentially the human green-li
 By passing this module, the AI project moves from testing into operational deployment with confidence that both technical and human factors are accounted for. It’s the final gate reinforcing that the AI is not only technically sound but also appropriate and responsible to deploy in the real world.
 
 ### Continuous Monitoring & Improvement Module
+
 Deploying the AI system is not the end of the assurance process – it’s actually the beginning of a new phase. This section emphasizes that continuous monitoring and improvement is essential to sustain the AI system’s quality over time. AI systems can change (models drift, data patterns evolve, user behavior shifts) and new risks can emerge (e.g., adversaries find new exploits, or a model’s performance slowly degrades). Thus, a systematic approach to monitor, maintain, and enhance the AI post-deployment is required.
 
-**Key components of continuous monitoring & improvement:** 
+**Key components of continuous monitoring & improvement:**
 
 - **Performance Monitoring in Production:** As mentioned earlier, set up dashboards and alerts for key metrics . This includes technical metrics (response times, error rates, system uptime) and AI-specific metrics (prediction accuracy on cases where ground truth later becomes available, drift in input data distribution, etc.). For example, if it’s a model that approves applications, as actual outcomes (like repayment rates for loans) come in, compare model predictions to real outcomes to gauge if accuracy is holding up. If the model confidence on inputs starts dropping or the distribution of inputs shifts significantly from training, these are signs to investigate. Define thresholds for alerts: e.g., 'If monthly average accuracy drops below 85%, alert the data science team,' or 'If any fairness metric diverges beyond X, flag it.' Some organizations implement automatic retraining triggers if drift is detected (though that itself should be governed).
 - **Error and Incident Logging:** Any errors or unexpected system behaviors in production should be logged and analyzed. For example, if the AI component ever crashes or returns an exception, capture the input that caused it so the team can fix that case or improve validation. Similarly, maintain a log of any incidents (e.g., a user complaint that the AI made a wrong or biased decision). Establish an incident response plan: who investigates, how to mitigate immediately (maybe switching the AI off or into a safe mode if a serious issue is found), and how to communicate if needed (transparency demands that if a significant error affected the public, the department might have to disclose it). Continuous improvement means learning from each incident and updating testing or processes to prevent it in future.
@@ -440,35 +441,6 @@ We encourage teams to refer to the UK Government AI Playbook, which provides pra
 - [GenAI Top10 Risks and Mitigations](https://genai.owasp.org/llm-top-10/)
 - [GOV.UK AI Insights](https://www.gov.uk/government/publications/ai-insights)
 
-
 ## Conclusion
 The responsible deployment of Artificial Intelligence in public services requires more than innovation - it demands trust, transparency, and accountability. This framework provides a structured approach to testing and assuring the quality of AI systems, supporting departments in meeting their obligations to the public while enabling the safe use of advanced technologies.
 By aligning testing and assurance activities with defined quality principles, lifecycle strategies, modular testing methods, and proportionate risk management, government teams can evaluate AI systems consistently and rigorously. This framework recognises the evolving nature of AI - especially with the emergence of complex agentic and generative models - and promotes continuous adaptation, monitoring, and governance to keep testing practices relevant and robust.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
