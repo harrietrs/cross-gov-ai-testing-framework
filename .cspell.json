@@ -1,19 +1,13 @@
 {
     "version": "0.2",
     "language": "en",
-    "words": [
-      "govuk",
-      "OneLogin",
-      "markdownlint",
-      "cspell",
-      "lychee"
-    ],
     "ignorePaths": [
       "node_modules",
       ".git",
       "**/package-lock.json",
       "README.md"
     ],
-    "dictionaries": ["typescript", "node", "html", "css"]
+    "useDefaultConfiguration":true,
+    "dictionaries": ["en","typescript", "node", "html", "css"]
 }
   
