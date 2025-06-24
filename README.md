@@ -1,5 +1,5 @@
 ![Quality Check](https://github.com/Testing-AI-Standards/cross-gov-ai-testing-framework/actions/workflows/standards-check.yml/badge.svg)
-
+<!-- cspell:disable-next-line -->
 # Cross-Government AI Testing and Assurance Framework
 
 This repository contains the  Cross-Government Testing community's AI Testing and Assurance Framework.  

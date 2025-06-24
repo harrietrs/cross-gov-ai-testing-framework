@@ -11,7 +11,8 @@
     "ignorePaths": [
       "node_modules",
       ".git",
-      "**/package-lock.json"
+      "**/package-lock.json",
+      "README.md"
     ],
     "dictionaries": ["typescript", "node", "html", "css"]
 }
