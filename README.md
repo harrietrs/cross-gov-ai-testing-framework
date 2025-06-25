@@ -31,3 +31,9 @@ This framework supports the goal to ensure AI systems are ethical, transparent, 
 |               |3. **Vas Ntokas**   <br> Lead Test Engineer - DWP  | 18/6/2025  |
 |               |4. **David Rutter-Close**   <br> Lead Test Engineer - DfE  | 19/6/2025  |
 |               |5. **Adam Byfield**   <br> Principal Technical Assurance Specialist - NHS England | 19/6/2025  |
+
+## 📄 Licence
+
+Unless stated otherwise, the framework is released under the MIT License. This covers both the files and any sample code in the documentation.
+
+The documentation is [© Crown copyright](https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/) and available under the terms of the [Open Government 3.0 licence](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
