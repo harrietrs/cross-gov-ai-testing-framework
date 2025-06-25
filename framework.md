@@ -170,7 +170,8 @@ Assuring an AI system’s quality is not a one-time event - it must be woven thr
 
 ### Planning and Design
 
-**Focus**
+Focus:
+
 At the very start of the project, the emphasis is on setting the stage for quality. This includes defining clear objectives for the AI system, specifying requirements (functional and non-functional), and identifying potential risks. Key activities in this phase are performing Risk Assessments and Impact Assessments - e.g. a Data Protection Impact Assessment (DPIA) if personal data is involved, and an Algorithmic Impact Assessment to consider societal impact. The project team should also define what success looks like in measurable terms (for example, ‘predictive accuracy must exceed 90% on benchmark X’ or ‘no disparate impact greater than Y between groups’). Additionally, governance structures are established here: decide on roles (who is accountable for the AI’s outcomes), form an oversight or ethics committee if needed, and outline an initial test strategy. In short, Planning & Design lays out the ‘quality plan’ for the AI.
 
 > **[Secure by Design](https://www.security.gov.uk/policy-and-guidance/secure-by-design/principles/)** helps to proactively embed security from inception. It is part of [Service Standard](https://www.gov.uk/service-manual/service-standard/point-9-create-a-secure-service) and should be considered essential for AI testing and assurance.
@@ -255,7 +256,8 @@ Is data collected and presented in a way that some of the relevant metrics below
 
 ### Deployment (Release and Integration)
 
-**Focus**
+Focus:
+
 This phase involves the release of the AI system into the live environment and its integration into the broader business or service workflow. Even after thorough pre-release testing, deployment can reveal new issues, so this stage includes final integration testing and checks in the production setting.
 
 Key activities: verify that the AI service is correctly interfacing with production data sources, databases, or other IT systems (e.g. does the API call from the web application correctly reach the AI model and handle responses?). Ensure all configuration is correct for prod (sometimes models behave differently if run on different hardware or with scaled loads, so do a sanity check in situ). Security hardening is finalized: confirm that any secrets, keys, or access controls for the AI in production are set as per security policy. There is also a governance aspect: before go-live, ensure all necessary approvals have been obtained (for high-risk AI, perhaps a formal sign-off by a senior responsible owner or an ethics board). Tech Documentation should be finalised. Essentially, the Deployment phase is about carefully rolling the AI out and making sure ‘everything is green’ in the live environment.  
