@@ -1,6 +1,6 @@
 ![Quality Check](https://github.com/Testing-AI-Standards/cross-gov-ai-testing-framework/actions/workflows/standards-check.yml/badge.svg)
 <!-- cspell:disable-next-line -->
-# Cross-Government AI Testing and Assurance Framework
+# AI Testing and Assurance Framework for Public Sector
 
 This repository contains the  Cross-Government Testing community's AI Testing and Assurance Framework.  
 The goal is to gather input and feedback to refine and strengthen our approach to AI testing, validation, and assurance in the public sector.
