@@ -1,4 +1,4 @@
-# Cross-Government AI Testing and Assurance Framework [Draft]
+# Cross-Government AI Testing and Assurance Framework
 
 ## Table of Contents
 
