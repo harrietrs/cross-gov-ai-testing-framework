@@ -4,7 +4,7 @@
 
 > An initiative of Cross Government Testing Community
 
-![Banner image for AI testing framework](assets/img/795D086D-A612-4FA0-A461-C5B424DE0ACC.png)
+![Banner image for AI testing framework](assets/img/Screenshot 2025-07-10 at 21.37.51.png)
 
 ## Table of Contents
 
