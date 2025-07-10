@@ -1,2 +1,4 @@
 remote_theme: just-the-docs
 title: AI Testing in Public Sector
+# Optional: enable search
+search_enabled: true
