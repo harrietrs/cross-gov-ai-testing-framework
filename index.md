@@ -284,7 +284,7 @@ Focus:
 
 This phase involves the release of the AI system into the live environment and its integration into the broader business or service workflow. Even after thorough pre-release testing, deployment can reveal new issues, so this stage includes final integration testing and checks in the production setting.
 
-AI systems should be delivered through secure, repeatable, and automated processes. Teams are encouraged to integrate testing and assurance steps into their DevOps pipelines and Continuous Integration/Continuous Deployment (CI/CD) workflows. 
+> AI systems should be delivered through secure, repeatable, and automated processes. Teams are encouraged to integrate testing and assurance steps into their DevOps pipelines and Continuous Integration/Continuous Deployment (CI/CD) workflows.
 
 Key activities: verify that the AI service is correctly interfacing with production data sources, databases, or other IT systems (e.g. does the API call from the web application correctly reach the AI model and handle responses?). Ensure all configuration is correct for prod (sometimes models behave differently if run on different hardware or with scaled loads, so do a sanity check in situ). Security hardening is finalized: confirm that any secrets, keys, or access controls for the AI in production are set as per security policy. There is also a governance aspect: before go-live, ensure all necessary approvals have been obtained (for high-risk AI, perhaps a formal sign-off by a senior responsible owner or an ethics board). Tech Documentation should be finalised. Essentially, the Deployment phase is about carefully rolling the AI out and making sure ‘everything is green’ in the live environment.  
 
