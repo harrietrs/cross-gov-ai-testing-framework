@@ -1,2 +1,6 @@
 theme: jekyll-theme-cayman
 title: AI Testing in Public Sector
+sass:
+  style: compressed
+include:
+  - assets/css
