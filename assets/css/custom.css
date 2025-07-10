@@ -1,3 +1,14 @@
-.page-content {
-    max-width: 90%;
-}
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+  
+  .sidebar {
+    flex: 0 0 200px;  /* Make sidebar narrower */
+  }
+  
+  .page-content {
+    flex: 1;
+    max-width: none;
+  }
