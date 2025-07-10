@@ -1,4 +1,7 @@
 ![Quality Check](https://github.com/Testing-AI-Standards/cross-gov-ai-testing-framework/actions/workflows/standards-check.yml/badge.svg)
+<p align="right">
+<img src="https://img.shields.io/badge/Phase-Public%20Beta-blue" />
+</p>
 <!-- cspell:disable-next-line -->
 # AI Testing and Assurance Framework for Public Sector
 
