@@ -6,7 +6,6 @@
 
 1. [Executive Summary](#executive-summary)  
 2. [Introduction](#introduction)  
-
    - [Purpose](#purpose)  
    - [Scope](#scope)  
    - [Audience](#audience)  
@@ -15,7 +14,6 @@
 3. [Testing and Quality Engineering Principles for AI](#testing-and-quality-engineering-principles-for-ai)  
 4. [Core AI Quality Attributes for Testing](#core-ai-quality-attributes-for-testing)  
 5. [Lifecycle based Testing and Assurance](#lifecycle-based-testing-and-assurance)
-
    - [Planning and Design](#planning-and-design)  
    - [Data Collection and Preparation](#data-collection-and-preparation)
    - [Model Development and Training](#model-development-and-training)
@@ -25,7 +23,6 @@
    - [Monitoring and Continuous Assurance](#monitoring-and-continuous-assurance)
 
 6. [Modular AI Testing Framework](#modular-ai-testing-framework)
-
    - [Data & Input Validation](#data--input-validation-module)
    - [Model Functionality Testing](#model-functionality-testing-module)
    - [Bias and Fairness Testing](#bias-and-fairness-testing-module)
