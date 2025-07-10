@@ -3,6 +3,17 @@
 
 # AI Testing and Assurance Framework for Public Sector
 
+> An initiative of Cross Government Testing Community
+
+| Action | Name                 |  Date          |
+|:-------|:---------------------|:---------------|
+|Author | **Mibin Boban**   <br> X-Gov Testing Community Chair / Head of Quality Engineering - GDS | 5/6/2025|
+|Working Group Review|1. **Dinesh KTJ**   <br> Principal Test Engineer - Home Office  | 16/6/2025  |
+|               |2. **David Lee**   <br> Lead Technical Architect - GDS  | 17/6/2025  |
+|               |3. **Vas Ntokas**   <br> Lead Test Engineer - DWP  | 18/6/2025  |
+|               |4. **David Rutter-Close**   <br> Lead Test Engineer - DfE  | 19/6/2025  |
+|               |5. **Adam Byfield**   <br> Principal Technical Assurance Specialist - NHS England | 19/6/2025  |
+
 ## Table of Contents
 
 1. [Executive Summary](#executive-summary)  
