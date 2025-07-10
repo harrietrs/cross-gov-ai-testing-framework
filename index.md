@@ -2,7 +2,7 @@
 
 # AI Testing and Assurance Framework for Public Sector
 
-> An initiative of Cross Government Testing Community
+> An initiative by the Cross Government Testing Community
 
 ![Banner image for AI testing framework](assets/img/Screenshot 2025-07-10 at 21.37.51.png)
 
