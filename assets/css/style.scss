@@ -1,45 +1,18 @@
 ---
 ---
 
-/* Header sections: navbar, banners, etc. */
-header, .page-header, .site-header, .main-header, .masthead {
-background-color: #003366 !important;
-color: #ffffff !important;
+/* Adjust page header only */
+.page-header {
+background-color: #003366;
+color: #ffffff;
 }
 
-/* Header links */
-header a, .page-header a, .site-header a, .main-header a, .masthead a {
-color: #ffffff !important;
-}
-
-/* Headings in main content */
+/* Slightly darken headings */
 h1, h2, h3, h4, h5, h6 {
-color: #003366 !important;
+color: #003366;
 }
 
-/* General page text */
-body, p, li, td, th, span, div {
-color: #000000 !important;
-font-family: Arial, sans-serif;
+/* Optional: change navbar links */
+.page-header a {
+color: #ffffff;
 }
-
-/* Ensure links in content remain visible and accessible */
-a {
-color: #003366 !important;
-text-decoration: underline;
-}
-
-blockquote {
-    border-left: 4px solid #003366;
-    padding-left: 1em;
-    color: #444;
-    }
-    
-table {
-    border-collapse: collapse;
-    }
-    
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    }
