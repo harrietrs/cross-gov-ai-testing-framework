@@ -1,3 +1,5 @@
+![Public Beta](https://img.shields.io/badge/Phase-Public%20Beta-blue)
+
 # Cross-Government AI Testing and Assurance Framework
 
 ## Table of Contents
