@@ -137,8 +137,6 @@ Quality shouldn't be an afterthought - it must be built in from beginning. Apply
 
 These principles set the tone for the subsequent sections. They encourage testers and project teams to look at AI quality from multiple angles - technical, ethical, and operational - and to integrate testing as a continuous effort.
 
-![Banner image 2 for AI testing framework](assets/img/2B0E2409-67F2-4EBC-9D9E-FCBBD4E266EA.png)
-
 ## Core AI Quality Attributes for Testing
 
 > Adapted from the Cross-Government Testing Community AI Quality Workshop
@@ -173,6 +171,8 @@ These are not just desirable traits—they’re testable targets. Use this list 
 ## Lifecycle based Testing and Assurance
 
 Assuring an AI system’s quality is not a one-time event - it must be woven through the entire AI development lifecycle. In this framework, we adopt a lifecycle-based strategy, identifying key testing activities and deliverables at each phase of an AI project. The lifecycle is broken into stages from conception to operation, with each stage having specific goals, risk considerations, and recommended metrics to track. Below provides an overview of each phase, what the testing/assurance focus is, and examples of metrics or outcomes to measure:
+
+![Banner image 2 for AI testing framework](assets/img/2B0E2409-67F2-4EBC-9D9E-FCBBD4E266EA.png)
 
 ### Planning and Design
 
