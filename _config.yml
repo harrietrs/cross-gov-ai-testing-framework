@@ -1,4 +1,2 @@
-remote_theme: just-the-docs/just-the-docs
+theme: jekyll-theme-primer
 title: AI Testing in Public Sector
-# Optional: enable search
-search_enabled: true
