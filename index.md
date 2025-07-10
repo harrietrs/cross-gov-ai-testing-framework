@@ -182,6 +182,13 @@ At the very start of the project, the emphasis is on setting the stage for quali
 
 > **[Secure by Design](https://www.security.gov.uk/policy-and-guidance/secure-by-design/principles/)** helps to proactively embed security from inception. It is part of [Service Standard](https://www.gov.uk/service-manual/service-standard/point-9-create-a-secure-service) and should be considered essential for AI testing and assurance.
 
+AI assurance should start as early as possible in the lifecycle. For projects involving procurement or external suppliers, teams should:
+
+- Define Non-Functional Requirements (NFRs), including explainability, fairness, robustness, and security expectations.
+- Use Explainability Matrices or AI Assurance Artefacts to clarify what is required from suppliers.
+- Include clear testing expectations in contracts and tender documentation.
+- Conduct Service Assessments early to identify and manage risks before deployment.
+
 Example Outputs/Metrics:
 
 - Risk Identification: — Number of high-risk items identified in the initial risk assessment (e.g. if 5 major ethical risks are logged, they will need mitigation plans). A completed risk register or heatmap is an output.
@@ -232,6 +239,17 @@ Focus:
 
 Now the model (and any surrounding system components) undergoes rigorous testing in a pre-deployment environment. This phase is essentially the classic testing phase. The AI system is tested against a wide array of scenarios and quality criteria, many of which are detailed in modular framework. Activities include: functional testing (does the AI do what it’s supposed to, across various cases?), performance testing (does it meet speed and throughput requirements consistently?), stress testing and adversarial testing (throw extreme or malicious cases at it), and user testing (pilot groups interacting with the AI to gather feedback). Verification also means checking that all requirements set in earlier phases have been met - essentially a final validation on the model and system. For high-risk applications, this phase might involve a formal acceptance test witnessed by stakeholders or even external auditors. By the end of Validation & Verification, the team should have high confidence (with evidence) that the AI system is ready for real-world use, or identify issues that need fixing before it can proceed. Implement fairness metrics to assess and rectify biases in predictions.
 
+Example Test Techniques:
+
+To support thorough and consistent AI testing, teams should consider established test techniques. These help verify model behaviour and track quality over time. Example techniques include:
+
+- Verification Metrics: - such as F-score, precision, recall, or ROC AUC for classification tasks.
+- Golden Test Methods: - using a set of predefined benchmark inputs and expected outputs to ensure consistent responses across versions.
+- Metamorphic Testing: - validating that the system behaves predictably under input transformations or variations.
+- Management Information (MI): - producing clear testing reports to show coverage, issues found, and resolution status.
+
+Teams should select techniques appropriate to their system type and risk profile. AI testing techniques will evolve over time, hence it is important to keep them under regular review.
+
 Example Outputs/Metrics:
 
 - Test Coverage: - A metric indicating how much of the AI system’s logic has been tested . For rule-based systems, this might be the percentage of rules executed at least once in tests. For ML, it could be coverage of input space or scenarios (e.g. ‘100% of requirement-specified scenarios tested, 85% of identified edge cases tested’). High coverage lends confidence that most behaviors have been vetted.
@@ -265,6 +283,8 @@ Is data collected and presented in a way that some of the relevant metrics below
 Focus:
 
 This phase involves the release of the AI system into the live environment and its integration into the broader business or service workflow. Even after thorough pre-release testing, deployment can reveal new issues, so this stage includes final integration testing and checks in the production setting.
+
+AI systems should be delivered through secure, repeatable, and automated processes. Teams are encouraged to integrate testing and assurance steps into their DevOps pipelines and Continuous Integration/Continuous Deployment (CI/CD) workflows. 
 
 Key activities: verify that the AI service is correctly interfacing with production data sources, databases, or other IT systems (e.g. does the API call from the web application correctly reach the AI model and handle responses?). Ensure all configuration is correct for prod (sometimes models behave differently if run on different hardware or with scaled loads, so do a sanity check in situ). Security hardening is finalized: confirm that any secrets, keys, or access controls for the AI in production are set as per security policy. There is also a governance aspect: before go-live, ensure all necessary approvals have been obtained (for high-risk AI, perhaps a formal sign-off by a senior responsible owner or an ethics board). Tech Documentation should be finalised. Essentially, the Deployment phase is about carefully rolling the AI out and making sure ‘everything is green’ in the live environment.  
 
