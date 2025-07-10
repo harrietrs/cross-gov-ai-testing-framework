@@ -4,6 +4,8 @@
 
 > An initiative of Cross Government Testing Community
 
+![Banner image for AI testing framework](assets/img/795D086D-A612-4FA0-A461-C5B424DE0ACC.png)
+
 ## Table of Contents
 
 1. [Executive Summary](#executive-summary)  
@@ -37,6 +39,7 @@
 
 7. [Tools and Resources for Testing](#tools-and-resources-for-testing)
 8. [Conclusion](#conclusion)
+9. [Review Log](#review-log)
 
 ## Executive Summary
 
@@ -133,6 +136,8 @@ Test not only accuracy, but also the system’s efficiency, scalability, and res
 Quality shouldn't be an afterthought - it must be built in from beginning. Apply a shift-left approach by embedding testing into early stages and continuously throughout development. Testing doesn’t end at deployment. Quality needs to be visible in production through monitoring, feedback loops, and traceable logs. If something goes wrong, you should know about it—early, clearly, and with enough data to respond quickly.
 
 These principles set the tone for the subsequent sections. They encourage testers and project teams to look at AI quality from multiple angles - technical, ethical, and operational - and to integrate testing as a continuous effort.
+
+![Banner image 2 for AI testing framework](assets/img/2B0E2409-67F2-4EBC-9D9E-FCBBD4E266EA.png)
 
 ## Core AI Quality Attributes for Testing
 
