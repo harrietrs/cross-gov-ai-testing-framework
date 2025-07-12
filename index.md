@@ -491,3 +491,4 @@ The responsible deployment of Artificial Intelligence in public services require
 |               |3. **Vas Ntokas**   <br> Lead Test Engineer - DWP  | 18/6/2025  |
 |               |4. **David Rutter-Close**   <br> Lead Test Engineer - DfE  | 19/6/2025  |
 |               |5. **Adam Byfield**   <br> Principal Technical Assurance Specialist - NHS England | 19/6/2025  |
+|               |6. **Matthew Dyson**   <br> Principal Test Assurance Manager - National Highways(DfT) | 30/6/2025  |
