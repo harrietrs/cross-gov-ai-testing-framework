@@ -172,13 +172,13 @@ These are not just desirable traits—they’re testable targets. Use this list 
 
 Assuring an AI system’s quality is not a one-time event, it must be woven through the entire AI development lifecycle. In this framework, we adopt a lifecycle-based strategy, identifying key testing activities and deliverables at each phase of an AI project. The lifecycle is broken into stages from conception to operation, with each stage having specific goals, risk considerations, and recommended metrics to track. Below provides an overview of each phase, what the testing/assurance focus is, and examples of metrics or outcomes to measure:
 
-![Banner image 2 for AI testing framework](assets/img/2B0E2409-67F2-4EBC-9D9E-FCBBD4E266EA.png)
+![Defensive model for AI testing framework](assets/img/defensive delivery.png)
 
 ### Planning and Design
 
 Focus:
 
-At the very start of the project, the emphasis is on setting the stage for quality. This includes defining clear objectives for the AI system, specifying requirements (functional and non-functional), and identifying potential risks. Key activities in this phase are performing Risk Assessments and Impact Assessments, e.g. a Data Protection Impact Assessment (DPIA) if personal data is involved, and an Algorithmic Impact Assessment to consider societal impact. The project team should also define what success looks like in measurable terms (for example, ‘predictive accuracy must exceed 90% on benchmark X’ or ‘no disparate impact greater than Y between groups’). Additionally, governance structures are established here: decide on roles (who is accountable for the AI’s outcomes), form an oversight or ethics committee if needed, and outline an initial test strategy. In short, Planning & Design lays out the ‘quality plan’ for the AI.
+At the very start of the project, the emphasis is on setting the stage for quality. This includes defining clear objectives for the AI system, specifying requirements (functional and non-functional), and identifying potential risks. Key activities in this phase includes performing Risk Assessments and Impact Assessments, e.g. a Data Protection Impact Assessment (DPIA) if personal data is involved, and an Algorithmic Impact Assessment to consider societal impact. The project team should also define what success looks like in measurable terms (for example, ‘predictive accuracy must exceed 90% on benchmark X’ or ‘no disparate impact greater than Y between groups’). Additionally, governance structures are established here: decide on roles (who is accountable for the AI’s outcomes), form an oversight or ethics committee if needed, and outline an initial test strategy. In short, Planning & Design lays out the ‘quality plan’ for the AI.
 
 > **[Secure by Design](https://www.security.gov.uk/policy-and-guidance/secure-by-design/principles/)** helps to proactively embed security from inception. It is part of [Service Standard](https://www.gov.uk/service-manual/service-standard/point-9-create-a-secure-service) and should be considered essential for AI testing and assurance.
 
@@ -319,6 +319,8 @@ Example Outputs/Metrics:
 ## Modular AI Testing Framework
 
 While the lifecycle approach tells us when to perform testing activities, this section describes what tests to perform in detail. We present a Modular Testing Framework for AI, consisting of distinct testing modules, each addressing a specific facet of AI quality. These modules can be thought of as building blocks, depending on the AI system and its risk level. You might emphasize some modules more than others, but together they form a comprehensive testing regimen. The modular design allows flexibility; for example, a simple rule-based system might not need elaborate adversarial testing, whereas a machine learning model would. Each module also notes how approaches may differ for various AI types (rule-based vs ML vs generative vs agentic AI), ensuring the unique challenges of each are covered.
+
+![Modules for AI testing framework](assets/img/modules.png)
 
 There are 9 modules in this framework:
 
