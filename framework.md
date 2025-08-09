@@ -338,7 +338,7 @@ There are 9 modules in this framework:
 
 **Objective:** This module focuses on the quality of data and inputs before they reach the AI model. The goal is to ensure that ‘garbage in’ doesn’t produce ‘garbage out’, i.e., that any data feeding the AI, whether training data or live input is valid, clean, and appropriate. For AI, data is the fuel, so rigorous validation here prevents downstream errors and biases. Training data should be structured so that each category of data is equally represented. Test data should reflect as closely as possible the distributions seen in live data.
 
-**Key activities** include schema validation (correct format/types), range checks (values within expected bounds), outlier detection, and sanity checks on data distributions. In live operation, it might involve filtering or rejecting anomalous inputs that could confuse the model. This module also covers establishing data lineage and version contro, so you know which data was used for which model version.
+**Key activities** include schema validation (correct format/types), range checks (values within expected bounds), outlier detection, and sanity checks on data distributions. In live operation, it might involve filtering or rejecting anomalous inputs that could confuse the model. This module also covers establishing data lineage and version control, so you know which data was used for which model version.
 
 **Different AI systems require different approaches:**
 
