@@ -1,6 +1,7 @@
 ![Public Beta](https://img.shields.io/badge/Phase-Public%20Beta-blue)
 
 # AI Testing and Assurance Framework for Public Sector
+
 *Evaluation-driven approach to building safe, fair and reliable AI*
 
 > An initiative by the Cross Government Testing Community (UK)
@@ -15,8 +16,8 @@
    - [Scope](#scope)  
    - [Audience](#audience)  
    - [AI Types Covered](#ai-types-covered)  
-3. [Core AI Quality Attributes](#core-ai-quality-attributes-for-testing)
-4. [Evaluation and Assurance Principles for AI](#testing-and-quality-engineering-principles-for-ai)    
+3. [Core AI Quality Attributes](#core-ai-quality-attributes)
+4. [Evaluation and Assurance Principles for AI](#evaluation-and-assurance-principles-for-ai)
 5. [Lifecycle based Testing and Assurance](#lifecycle-based-testing-and-assurance)
    - [Planning and Design](#planning-and-design)  
    - [Data Collection and Preparation](#data-collection-and-preparation)
@@ -67,9 +68,9 @@ This framework applies to across the full AI system lifecycle: from initial plan
 
 - **AI Model / Layer Evaluation** - quality attributes like accuracy, fairness, transparency etc.
 
-- **Governance Activities** - risk assessments, documentation, approvals, monitoring
+- **Governance Activities** - risk assessments, documentation, approvals, monitoring.
 
-The framework can be adapted to AI initiatives of varying size and risk. It covers pre-deployment testing (e.g. validating models in controlled environments) as well as post-deployment assurance (e.g. monitoring live systems for drift or issues). 
+The framework can be adapted to AI initiatives of varying size and risk. It covers pre-deployment testing (e.g. validating models in controlled environments) as well as post-deployment assurance (e.g. monitoring live systems for drift or issues).
 
 The framework is cross-disciplinary, encompassing activities for data scientists, developers,  test engineers, policy and ethics reviewers, information testing teams, and senior decision-makers. It does not replace specific legal or regulatory requirements, but rather consolidates and references them so that teams can ensure compliance through testing and evaluation.
 
@@ -142,7 +143,7 @@ These are not just desirable traits—they’re testable targets. Use this list 
 
 ## Evaluation and Assurance Principles for AI
 
-Testing AI is different. AI systems need a more curated approach for testing the underlying AI models and intended intelligence from the system or machine as compared to the traditional machine with no intelligence.Traditional testing assumes software will behave deterministically. AI doesn’t always follow that rule — it adapts, it predicts, it generates. That makes testing both more complex and more critical. 
+Testing AI is different. AI systems need a more curated approach for testing the underlying AI models and intended intelligence from the system or machine as compared to the traditional machine with no intelligence.Traditional testing assumes software will behave deterministically. AI doesn’t always follow that rule — it adapts, it predicts, it generates. That makes testing both more complex and more critical.
 
 - **Design Context-Appropriate Testing**  
 One size does not fit all. Always test AI systems in conditions that reflect their real-world use context . This means moving beyond idealised training scenarios. For example, testing models on live or representative data to detect concept drift or unusual inputs that differ from training. And rule-based expert system, a predictive ML model, and a generative AI chatbot each require a different testing focus and test design tailored to their use case and operating environment.
