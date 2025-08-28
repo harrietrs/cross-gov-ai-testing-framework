@@ -2,9 +2,7 @@
 
 # AI Testing and Assurance Framework for Public Sector
 
-*Evaluation-driven approach to building safe, fair and reliable AI*
-
-> An initiative by the Cross Government Testing Community (UK)
+> Evaluation-driven approach to building safe, fair and reliable AI
 
 ![Banner image for AI testing framework](assets/img/Screenshot 2025-07-10 at 21.37.51.png)
 
@@ -46,7 +44,7 @@
 
 AI is playing a growing role across public services, from decision support to automation to frontline service delivery. As these systems become more capable and more embedded in critical processes, it is essential that we understand how well they work, how fair they are, and what happens when they go wrong.
 
-This framework sets out a practical, shared approach for testing, evaluation and assurnace of AI systems across public sector. It focuses on helping teams test systems, evaluate AI models and assure quality, trustworthiness, and risk. This is whether the AI in question is a traditional rule-based system, Machine Learned model, or a newer generative or agentic system.
+This framework sets out a practical, shared approach for testing, evaluation and assurance of AI systems across public sector. It focuses on helping teams test systems, evaluate AI models and assure quality, trustworthiness, and risk. This is whether the AI in question is a traditional rule-based system, Machine Learned model, or a newer generative or agentic system.
 
 > In this framework, **testing** refers to checking the whole AI-enabled system (infrastructure, APIs, integrations, user interfaces, data flows). **Evaluation** focuses on AI model/layer, assessing how well they perform against agreed quality attributes. **Testing** generates the evidence, **evaluation** interprets it in context, and **assurance** gives confidence that systems are safe, fair and accountable.
 
@@ -510,3 +508,5 @@ The responsible deployment of Artificial Intelligence in public services require
 |               |4. **David Rutter-Close**   <br> Lead Test Engineer - DfE  | 19/6/2025  |
 |               |5. **Adam Byfield**   <br> Principal Technical Assurance Specialist - NHS England | 19/6/2025  |
 |               |6. **Matthew Dyson**   <br> Principal Test Assurance Manager - National Highways(DfT) | 30/6/2025  |
+
+>An initiative by the Cross Government Testing Community (UK)
