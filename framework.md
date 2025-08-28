@@ -148,68 +148,68 @@ The following principles set out how to do this in practice:
 - **Design Context-Appropriate Testing**  
 One size does not fit all. Always test AI systems in conditions that reflect their real-world use context . This means moving beyond idealised training scenarios. A rule-based expert system, a predictive ML model, and a generative AI chatbot each require a different testing focus and test design tailored to their use case and operating environment.
 
-   - *Testing*: check the full system in realistic conditions and environments (infrastructure, APIs, integrations, user flows etc.).
-   - *Evaluation*: run the AI model on live or representative data to check it responds safely and accurately.
+  - *Testing*: check the full system in realistic conditions and environments (infrastructure, APIs, integrations, user flows etc.).
+  - *Evaluation*: run the AI model on live or representative data to check it responds safely and accurately.
 
 - **Test the Quality and Diversity of Your Data**  
 AI systems are only as good as the data they learn from. High-quality testing must start with scrutinising the datasets that shape the model’s behaviour. The gaps or biases in the data can lead to unfair or unreliable results. Good AI testing isn’t just about what the system does, it’s about what it was taught.
 
-   - *Testing*: validate data handling and flows across the wider system.
-   - *Evaluation*: check datasets for completeness, accuracy, relevance and balance across groups and scenarios.
+  - *Testing*: validate data handling and flows across the wider system.
+  - *Evaluation*: check datasets for completeness, accuracy, relevance and balance across groups and scenarios.
 
 - **Test Autonomy, Don't Assume it**  
 If the AI operate with any autonomy, evaluate how it behaves during prolonged unattended operation and edge cases. This prevents silent failures or harmful behaviour.
 
-   - *Testing*: check safety thresholds, fail-safes, and human-in-the-loop controls at system level.
-   - *Evaluation*: simulate rare or unexpected conditions to see how the model adapts.
+  - *Testing*: check safety thresholds, fail-safes, and human-in-the-loop controls at system level
+  - *Evaluation*: simulate rare or unexpected conditions to see how the model adapts.
 
 - **Test for Drift and Change**  
 AI models evolve. They may be retrained, updated, or influenced by new data. Establish procedures to retest models whenever they change (new data, new model release, pipeline modifications). Without version control, it becomes impossible to reproduce issues, audit changes or track quality over time. Continuously incorporate feedback from real-world use to improve both the AI and the assurance measures (learning from incidents, updating tests, etc.).
 
-   - *Testing*: put in place monitoring across the full system to spot regressions or ethical drift.
-   - *Evaluation*: regularly check model performance against agreed quality attributes.
+  - *Testing*: put in place monitoring across the full system to spot regressions or ethical drift.
+  - *Evaluation*: regularly check model performance against agreed quality attributes.
 
 - **Adopt a Risk-Based Approach**  
 The rigour of testing should be proportional to potential impacts on people, services and organisation. Not all AI deployments carry the same risk. A typo-correcting AI assistant is not as critical as an AI diagnosing medical conditions. Perform an initial risk classification (considering factors like impact on legal rights, safety, scale of use, novelty of the tech) and let that guide the depth of testing. High-risk AI (e.g. those that could endanger lives or cause legal determinations about individuals) demand exhaustive testing, possibly including formal verification or external audits before deployment. Lower-risk tools can use lighter-weight checks, though still covering all relevant quality dimensions. Under this framework, no AI system is deployed without adequate testing, but the notion of 'proportionality' ensures resources are focused where it matters most. [Risk Based Assurance (RBA)](https://glossary.istqb.org/en_US/term/risk-based-testing) practices are recommended.
 
-   - *Testing*: Prove controls work end to end at the chosen rigour (interfaces, user journeys, fail over, audit/logging)
-   - *Evaluation*: Set quality thresholds appropriate to risk level, perform quantitative and qualitative evaluation of model.
+  - *Testing*: Prove controls work end to end at the chosen rigour (interfaces, user journeys, fail over, audit/logging)
+  - *Evaluation*: Set quality thresholds appropriate to risk level, perform quantitative and qualitative evaluation of model.
 
 - **Test What You Can Explain or Interpret**  
 An AI decision that can’t be explained or interpreted can’t be trusted or fixed. Testing should include not only whether the output is correct, but whether it makes sense. AI may assume users can read and write fluently, which excludes those with dyslexia or learning disabilities. In some cases (e.g. in clinical settings), we may not be able to explain how decisions are made, but we should be able to interpret what the model might be doing.
 
-   - *Testing*: ensure outputs align with expected rules and user needs.
-   - *Evaluation*: use explainability tools to understand how models reach outputs.
+  - *Testing*: ensure outputs align with expected rules and user needs.
+  - *Evaluation*: use explainability tools to understand how models reach outputs.
 
 - **Treat Ethics as Testable Risk**  
 Ethical considerations (e.g. avoiding harm, respecting rights, non-discrimination) should be managed like any other risk. Define ethical risk scenarios (such as the AI producing harmful or offensive output, or unfairly denying a service) and include them in test plans.
 
-   - *Testing*: build explicit ethical test cases, trace results back to requirements, and review with diverse ethical tester groups.
-   - *Evaluation*: check models for harmful or biased outputs across different groups, check the compliance against ethical standards or checklists
+  - *Testing*: build explicit ethical test cases, trace results back to requirements, and review with diverse ethical tester groups.
+  - *Evaluation*: check models for harmful or biased outputs across different groups, check the compliance against ethical standards or checklists
 
 - **Look for What Wasn’t Intended**  
 AI systems can fail in ways designers didn’t anticipate. This can reveal ‘unknown unknowns', for example, a vision model picking up a spurious pattern (shortcut) or a chatbot getting tricked into revealing confidential info.
 
-   - *Testing*: simulate malicious inputs, edge-case data, or attempts to game the system.
-   - *Evaluation*: run adversarial and stress tests to uncover vulnerabilities or undesirable behaviour in models.
+  - *Testing*: simulate malicious inputs, edge-case data, or attempts to game the system.
+  - *Evaluation*: run adversarial and stress tests to uncover vulnerabilities or undesirable behaviour in models.
 
 - **Test Safe and Predictable Failure**  
 When AI does fail, it must fail safely.
 
-   - *Testing*: check component outages, bad data, or exceptions to ensure the system responds with appropriate fallbacks (e.g. hand off to a human, conservative decision).
-   - *Evaluation*: confirm models degrade gracefully rather than catastrophically.
+  - *Testing*: check component outages, bad data, or exceptions to ensure the system responds with appropriate fallbacks (e.g. hand off to a human, conservative decision).
+  - *Evaluation*: confirm models degrade gracefully rather than catastrophically.
 
 - **Benchmark Performance Holistically**  
 Test not only accuracy, but also the system’s efficiency, scalability, and resilience under load. Holistic performance testing ensures the AI can meet service level requirements in a production environment, not just produce correct output in ideal lab conditions.
 
-   - *Testing*: monitor the system under stress (e.g. latency, partial outages, resource utilisation, degraded conditions).
-   - *Evaluation*: measure model efficiency, scalability, fairness and resilience.
+  - *Testing*: monitor the system under stress (e.g. latency, partial outages, resource utilisation, degraded conditions).
+  - *Evaluation*: measure model efficiency, scalability, fairness and resilience.
 
 - **Build and Observe Quality from the Start**  
 Quality shouldn't be an afterthought, it must be built in from beginning. Apply a shift-left approach by embedding testing into early stages and continuously throughout development. If something goes wrong, you should know about it early, clearly, and with enough data to respond quickly.
 
-   - *Testing*: embed monitoring, feedback loops and traceable logs into every stage of delivery.
-   - *Evaluation*: design model checks that continue after deployment, not just during training.
+  - *Testing*: embed monitoring, feedback loops and traceable logs into every stage of delivery.
+  - *Evaluation*: design model checks that continue after deployment, not just during training.
 
 These principles encourage testers and project teams to look at AI quality from multiple angles (technical, ethical, and operational), and to integrate testing as a continuous effort.
 
