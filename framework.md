@@ -1,9 +1,8 @@
 ![Public Beta](https://img.shields.io/badge/Phase-Public%20Beta-blue)
 
 # AI Testing and Assurance Framework for Public Sector
-*Evaluation-driven approach to building safe, fair and reliable AI*
 
-> An initiative by the Cross Government Testing Community (UK)
+> Evaluation-driven approach to building safe, fair and reliable AI
 
 ![Banner image for AI testing framework](assets/img/Screenshot 2025-07-10 at 21.37.51.png)
 
@@ -15,8 +14,8 @@
    - [Scope](#scope)  
    - [Audience](#audience)  
    - [AI Types Covered](#ai-types-covered)  
-3. [Core AI Quality Attributes](#core-ai-quality-attributes-for-testing)
-4. [Evaluation and Assurance Principles for AI](#testing-and-quality-engineering-principles-for-ai)    
+3. [Core AI Quality Attributes](#core-ai-quality-attributes)
+4. [Evaluation and Assurance Principles for AI](#evaluation-and-assurance-principles-for-ai)
 5. [Lifecycle based Testing and Assurance](#lifecycle-based-testing-and-assurance)
    - [Planning and Design](#planning-and-design)  
    - [Data Collection and Preparation](#data-collection-and-preparation)
@@ -45,24 +44,33 @@
 
 AI is playing a growing role across public services, from decision support to automation to frontline service delivery. As these systems become more capable and more embedded in critical processes, it is essential that we understand how well they work, how fair they are, and what happens when they go wrong.
 
-This framework sets out a practical, shared approach for testing, evaluation and assurnace of AI systems across public sector. It focuses on helping teams test for quality, trustworthiness, and risk. This is whether the AI in question is a traditional rule-based system, Machine Learned model, or a newer generative or agentic system.
+This framework sets out a practical, shared approach for testing, evaluation and assurance of AI systems across public sector. It focuses on helping teams test systems, evaluate AI models and assure quality, trustworthiness, and risk. This is whether the AI in question is a traditional rule-based system, Machine Learned model, or a newer generative or agentic system.
+
+> In this framework, **testing** refers to checking the whole AI-enabled system (infrastructure, APIs, integrations, user interfaces, data flows). **Evaluation** focuses on AI model/layer, assessing how well they perform against agreed quality attributes. **Testing** generates the evidence, **evaluation** interprets it in context, and **assurance** gives confidence that systems are safe, fair and accountable.
 
 Testing AI is not the same as testing traditional software. AI behaves probabilistically, learns from data that may shift over time, and may act autonomously or opaquely. That means we need new methods, new language, and new standards. This framework provides the foundations to support that shift.
 
-Importantly, this is not a checklist or a rigid standard. It is a living tool to help organisations ask better questions, design better tests, and share what works. Departments can tailor the framework to fit their context, and contribute their own learning back into the shared understanding of how to test AI in public sector responsibly.
-
-> In this framework, **testing** refers to checking the whole AI-enabled system (infrastructure, APIs, integrations, user interfaces, data flows). **Evaluation** focuses on AI model/layer, assessing how well they perform against agreed quality attributes. **Testing** provides the evidence, **evaluation** interprets that evidence in context, and **assurance** gives confidence that systems are safe, fair and accountable.
+Importantly, this is not a checklist or a rigid standard. It is a living tool to help organisations ask better questions, design better tests, assurance strategy and share what works. Departments can tailor the framework to fit their context, and contribute their own learning back into the shared understanding of how to evaluate AI in public sector responsibly.
 
 ## Introduction
 
 ### Purpose
 
-The purpose of this framework is to provide a shared reference point for government teams who are responsible for testing and the wider assurance of AI systems. Whether you are building AI internally, procuring it externally, or overseeing its implementation, this document is designed to help you ask the right questions about how AI systems are tested, which covers before development, during development, and after deployment. It helps establish a minimum level of testing rigour for AI systems that impact the public, while allowing departments to adapt it to their own governance models, service needs, and levels of technical maturity.
+The purpose of this framework is to provide a shared reference point for government teams who are responsible for testing, evaluation and the wider assurance of AI systems. Whether you are building AI internally, procuring it externally, or overseeing its implementation, this document is designed to help you ask the right questions about how AI systems are tested, which covers before development, during development, and after deployment. It helps establish a minimum baseline of testing and evaluation for AI systems that impact the public, while allowing departments to adapt it to their own governance models, service needs, and levels of technical maturity.
 
 ### Scope
 
-This framework applies to all stages of the AI solution lifecycle, from initial planning and design through development, testing, deployment, and ongoing monitoring. It is intended for use across UK Government departments, agencies, and other public sector bodies developing or procuring AI systems. The scope covers all types of AI technologies and addresses both technical testing (model performance, data quality, etc.) and governance processes (risk assessments, documentation, approvals).
-The framework can be adapted to AI initiatives of varying size and risk. It covers pre-deployment testing (e.g. validating models in controlled environments) as well as post-deployment assurance (e.g. monitoring live systems for drift or issues). The framework is cross-disciplinary, encompassing activities for data scientists, developers,  test engineers, policy and ethics reviewers, information testing teams, and senior decision-makers. It does not replace specific legal or regulatory requirements, but rather consolidates and references them so that teams can ensure compliance through testing.
+This framework applies to across the full AI system lifecycle: from initial planning and design through development, testing, deployment, and ongoing monitoring. It is intended for use across UK Government departments, agencies, and other public sector bodies developing or procuring AI systems.The scope covers:
+
+- **System Testing** - infrastructure, data flows, integrations, UI, components.
+
+- **AI Model / Layer Evaluation** - quality attributes like accuracy, fairness, transparency etc.
+
+- **Governance Activities** - risk assessments, documentation, approvals, monitoring.
+
+The framework can be adapted to AI initiatives of varying size and risk. It covers pre-deployment testing (e.g. validating models in controlled environments) as well as post-deployment assurance (e.g. monitoring live systems for drift or issues).
+
+The framework is cross-disciplinary, encompassing activities for data scientists, developers,  test engineers, policy and ethics reviewers, information testing teams, and senior decision-makers. It does not replace specific legal or regulatory requirements, but rather consolidates and references them so that teams can ensure compliance through testing and evaluation.
 
 > This framework is intended as a common foundation, not a fixed prescription. It sets out principles, testing strategies, and testing modules that departments can adopt, adapt, or extend based on their specific operational contexts, risk profiles, and technical architectures. Flexibility is essential: testing activities should be proportionate to the impact of the AI system, and tailored to its type, whether rule-based, machine learning, generative, or agentic. Departments are encouraged to use this framework as a baseline for their own testing strategies, aligning with key principles while addressing the unique demands of their services.
 
@@ -133,7 +141,7 @@ These are not just desirable traits—they’re testable targets. Use this list 
 
 ## Evaluation and Assurance Principles for AI
 
-Testing AI is different. AI systems need a more curated approach for testing the underlying AI models and intended intelligence from the system or machine as compared to the traditional machine with no intelligence.Traditional testing assumes software will behave deterministically. AI doesn’t always follow that rule — it adapts, it predicts, it generates. That makes testing both more complex and more critical. 
+Testing AI is different. AI systems need a more curated approach for testing the underlying AI models and intended intelligence from the system or machine as compared to the traditional machine with no intelligence.Traditional testing assumes software will behave deterministically. AI doesn’t always follow that rule — it adapts, it predicts, it generates. That makes testing both more complex and more critical.
 
 - **Design Context-Appropriate Testing**  
 One size does not fit all. Always test AI systems in conditions that reflect their real-world use context . This means moving beyond idealised training scenarios. For example, testing models on live or representative data to detect concept drift or unusual inputs that differ from training. And rule-based expert system, a predictive ML model, and a generative AI chatbot each require a different testing focus and test design tailored to their use case and operating environment.
@@ -500,3 +508,5 @@ The responsible deployment of Artificial Intelligence in public services require
 |               |4. **David Rutter-Close**   <br> Lead Test Engineer - DfE  | 19/6/2025  |
 |               |5. **Adam Byfield**   <br> Principal Technical Assurance Specialist - NHS England | 19/6/2025  |
 |               |6. **Matthew Dyson**   <br> Principal Test Assurance Manager - National Highways(DfT) | 30/6/2025  |
+
+>An initiative by the Cross Government Testing Community (UK)
