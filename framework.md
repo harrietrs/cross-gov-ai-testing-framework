@@ -307,7 +307,16 @@ Example Outputs/Metrics:
 
 Focus:
 
-Now the model and any surrounding or integrated system components undergoes rigorous testing in a pre-deployment environment. This phase is essentially the classic testing phase. The AI system is tested against a wide array of scenarios and quality criteria, many of which are detailed in modular framework. Activities include functional testing (does the AI do what it’s supposed to, across various cases?), performance testing (does it meet speed and throughput requirements consistently?), stress testing and adversarial testing (throw extreme or malicious cases at it), and user testing (pilot groups interacting with the AI to gather feedback). Verification also means checking that all requirements set in earlier phases have been met, essentially a final validation on the model and system. For high risk applications, this phase might involve a formal acceptance test witnessed by stakeholders or even external auditors. By the end of Validation & Verification, the team should have high confidence with evidence that the AI system is ready for real-world use, or identify issues that need fixing before it can proceed. Implement fairness metrics to assess and rectify biases in predictions.
+At this stage, the AI system and its integrated components are put through rigorous pre-deployment checks. This is the classic testing phase, where the system is exercised against a wide range of scenarios and quality requirements. The aim is to confirm that the system behaves as intended under realistic and adverse conditions, and that all requirements set earlier in the project have been met. By the end of Validation & Verification, the team should have high confidence with evidence that the AI system is ready for real-world use, or identify issues that need fixing before it can proceed. 
+
+Verification here means confirming that the system implementation aligns with specified requirements.Validation refers to confirming that the system is fit for its intended use in real-world conditions. These sit alongside, but are distinct from, the broader framework’s concepts of Testing (generating evidence) and Evaluation (interpreting that evidence in context).
+
+Activities typically include:
+
+- Functional checks – Does the system perform its intended tasks correctly across different use cases?
+- Performance checks – Can it meet throughput and latency requirements consistently?
+- Stress and adversarial checks – Does the system remain robust under extreme, malicious, or unexpected inputs?
+- User acceptance checks – Are pilot users or stakeholders able to use the system effectively?
 
 Example Test Techniques:
 
