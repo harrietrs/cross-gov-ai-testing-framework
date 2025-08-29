@@ -287,11 +287,15 @@ Example Outputs/Metrics:
 
 Focus:
 
-In this phase, the AI model or ruleset, in a rules-based system is developed. For machine learning, this involves selecting an appropriate model architecture or algorithm, training the model on the prepared dataset, and tuning hyperparameters to meet the performance goals. Assurance during model development is about validating that the model is learning correctly and is on track to meet requirements . Key tasks include holding out a validation dataset to check performance on unseen data (to detect overfitting), performing cross-validation, and monitoring training metrics (e.g. loss curves). It’s also the stage to infuse fairness and explainability proactively. For example, the team might choose a more interpretable model if transparency is paramount, or apply techniques (like reweighting data) during training to reduce bias if the initial evaluation shows skew. By the end of this phase, there should be a trained model candidate that meets the initial performance criteria on validation data and has evidence of being free from major flaws.
+The focus is to ensure the model is learning correctly, generalising beyond training data, and embedding fairness, explainability, and robustness from the start. For example, teams may use validation datasets, cross-validation, or interpretable models to monitor for overfitting and bias. By the end of this phase, there should be a trained candidate model that meets initial performance criteria and shows no major flaws.
+
+- *Testing*: Check training pipelines, hyperparameter tuning processes, and system-level integration (e.g. ensuring training outputs are logged and reproducible).
+- *Evaluation*: Measure model performance on validation datasets (accuracy, precision/recall, RMSE, F1-score), assess fairness metrics, check for overfitting, and ensure interpretability.
+- *Assurance*: Provide confidence that the trained model meets agreed benchmarks, is free from major flaws, and is documented clearly for transparency and accountability.
 
 Example Outputs/Metrics:
 
-- Model Performance on Validation Data: - Typical metrics like accuracy, F1-score, precision/recall, RMSE (for regression), etc., evaluated on a hold-out validation set . For instance, ‘Validation accuracy = 92%, exceeding the 90% target, F1 = 0.88 for class A vs 0.85 for class B’. These results indicate how well the model generalises. Also track metrics across multiple validation splits (k-fold cross-validation), e.g. ‘Std. deviation of accuracy across 5 folds = 1.2%’ to gauge stability .
+- Model Performance on Validation Data: - Typical metrics like accuracy, F1-score, precision/recall, RMSE (for regression), etc., evaluated on a hold-out validation set . For instance, ‘Validation accuracy = 92%, exceeding the 90% target, F1 = 0.88 for class A vs 0.85 for class B’. These results indicate how well the model generalises. Also track metrics across multiple validation splits (k-fold cross-validation), e.g. ‘Standard deviation of accuracy across 5 folds = 1.2%’ to gauge stability .
 
 - Fairness Metrics (on Validation): - Calculate any relevant fairness statistics on the model’s validation predictions . For example: ‘False negative rate for group X = 5%, for group Y = 9% (disparity of 4%)’ or ‘Calibration between demographics is within 2%’. If these are out of acceptable range, note any mitigation integrated (e.g. adjusted threshold or retrained with balanced data).
 
@@ -303,7 +307,16 @@ Example Outputs/Metrics:
 
 Focus:
 
-Now the model and any surrounding or integrated system components undergoes rigorous testing in a pre-deployment environment. This phase is essentially the classic testing phase. The AI system is tested against a wide array of scenarios and quality criteria, many of which are detailed in modular framework. Activities include functional testing (does the AI do what it’s supposed to, across various cases?), performance testing (does it meet speed and throughput requirements consistently?), stress testing and adversarial testing (throw extreme or malicious cases at it), and user testing (pilot groups interacting with the AI to gather feedback). Verification also means checking that all requirements set in earlier phases have been met, essentially a final validation on the model and system. For high risk applications, this phase might involve a formal acceptance test witnessed by stakeholders or even external auditors. By the end of Validation & Verification, the team should have high confidence with evidence that the AI system is ready for real-world use, or identify issues that need fixing before it can proceed. Implement fairness metrics to assess and rectify biases in predictions.
+At this stage, the AI system and its integrated components are put through rigorous pre-deployment checks. This is the classic testing phase, where the system is exercised against a wide range of scenarios and quality requirements. The aim is to confirm that the system behaves as intended under realistic and adverse conditions, and that all requirements set earlier in the project have been met. By the end of Validation & Verification, the team should have high confidence with evidence that the AI system is ready for real-world use, or identify issues that need fixing before it can proceed.
+
+Verification here means confirming that the system implementation aligns with specified requirements.Validation refers to confirming that the system is fit for its intended use in real-world conditions. These sit alongside, but are distinct from, the broader framework’s concepts of Testing (generating evidence) and Evaluation (interpreting that evidence in context).
+
+Activities typically include:
+
+- Functional checks – Does the system perform its intended tasks correctly across different use cases?
+- Performance checks – Can it meet throughput and latency requirements consistently?
+- Stress and adversarial checks – Does the system remain robust under extreme, malicious, or unexpected inputs?
+- User acceptance checks – Are pilot users or stakeholders able to use the system effectively?
 
 Example Test Techniques:
 
@@ -332,11 +345,16 @@ Example Outputs/Metrics:
 
 Focus:
 
-Most software systems will undergo an Operational Acceptance Test (OAT) phase that determines its suitability to be deployed on to a production environment. This testing focuses on the operational readiness of the system. The generic principles of OAT testing also apply in the context of deploying AI systems. This implies that procedures in place for Alerting & Incident Response, Failover & Redundancy, User access & permission management, Audit trail logging etc are tested for and assured. When managing this phase of testing for AI systems, it will be prudent to also consider aspects like Human Oversight & Override capability, Safe shutdown & Kill switch, Reversal & Undo mechanism, Continous Model Perfomance monitoring etc.
+Before deployment, AI systems should pass an Operational Acceptance Test (OAT) to confirm they are ready for a production environment. This stage assesses whether the system has the safeguards, processes, and resilience needed for safe and reliable operation at scale.
+
+Traditional OAT covers areas like alerting and incident response, failover and redundancy, user access and permission management, and audit logging. For AI systems, additional considerations are critical:
+
+- Human oversight and override capabilities (e.g., ability for an operator to intervene).
+- Safe shutdown and kill switches to prevent uncontrolled behaviour.
+- Reversal and undo mechanisms for decisions.
+- Continuous monitoring of model performance to detect drift or degradation.
 
 Example Outputs/Metrics:
-
-Is data collected and presented in a way that some of the relevant metrics below can be caluclate
 
 - Existence of Manual override interfaces (e.g., admin dashboards). Ability to measure Override Rate (%) shows percentage of AI decisions overridden by human operators. High rates may indicate trust issues or model performance problems.
 
