@@ -258,7 +258,20 @@ Example Outputs/Metrics:
 
 Focus:
 
-In this phase, the team is concerned with gathering, generating, or selecting the data that will be used to train or inform the AI model, and preparing that data for use. Data quality testing is paramount here . This involves verifying that the data is accurate, complete, and representative of the domain. If the dataset is large, use statistical profiling to check for anomalies or gaps. Important considerations include handling missing values, correcting errors or outliers, and ensuring the data covers all relevant scenarios and sub-populations to avoid biases. The team should also address any biases detected in the dataset, for instance, if certain demographic groups are underrepresented or outcomes are skewed, they may collect additional data or apply balancing techniques. Privacy and compliance steps happen here as well. Confirm that using the data is lawful. Consent, if required, is obtained. Personal data is minimized or anonymized per UK GDPR. By the end of this phase, the training and testing datasets should be of known quality and documented.
+In this phase, the goal is to gather, generate, or select the data that will be used to train and inform the AI model, and to prepare it for safe and effective use. High-quality data is critical, it must be accurate, complete, representative, and lawfully obtained.
+
+Key activities include:
+
+- Check for anomalies, gaps, or errors (e.g. missing values, mislabels, outliers).
+- Ensure coverage of all relevant scenarios and sub-populations, avoiding underrepresentation or skew.
+- Address and correct bias (e.g. balancing techniques for demographic groups).
+- Apply privacy and compliance steps, ensuring personal data is minimised or anonymised in line with GDPR.
+
+By the end of this phase, datasets should be of known quality, well-documented, and suitable for both testing the system and evaluating the model.
+
+- *Testing*: Validate how data is handled across pipelines and systems (storage, transfers, cleaning scripts).
+- *Evaluation*: Assess dataset quality, representativeness, and bias against agreed fairness and robustness criteria.
+- *Assurance*: Confirm evidence that data collection, use, and storage are lawful, ethical, and accountable.
 
 Example Outputs/Metrics:
 
@@ -268,7 +281,7 @@ Example Outputs/Metrics:
 
 - Coverage of Scenarios: - A qualitative or quantitative assessment of how well the data covers expected use cases. For example: a checklist of scenarios with data counts, ‘Contains data for all 10 regions of the UK, includes examples of all major categories of inquiries from last year’s records, synthetic data added for rare but critical scenario X’. This ensures that the model won’t be blindsided by a common scenario that was absent in training.
 
-- Data Lineage & Documentation: - Although not a metric per se, an output here is documentation, could be a Data Factsheet or datasheet for dataset, capturing where data came from, how it was processed, any assumptions or filtering applied, and any known limitations of the dataset.
+- Data Lineage & Documentation: - Although not a metric per se, an output here is documentation. It could be a Data Factsheet or datasheet for dataset, capturing where data came from, how it was processed, any assumptions or filtering applied, and any known limitations of the dataset.
 
 ### Model Development and Training
 
