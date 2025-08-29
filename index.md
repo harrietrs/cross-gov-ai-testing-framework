@@ -345,11 +345,16 @@ Example Outputs/Metrics:
 
 Focus:
 
-Most software systems will undergo an Operational Acceptance Test (OAT) phase that determines its suitability to be deployed on to a production environment. This testing focuses on the operational readiness of the system. The generic principles of OAT testing also apply in the context of deploying AI systems. This implies that procedures in place for Alerting & Incident Response, Failover & Redundancy, User access & permission management, Audit trail logging etc are tested for and assured. When managing this phase of testing for AI systems, it will be prudent to also consider aspects like Human Oversight & Override capability, Safe shutdown & Kill switch, Reversal & Undo mechanism, Continous Model Perfomance monitoring etc.
+Before deployment, AI systems should pass an Operational Acceptance Test (OAT) to confirm they are ready for a production environment. This stage assesses whether the system has the safeguards, processes, and resilience needed for safe and reliable operation at scale.
+
+Traditional OAT covers areas like alerting and incident response, failover and redundancy, user access and permission management, and audit logging. For AI systems, additional considerations are critical:
+
+- Human oversight and override capabilities (e.g., ability for an operator to intervene).
+- Safe shutdown and kill switches to prevent uncontrolled behaviour.
+- Reversal and undo mechanisms for decisions.
+- Continuous monitoring of model performance to detect drift or degradation.
 
 Example Outputs/Metrics:
-
-Is data collected and presented in a way that some of the relevant metrics below can be caluclate
 
 - Existence of Manual override interfaces (e.g., admin dashboards). Ability to measure Override Rate (%) shows percentage of AI decisions overridden by human operators. High rates may indicate trust issues or model performance problems.
 
