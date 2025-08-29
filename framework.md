@@ -307,7 +307,7 @@ Example Outputs/Metrics:
 
 Focus:
 
-At this stage, the AI system and its integrated components are put through rigorous pre-deployment checks. This is the classic testing phase, where the system is exercised against a wide range of scenarios and quality requirements. The aim is to confirm that the system behaves as intended under realistic and adverse conditions, and that all requirements set earlier in the project have been met. By the end of Validation & Verification, the team should have high confidence with evidence that the AI system is ready for real-world use, or identify issues that need fixing before it can proceed. 
+At this stage, the AI system and its integrated components are put through rigorous pre-deployment checks. This is the classic testing phase, where the system is exercised against a wide range of scenarios and quality requirements. The aim is to confirm that the system behaves as intended under realistic and adverse conditions, and that all requirements set earlier in the project have been met. By the end of Validation & Verification, the team should have high confidence with evidence that the AI system is ready for real-world use, or identify issues that need fixing before it can proceed.
 
 Verification here means confirming that the system implementation aligns with specified requirements.Validation refers to confirming that the system is fit for its intended use in real-world conditions. These sit alongside, but are distinct from, the broader framework’s concepts of Testing (generating evidence) and Evaluation (interpreting that evidence in context).
 
