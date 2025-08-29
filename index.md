@@ -287,11 +287,15 @@ Example Outputs/Metrics:
 
 Focus:
 
-In this phase, the AI model or ruleset, in a rules-based system is developed. For machine learning, this involves selecting an appropriate model architecture or algorithm, training the model on the prepared dataset, and tuning hyperparameters to meet the performance goals. Assurance during model development is about validating that the model is learning correctly and is on track to meet requirements . Key tasks include holding out a validation dataset to check performance on unseen data (to detect overfitting), performing cross-validation, and monitoring training metrics (e.g. loss curves). It’s also the stage to infuse fairness and explainability proactively. For example, the team might choose a more interpretable model if transparency is paramount, or apply techniques (like reweighting data) during training to reduce bias if the initial evaluation shows skew. By the end of this phase, there should be a trained model candidate that meets the initial performance criteria on validation data and has evidence of being free from major flaws.
+The focus is to ensure the model is learning correctly, generalising beyond training data, and embedding fairness, explainability, and robustness from the start. For example, teams may use validation datasets, cross-validation, or interpretable models to monitor for overfitting and bias. By the end of this phase, there should be a trained candidate model that meets initial performance criteria and shows no major flaws.
+
+- *Testing*: Check training pipelines, hyperparameter tuning processes, and system-level integration (e.g. ensuring training outputs are logged and reproducible).
+- *Evaluation*: Measure model performance on validation datasets (accuracy, precision/recall, RMSE, F1-score), assess fairness metrics, check for overfitting, and ensure interpretability.
+- *Assurance*: Provide confidence that the trained model meets agreed benchmarks, is free from major flaws, and is documented clearly for transparency and accountability.
 
 Example Outputs/Metrics:
 
-- Model Performance on Validation Data: - Typical metrics like accuracy, F1-score, precision/recall, RMSE (for regression), etc., evaluated on a hold-out validation set . For instance, ‘Validation accuracy = 92%, exceeding the 90% target, F1 = 0.88 for class A vs 0.85 for class B’. These results indicate how well the model generalises. Also track metrics across multiple validation splits (k-fold cross-validation), e.g. ‘Std. deviation of accuracy across 5 folds = 1.2%’ to gauge stability .
+- Model Performance on Validation Data: - Typical metrics like accuracy, F1-score, precision/recall, RMSE (for regression), etc., evaluated on a hold-out validation set . For instance, ‘Validation accuracy = 92%, exceeding the 90% target, F1 = 0.88 for class A vs 0.85 for class B’. These results indicate how well the model generalises. Also track metrics across multiple validation splits (k-fold cross-validation), e.g. ‘Standard deviation of accuracy across 5 folds = 1.2%’ to gauge stability .
 
 - Fairness Metrics (on Validation): - Calculate any relevant fairness statistics on the model’s validation predictions . For example: ‘False negative rate for group X = 5%, for group Y = 9% (disparity of 4%)’ or ‘Calibration between demographics is within 2%’. If these are out of acceptable range, note any mitigation integrated (e.g. adjusted threshold or retrained with balanced data).
 
