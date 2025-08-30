@@ -366,15 +366,21 @@ Example Outputs/Metrics:
 
 Focus:
 
-This phase involves the release of the AI system into the live environment and its integration into the broader business or service workflow. Even after thorough pre-release testing, deployment can reveal new issues, so this stage includes final integration testing and checks in the production setting.
+This phase covers releasing the AI system into the live environment and integrating it into the wider business or service workflow. Even after extensive pre-release testing, new issues can appear in production, so this stage includes final smoke testing and operational checks.
 
-> AI systems should be delivered through secure, repeatable, and automated processes. Teams are encouraged to integrate testing and assurance steps into their DevOps pipelines and Continuous Integration/Continuous Deployment (CI/CD) workflows.
+AI systems should be deployed using secure, repeatable, and automated processes. Teams are encouraged to integrate testing and assurance into their DevOps pipelines and use Continuous Integration/Continuous Deployment (CI/CD) workflows.
 
-Key activities: verify that the AI service is correctly interfacing with production data sources, databases, or other IT systems (e.g. does the API call from the web application correctly reach the AI model and handle responses?). Ensure all configuration is correct for production. Sometimes models behave differently if run on different hardware or with scaled loads, so do a sanity check in situ. Security hardening is finalized, confirm that any secrets, keys, or access controls for the AI in production are set as per security policy. There is also a governance aspect before go-live, ensure all necessary approvals have been obtained (for high-risk AI, perhaps a formal sign-off by a senior responsible owner or an ethics board). Tech Documentation should be finalised. Essentially, the Deployment phase is about carefully rolling the AI out and making sure ‘everything is green’ in the live environment.  
+Key activities include:
+
+- Verifying that the AI service interacts correctly with production data sources, databases, or IT systems (e.g., API calls reaching the AI model, handling responses as expected).
+- Confirming security hardening is in place, including secrets management, keys, and access controls.
+- Checking performance under real-world conditions (different hardware, scaled loads).
+- Ensuring governance requirements are met before go-live — for high-risk AI, this may require senior approval or an ethics board decision.
+- Finalising technical documentation to confirm the system is production-ready.
 
 Example Outputs/Metrics:
 
-- Integration Test Results (Production): - Results of final smoke tests run in the production environment or staging environment identical to production . This could include live proving of user journeys. For example: ‘Full workflow test (user submits application -> AI risk scoring -> database update -> user notified) passed all steps, data flows and hand-offs confirmed’. If any integration bugs were found (e.g. data format mismatches between systems), those are resolved or documented.
+- Smoke Test Results (Production): - Results of final smoke tests run in the production environment or staging environment identical to production . This could include live proving of user journeys. For example: ‘Full workflow test (user submits application -> AI risk scoring -> database update -> user notified) passed all steps, data flows and hand-offs confirmed’. If any integration bugs were found (e.g. data format mismatches between systems), those are resolved or documented.
 
 - Production Performance Metrics: - Baseline metrics collected with the system running under production load (or simulated load). E.g. ‘Average latency of AI API calls in production = 850ms, p95 latency = 1.3s, within acceptable range’. Throughput might be measured during a load test, ‘System can handle 50 requests per second with <5% error rate’. These numbers confirm that the system meets performance requirements in the real setup .
 
