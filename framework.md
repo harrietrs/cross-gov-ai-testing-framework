@@ -25,7 +25,7 @@
    - [Deployment (Release and Integration)](#deployment-release-and-integration)
    - [Monitoring and Continuous Assurance](#monitoring-and-continuous-assurance)
 
-6. [Modular AI Testing Framework](#modular-ai-testing-framework)
+6. [Modular AI Testing Approach](#modular-ai-testing-approach)
    - [Data & Input Validation](#data--input-validation-module)
    - [Model Functionality Testing](#model-functionality-testing-module)
    - [Bias and Fairness Testing](#bias-and-fairness-testing-module)
@@ -366,15 +366,21 @@ Example Outputs/Metrics:
 
 Focus:
 
-This phase involves the release of the AI system into the live environment and its integration into the broader business or service workflow. Even after thorough pre-release testing, deployment can reveal new issues, so this stage includes final integration testing and checks in the production setting.
+This phase covers releasing the AI system into the live environment and integrating it into the wider business or service workflow. Even after extensive pre-release testing, new issues can appear in production, so this stage includes final smoke testing and operational checks.
 
-> AI systems should be delivered through secure, repeatable, and automated processes. Teams are encouraged to integrate testing and assurance steps into their DevOps pipelines and Continuous Integration/Continuous Deployment (CI/CD) workflows.
+AI systems should be deployed using secure, repeatable, and automated processes. Teams are encouraged to integrate testing and assurance into their DevOps pipelines and use Continuous Integration/Continuous Deployment (CI/CD) workflows.
 
-Key activities: verify that the AI service is correctly interfacing with production data sources, databases, or other IT systems (e.g. does the API call from the web application correctly reach the AI model and handle responses?). Ensure all configuration is correct for production. Sometimes models behave differently if run on different hardware or with scaled loads, so do a sanity check in situ. Security hardening is finalized, confirm that any secrets, keys, or access controls for the AI in production are set as per security policy. There is also a governance aspect before go-live, ensure all necessary approvals have been obtained (for high-risk AI, perhaps a formal sign-off by a senior responsible owner or an ethics board). Tech Documentation should be finalised. Essentially, the Deployment phase is about carefully rolling the AI out and making sure ‘everything is green’ in the live environment.  
+Key activities include:
+
+- Verifying that the AI service interacts correctly with production data sources, databases, or IT systems (e.g., API calls reaching the AI model, handling responses as expected).
+- Confirming security hardening is in place, including secrets management, keys, and access controls.
+- Checking performance under real-world conditions (different hardware, scaled loads).
+- Ensuring governance requirements are met before go-live — for high-risk AI, this may require senior approval or an ethics board decision.
+- Finalising technical documentation to confirm the system is production-ready.
 
 Example Outputs/Metrics:
 
-- Integration Test Results (Production): - Results of final smoke tests run in the production environment or staging environment identical to production . This could include live proving of user journeys. For example: ‘Full workflow test (user submits application -> AI risk scoring -> database update -> user notified) passed all steps, data flows and hand-offs confirmed’. If any integration bugs were found (e.g. data format mismatches between systems), those are resolved or documented.
+- Smoke Test Results (Production): - Results of final smoke tests run in the production environment or staging environment identical to production . This could include live proving of user journeys. For example: ‘Full workflow test (user submits application -> AI risk scoring -> database update -> user notified) passed all steps, data flows and hand-offs confirmed’. If any integration bugs were found (e.g. data format mismatches between systems), those are resolved or documented.
 
 - Production Performance Metrics: - Baseline metrics collected with the system running under production load (or simulated load). E.g. ‘Average latency of AI API calls in production = 850ms, p95 latency = 1.3s, within acceptable range’. Throughput might be measured during a load test, ‘System can handle 50 requests per second with <5% error rate’. These numbers confirm that the system meets performance requirements in the real setup .
 
@@ -386,11 +392,20 @@ Example Outputs/Metrics:
 
 Focus:
 
-The lifecycle doesn’t end at deployment, continuous monitoring and improvement is crucial. In this operational phase, the AI system is live and delivering services, so the goal is to ensure it continues to perform as intended and to catch any issues early. The team should establish ongoing monitoring of key metrics, both technical (performance, error rates) and outcome-based (accuracy on new data, signs of bias drift). There should be alerts set for anomalous behavior, e.g. if the model’s predictions start significantly deviating from historical patterns or if input data characteristics shift beyond the training range . Additionally, periodic evaluations or audits are conducted: for example, retraining the model at scheduled intervals and re-running the full test suite, or annually auditing the AI for compliance and performance (some agencies might require an annual ‘AI health check’ to verify everything is still in order). Maintenance processes are also enacted here: if the business process changes or new data becomes available, the AI might need to be updated, any such changes should go through a controlled process (with re-testing before redeployment, per change management guidelines). In summary, this phase is about operational assurance, keeping the AI system reliable, efficient, and fair over time in the face of evolving conditions.
+Deployment is not the end of the lifecycle. Continuous monitoring and improvement are essential to keep AI systems reliable, efficient, and fair over time. Once in operation, the AI system must be monitored to ensure it performs as intended and to detect issues early.
+
+Teams should establish ongoing monitoring of key metrics, including:
+
+- Technical performance (e.g., latency, error rates, throughput).
+- Outcome quality (e.g., accuracy on new data, fairness indicators, rates of bias drift).
+
+Monitoring should include alerts for anomalous behaviour, such as predictions deviating significantly from expectations or input data distributions shifting away from training data. Scheduled re-testing, periodic audits, and compliance reviews (such as 'AI health checks') provide additional safeguards.
+
+Where business processes change or new data sources emerge, AI models may need to be retrained or updated. Such changes must go through a controlled process with re-testing and governance sign-off to prevent risks from being introduced unnoticed.
 
 Example Outputs/Metrics:
 
-- Real-Time Performance & Drift Metrics: - Continuous metrics such as latency and throughput in production (monitored on dashboards), plus data drift and model drift indicators . For instance: a data drift metric might be the statistical distance between recent input data distribution and the training data distribution (alert if exceeds threshold), a model drift metric might compare model predictions now vs. a baseline (alert if e.g. the acceptance rate changes by more than X%). Also track system uptime and any failure incidents (downtime or error count).
+- Real-Time Performance & Drift Metrics: - Continuous tracking of metrics such as latency and throughput in production (monitored on dashboards), plus data drift and model drift indicators . For instance: a data drift metric might be the statistical distance between recent input data distribution and the training data distribution (alert if exceeds threshold), a model drift metric might compare model predictions now vs. a baseline (alert if e.g. the acceptance rate changes by more than X%). Also track system uptime and any failure incidents (downtime or error count).
 
 - Incident Reports: - If any issues occur (e.g. the model made a significant error or the system was unavailable for a period), document each incident and the response. Metrics here include the number of incidents per month/quarter and mean time to detection and resolution. For example: ‘3 minor incidents in the last quarter (1 data pipeline outage for 2 hours, 2 cases of incorrect outputs flagged by users); all resolved within SLA; no major incidents’. This provides transparency and learning opportunities.
 
@@ -400,7 +415,7 @@ Example Outputs/Metrics:
 
 - End-of-Life Planning (Retirement): - Eventually, the AI system may be retired or replaced. As part of continuous improvement, there should be a plan for decommissioning when appropriate. Metrics or checks include ensuring data retention and deletion policies are followed (‘100% of personal data archived or deleted as per policy upon retirement’) , and lessons learned compiled for future projects. While this is the final step of the lifecycle, it’s noted here for completeness: successful retirement is also part of assuring the AI’s overall lifecycle (no loose ends or forgotten models left running).
 
-## Modular AI Testing Framework
+## Modular AI Testing Approach
 
 While the lifecycle approach tells us when to perform testing activities, this section describes what tests to perform in detail. We present a Modular Testing Framework for AI, consisting of distinct testing modules, each addressing a specific facet of AI quality. These modules can be thought of as building blocks, depending on the AI system and its risk level. You might emphasize some modules more than others, but together they form a comprehensive testing regimen. The modular design allows flexibility. For example, a simple rule-based system might not need elaborate adversarial testing, whereas a machine learning model would. Each module also notes how approaches may differ for various AI types (rule-based vs ML vs generative vs agentic AI), ensuring the unique challenges of each are covered.
 
