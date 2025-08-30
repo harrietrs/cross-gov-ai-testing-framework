@@ -395,6 +395,7 @@ Focus:
 Deployment is not the end of the lifecycle. Continuous monitoring and improvement are essential to keep AI systems reliable, efficient, and fair over time. Once in operation, the AI system must be monitored to ensure it performs as intended and to detect issues early.
 
 Teams should establish ongoing monitoring of key metrics, including:
+
 - Technical performance (e.g., latency, error rates, throughput).
 - Outcome quality (e.g., accuracy on new data, fairness indicators, rates of bias drift).
 
