@@ -440,7 +440,7 @@ Example Outputs/Metrics:
 
 ## Modular AI Testing Approach
 
-While the lifecycle approach tells us when to perform testing activities, this section describes what tests to perform in detail. We present a Modular Testing Framework for AI, consisting of distinct testing modules, each addressing a specific facet of AI quality. These modules can be thought of as building blocks, depending on the AI system and its risk level. You might emphasize some modules more than others, but together they form a comprehensive testing regimen. The modular design allows flexibility. For example, a simple rule-based system might not need elaborate adversarial testing, whereas a machine learning model would. Each module also notes how approaches may differ for various AI types (rule-based vs ML vs generative vs agentic AI), ensuring the unique challenges of each are covered.
+While the defensive assurance approach tells us when to perform testing activities, this section describes what tests to perform in detail. We present a modular testing approach for AI, consisting of distinct testing modules, each addressing a specific facet of AI quality. These modules can be thought of as building blocks, depending on the AI system and its risk level. You might emphasize some modules more than others, but together they form a comprehensive testing regimen. The modular design allows flexibility. For example, a simple rule-based system might not need elaborate adversarial testing, whereas a machine learning model would. Each module also notes how approaches may differ for various AI types (rule-based vs ML vs generative vs agentic AI), ensuring the unique challenges of each are covered.
 
 ![Modules for AI testing framework](assets/img/modules.png)
 
@@ -458,18 +458,77 @@ There are 9 modules in this framework:
 
 ### Data & Input Validation Module
 
-**Objective:** This module focuses on the quality of data and inputs before they reach the AI model. The goal is to ensure that ‘garbage in’ doesn’t produce ‘garbage out’, i.e., that any data feeding the AI, whether training data or live input is valid, clean, and appropriate. For AI, data is the fuel, so rigorous validation here prevents downstream errors and biases. Training data should be structured so that each category of data is equally represented. Test data should reflect as closely as possible the distributions seen in live data.
+**Objective** 
 
-**Key activities** include schema validation (correct format/types), range checks (values within expected bounds), outlier detection, and sanity checks on data distributions. In live operation, it might involve filtering or rejecting anomalous inputs that could confuse the model. This module also covers establishing data lineage and version control, so you know which data was used for which model version.
+AI systems are only as good as the data that feeds them. If data is missing, skewed, or unsafe, errors and bias will follow. This module is about making sure training, validation, and live inputs are valid, representative, and compliant. It is the first safeguard in building confidence in an AI system.
 
-**Different AI systems require different approaches:**
+**Testing vs Evaluation**
 
-- **Rule-Based Systems:** These systems often expect structured inputs. Tests should verify that all inputs conform to expected formats and ranges. For example, if rules classify citizens by age bracket, ensure an input age of ‘200’ is caught as invalid and handled, since no human would be 200 years old . Validate each field (non-null where required, enumerated values are from allowed sets, etc.). Because rule-based logic might not handle unexpected values, robust input validation is critical to avoid system crashes or absurd outputs. Testing can include creating deliberately invalid inputs (nulls, out-of-range, wrong type) and confirming the system rejects them gracefully or defaults to a safe rule.
-- **Machine Learning Models:** Data validation is more statistical in nature. Before training, perform dataset profiling which include check for outliers, incorrect labels, duplicates or leaks between train and test sets . For instance, ensure that an ID that appears in training doesn’t appear in testing if that would leak information. Validate that feature distributions make sense (e.g. no percentages over 100, no negative values where impossible, etc.). If the model input pipeline involves transformations, test those as well. For example, if text needs to be tokenized, ensure unusual characters are handled. For live input to an ML model, implement appropriate checks. If an input vector is far outside training distribution (using techniques like Mahalanobis distance or simple range thresholds), log or refuse it to avoid unreliable predictions. If the model is to be retrained, ensure each dataset version is stored and differences are documented. Automated tools like Great Expectations or Pandora can be used to enforce data quality rules on new batches of data.
-- **Generative AI:** With large pre-trained models (like an LLM), training data validation might be out of the direct control of the team if using a third-party model. Thus, the emphasis is on input filtering and prompt validation . For example, if deploying a generative chatbot, incorporate a filter for user inputs, detect and block inputs that contain malicious content, code injection (e.g. someone tries to trick the model into running script tags or SQL commands), or disallowed queries (like requests for self-harm advice, etc.). Also apply rate-limiting or length checks as too long inputs might degrade performance or cause unexpected behavior. One should test prompts known to cause issues, e.g. profanities, or cleverly worded attacks (prompt injection attempts: 'Ignore previous instructions and …'), to ensure the system’s input guardrails catch them . Even though the internal training data of an LLM can’t be re-validated by us, we assume the provider did so. Our job is to validate what we feed into it and possibly any fine-tuning data we add.
-- **Agentic AI (Autonomous Agents):** For agents, inputs could be state observations from an environment (sensors, simulators) or reward signals. Validation for agentic systems means verifying the integrity of those environment inputs. If it’s a physical robot, sensor calibration tests ensure that, say, distance sensors give plausible readings. In a simulation or digital environment, validate the simulation’s outputs (no impossible physics glitches feeding into the agent). Additionally, ensure the reward function is properly defined and scaled, an incorrect reward signal is effectively ‘bad data’ to the learning agent. We should test edge-state inputs, feed the agent’s decision function extreme state values to see if it still outputs actions in a safe range. For example, if an agent’s state includes battery level, test what if battery=0 or extremely high. Validate if the agent handle that logically. Ensuring the agent doesn’t receive out-of-bound state info or that the environment can’t be exploited to send weird inputs, which could cause the agent to behave erratically, is part of this validation.
+- Testing (system level): checks the full data pipeline and interfaces. This include formats, schemas, ranges, encodings, file/API contracts, redaction of personal data, lineage, and monitoring.
+- Evaluation (model level): checks whether the model itself is being trained and assessed on data that is fit for purpose, representative, and free from obvious skew or leakage.
 
-By the end of this module, the team should have high confidence in the data pipeline that the training data was sound and representative, and that live inputs are properly checked. The output of Data & Input Validation is often an ‘OK to proceed’ signal for training (i.e., data is fit for model consumption) and a set of runtime validators that protect the model in production. Essentially, this module prevents garbage data from undermining the AI, thereby underpinning the reliability of all subsequent model behavior.
+Testing generates the evidence. Evaluation interprets that evidence. Together, they form the assurance that data is safe to use.
+
+**Core Practices**
+
+1. Basic validation
+
+  - Schema and format: required fields, correct data types, consistent encodings. Example: all records must include a case_id, with dates in standard format.
+  - Range and domain: values fall within realistic limits (e.g. ages 0–120, valid ISO country codes)
+  - Consistency and duplication: identifiers are unique, labels consistent, no duplicate entries.
+
+2. Statistical checks
+
+  - Profiling: highlight missing values, outliers, and unusual distributions.
+  - Representativeness: check class balance. If one group is less than 15% of the dataset, apply sampling or weighting and document the decision.
+  - Separation: confirm training, validation, and test datasets do not overlap. Prevent “leakage” that could inflate results.
+
+3. Compliance and safety
+
+  - Personal data: scan for personally identifiable information (PII) and remove or redact it. Record the lawful basis for data use.
+  - Lineage and versioning: log dataset versions and changes, so you know which model used which data.
+  - Live input validation: block malformed or unsafe inputs, such as oversized payloads or malformed JSON.
+
+**Approaches by AI type**
+
+- Rule-based systems: enforce strict schemas and boundary checks (e.g. reject an invalid postcode like ZZ99 9ZZ with a clear error message).
+- Machine learning models: check data quality (missing values, label errors, class imbalance) and compare distributions between training and test sets.
+- Generative AI (LLMs): validate prompts and inputs. Apply guardrails to block harmful requests and enforce schema validation for structured outputs.
+- Agentic AI (autonomous agents): validate environment and sensor inputs for plausibility, and confirm reward signals cannot be gamed.
+
+**Example Tests**
+
+- Schema smoke test: fail a batch import if required fields are missing.
+- Live input fuzzing: send malformed payloads to confirm safe rejection.
+- Distribution drift check: block retraining if new data diverges too far from the baseline.
+- Label audit: double-check a random sample with multiple annotators; require 95% agreement.
+- Prompt injection test (LLMs): adversarial prompts should fail less than 1% of the time.
+
+**Metrics**
+
+- Schema error rate: < 0.5% rejected.
+- Missing value rate: ≤ 1% for mandatory fields.
+- Drift score (Population Stability Index): ≤ 0.2 (investigate at 0.2–0.3, block above 0.3).
+- PII detection accuracy: ≥ 99%.
+- RAG retrieval relevance: ≥ 70% of top results relevant and from approved sources.
+
+**Evidence and Artefacts**
+
+- Data factsheet: where data came from, how it was processed, known limitations.
+- Lineage log: link datasets to model versions.
+- Validation report: metrics, thresholds, and any mitigations.
+- Compliance record: approvals for lawful use.
+- Decision note: whether data is fit to proceed for training.
+
+**Common Pitfalls**
+
+- Train–test leakage: performance looks strong in development but fails in production.
+- Unrepresentative data: minority groups under-represented, leading to unfair outcomes.
+- Hidden personal data: sensitive information included by mistake.
+- Schema drift: small format changes break downstream processes.
+- Pipeline mismatch: feature transformations differ between training and live systems.
+
+By the end of this module, the team should have high confidence in the data pipeline that the training data was sound and representative, and that live inputs are properly checked. The output of Data & Input Validation is often an ‘OK to proceed’ signal for training (i.e., data is fit for model consumption) and a set of runtime validators that protect the model in production.
 
 ### Model Functionality Testing Module
 
