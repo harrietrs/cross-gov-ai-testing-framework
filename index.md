@@ -504,7 +504,7 @@ Testing generates the evidence. Evaluation interprets that evidence. Together, t
 - Label audit: double-check a random sample with multiple annotators; require 95% agreement.
 - Prompt injection test (LLMs): adversarial prompts should fail less than 1% of the time.
 
-**Metrics**
+**Metrics - Example**
 
 - Schema error rate: < 0.5% rejected.
 - Missing value rate: ≤ 1% for mandatory fields.
