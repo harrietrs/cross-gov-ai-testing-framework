@@ -458,45 +458,45 @@ There are 9 modules in this framework:
 
 ### Data & Input Validation Module
 
-**Objective** 
+#### Objective
 
 AI systems are only as good as the data that feeds them. If data is missing, skewed, or unsafe, errors and bias will follow. This module is about making sure training, validation, and live inputs are valid, representative, and compliant. It is the first safeguard in building confidence in an AI system.
 
-**Testing vs Evaluation**
+#### Testing and Evaluation
 
 - Testing (system level): checks the full data pipeline and interfaces. This include formats, schemas, ranges, encodings, file/API contracts, redaction of personal data, lineage, and monitoring.
 - Evaluation (model level): checks whether the model itself is being trained and assessed on data that is fit for purpose, representative, and free from obvious skew or leakage.
 
 Testing generates the evidence. Evaluation interprets that evidence. Together, they form the assurance that data is safe to use.
 
-**Core Practices**
+#### Core practices
 
-1. Basic validation
+- Basic validation
 
   - Schema and format: required fields, correct data types, consistent encodings. Example: all records must include a case_id, with dates in standard format.
   - Range and domain: values fall within realistic limits (e.g. ages 0–120, valid ISO country codes)
   - Consistency and duplication: identifiers are unique, labels consistent, no duplicate entries.
 
-2. Statistical checks
+- Statistical checks
 
   - Profiling: highlight missing values, outliers, and unusual distributions.
   - Representativeness: check class balance. If one group is less than 15% of the dataset, apply sampling or weighting and document the decision.
   - Separation: confirm training, validation, and test datasets do not overlap. Prevent “leakage” that could inflate results.
 
-3. Compliance and safety
+- Compliance and safety
 
   - Personal data: scan for personally identifiable information (PII) and remove or redact it. Record the lawful basis for data use.
   - Lineage and versioning: log dataset versions and changes, so you know which model used which data.
   - Live input validation: block malformed or unsafe inputs, such as oversized payloads or malformed JSON.
 
-**Approaches by AI type**
+#### Approaches by AI type
 
 - Rule-based systems: enforce strict schemas and boundary checks (e.g. reject an invalid postcode like ZZ99 9ZZ with a clear error message).
 - Machine learning models: check data quality (missing values, label errors, class imbalance) and compare distributions between training and test sets.
 - Generative AI (LLMs): validate prompts and inputs. Apply guardrails to block harmful requests and enforce schema validation for structured outputs.
 - Agentic AI (autonomous agents): validate environment and sensor inputs for plausibility, and confirm reward signals cannot be gamed.
 
-**Example Tests**
+#### Example Tests
 
 - Schema smoke test: fail a batch import if required fields are missing.
 - Live input fuzzing: send malformed payloads to confirm safe rejection.
@@ -504,7 +504,7 @@ Testing generates the evidence. Evaluation interprets that evidence. Together, t
 - Label audit: double-check a random sample with multiple annotators; require 95% agreement.
 - Prompt injection test (LLMs): adversarial prompts should fail less than 1% of the time.
 
-**Metrics - Example**
+#### Metrics - Example
 
 - Schema error rate: < 0.5% rejected.
 - Missing value rate: ≤ 1% for mandatory fields.
@@ -512,7 +512,7 @@ Testing generates the evidence. Evaluation interprets that evidence. Together, t
 - PII detection accuracy: ≥ 99%.
 - RAG retrieval relevance: ≥ 70% of top results relevant and from approved sources.
 
-**Evidence and Artefacts**
+#### Evidence and Artefacts
 
 - Data factsheet: where data came from, how it was processed, known limitations.
 - Lineage log: link datasets to model versions.
@@ -520,7 +520,7 @@ Testing generates the evidence. Evaluation interprets that evidence. Together, t
 - Compliance record: approvals for lawful use.
 - Decision note: whether data is fit to proceed for training.
 
-**Common Pitfalls**
+#### Common Pitfalls
 
 - Train–test leakage: performance looks strong in development but fails in production.
 - Unrepresentative data: minority groups under-represented, leading to unfair outcomes.
