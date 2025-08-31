@@ -112,11 +112,58 @@ Where specific testing needs differ by AI type, these are called out in the rele
 
 > Adapted from the Cross-Government Testing Community AI Quality Workshop
 
-A cornerstone of this framework is understanding what quality means for AI systems. We define a set of Core Quality Characteristics that an AI system should be evaluated against. Each characteristic is accompanied by a definition and the specific testing focus needed to assure that quality attribute in an AI context. Table below summarizes the core quality characteristics, which form a quality matrix that teams can use to plan tests and measures:
+To assure that AI systems are safe, fair, and effective, we use a set of quality attributes. These guide both system-level testing (does the AI system as a whole work as intended in real conditions?) and model-level evaluation (does the AI model behave fairly, accurately, and robustly?). Together, they provide assurance over time.
 
-| Quality Attribute | What it means?                                      |  Test Focus                              |
+We group attributes into four themes:
+
+1. Safety and Ethics
+2. Openness & Trust
+3. Performance & Resilience
+4. User & Context Fit
+
+**1. Safety & Ethics**
+
+| Quality Attribute | What it means?                                      |  Focus                              |
 |:-------------------|:--------------------------------------------------|:--------------------------------------------------|
-| Autonomy| Degree to which the AI can operate independently of human intervention. (Relevant for agentic or autonomous AI systems.)| Challenge the system outside its normal operating envelope to test its autonomy limits . For example, what happens if an autonomous agent encounters a scenario not covered in training? Does it request human help appropriately? Test any 'human override' triggers , the AI should know when to stop and defer to humans if certain risk thresholds are exceeded.|
+| Autonomy| Degree to which the AI can operate independently of human intervention.| Challenge system outside its envelope, test for human handover triggers, verify deferral to humans when thresholds are exceeded.|
+| Fairness| Mitigation of unwanted bias.| Conduct bias audits, test for data skew, validate outcomes against equality law.|
+| Safety| Ability of system to not cause harm to life, property, or the environment.| Worst-case scenario testing, validate safety mechanisms.|
+| Ethical Compliance| Alignment with ethical guidelines, values, and laws.| Checklist-based testing, ethics panel review, pass/fail criteria.|
+| Side Effects & Reward Hacking| The presence of unintended behaviors arising from the AI’s optimization process.| Identify and trigger any potential side effects of the AI’s objectives, simulation testing and anomaly detection on the agent’s behaviors.|
+| Security| Protection against unauthorized access, misuse, or adversarial attacks.| Security testing, including penetration tests on AI APIs, checks for data leakage, ensure proper authentication/authorization around the AI service.|
+
+**2. Openness & Trust**
+
+| Quality Attribute | What it means?                                      |  Focus                              |
+|:-------------------|:--------------------------------------------------|:--------------------------------------------------|
+| Transparency| Visibility of AI’s data, logic, and workings.| Verify traceability records, audit trails, documentation like model cards or algorithmic transparency records.|
+| Explainability| Ability to explain AI outputs in human terms.| Use explainability tools (e.g. SHAP, LIME), domain expert review, user comprehension checks.|
+| Accountability| Clear responsibility for AI outcomes and decisions.| Trace decision responsibility, review governance mechanisms.|
+| Compliance| Adherence to organisational policies, standards, and relevant legal and regulatory requirements.| Assure compliance with legal frameworks like Data Protection Act, GDPR or AI assurance policies etc.|
+
+**3. Performance & Resilience**
+
+| Quality Attribute | What it means?                                      |  Focus                              |
+|:-------------------|:--------------------------------------------------|:--------------------------------------------------|
+| Functional Suitability| Degree to which the AI fulfills its specified tasks.| Validate against intended outputs for each requirement.|
+| Performance Efficiency| Speed, responsiveness, and resource use.| Measure latency, throughput, and system scalability.|
+| Reliability| Stability of performance under varying conditions.| Stress tests, fault injection, endurance testing.|
+| Maintainability| Ease of updating, fixing, or improving the system.| Verify retraining process, modularity, and version control.|
+| Evolution| The capability of the AI to learn and improve from experience over time.| Test for concept or policy drift handling, validate if learning improves performance without breaking existing functionality.|
+
+**4. User & Context Fit**
+
+| Quality Attribute | What it means?                                      |  Focus                              |
+|:-------------------|:--------------------------------------------------|:--------------------------------------------------|
+| Usability| Ease of use for human operators or end users.| UX testing, error handling, usability review.|
+| Accessibility| Designed for a wide range of abilities.| Test and audit the AI and all its user interfaces against the Web Content Accessibility Guidelines (WCAG) version 2.2 AA, to help it meet the [Public Sector Bodies Accessibility Regulations](https://www.gov.uk/guidance/accessibility-requirements-for-public-sector-websites-and-apps).|
+| Compatibility| Ability to work across environments and integrations.| Test across OS, APIs, browsers, devices, databases, cloud/on-prem.|
+| Portability| Ability to move across platforms or contexts.| Domain drift checks, portability test to new environments.|
+| Adaptability| Ability to adjust to changes in data or environment.| Test for handling new data patterns, concept drift.|
+| Data Correctness| Quality and diversity of data used to train the model.| Validate data quality, completeness, and representativeness.|
+
+
+////
 | Evolution (Learning Capability)| The capability of the AI to learn and improve from experience over time (if applicable).| If the system has an online learning component or periodic retraining, validate that learning improves performance without breaking existing functionality. Test for concept drift handling : feed the system data that gradually shifts in distribution and see if performance remains acceptable or if drift is detected. Also ensure mechanisms exist to detect when the AIs evolving behavior might diverge from policy (ethical drift).|
 | Transparency| The degree to which the AI’s workings, data, and logic are visible and understandable to stakeholders.|Check that the system produces audit logs or traceability of its decisions (e.g. which rules fired, or how a conclusion was reached). Ensure documentation like model cards or algorithmic transparency records are produced. A test in this context might be: given a specific decision the AI made, can we trace back to the input data and the steps that led to it? If using the ATRS ([Algorithmic Transparency Recording Standard](https://www.gov.uk/government/publications/guidance-for-organisations-using-the-algorithmic-transparency-recording-standard/)), verify that the transparency record is complete and published.|
 | Explainability| The ability to explain or articulate the reasoning behind the AI’s outputs in human-understandable terms.| Apply explainability methods and evaluate them. For ML, use tools (e.g. SHAP, LIME) on sample outputs to generate feature importance or explanations . Then have domain experts review these explanations to see if they 'make sense' (e.g. are the important factors clinically relevant in a medical AI?). For rule-based systems, verify that each rule has an associated explanation, and that the system can generate a rationale trace (e.g. 'Application rejected because income below threshold and credit score low'). The testing focus is on fidelity of explanations (they should accurately reflect the true logic) and user comprehension (explanations should be understandable to the target audience).|
