@@ -600,29 +600,93 @@ Example: A cleaning robot should actually clean when rewarded for 'clean floor',
 
 #### Common Pitfalls
 
-- Treating functionality testing as “one and done” rather than continuous.
+- Treating functionality testing as 'one and done' rather than continuous.
 - Ignoring boundary conditions, which often reveal flaws.
 - Over-reliance on aggregate metrics without inspecting actual errors.
 - Skipping adversarial or stress tests (e.g., prompt injection, noisy inputs).
-- Reward hacking in agents — the system optimises the wrong goal if signals are poorly designed.
+- Reward hacking in agents : the system optimises the wrong goal if signals are poorly designed.
 
 Overall, model functionality module provides evidence that the AI’s ‘brain’ works correctly in isolation. For ML and agents, it’s often a statistical confidence (‘with X% confidence, performance >= threshold’), while for rule-based, it’s near-certainty for each rule. This module ensures we aren’t integrating or deploying a fundamentally flawed model or system functionality.
 
 ### Bias and Fairness Testing Module
 
-**Objective:** This module is dedicated to evaluating and ensuring the fairness of the AI system. The AI’s decisions or outputs should not be unjustly biased toward or against particular groups or attributes. In the public sector, this is critical to uphold values of equality and comply with anti-discrimination laws. The focus is on detecting any disparate performance or outcomes and then addressing them.
+#### Objective
 
-**Key activities** include slicing model performance by demographic or sensitive attributes, computing fairness metrics, testing the system with synthetic or specially curated data to probe biases, and reviewing decision logic for any embedded biases, especially in rule-based systems. If biases are found, mitigation strategies are applied and re-tested,.This could involve retraining the model with more balanced data, adjusting thresholds, or implementing post-processing like equalized odds.
+This module ensures the AI system treats individuals and groups fairly. The goal is to detect and address any disparities in how different demographic or protected groups are treated by the model or system. For public sector use, this also supports legal compliance with anti-discrimination laws like the Equality Act 2010.
 
-**Different AI systems require different approaches:**
+#### Testing and Evaluation
 
-- **Rule-Based Systems:** Even though they’re manual logic, they can still embody biases intentionally or inadvertently. Fairness testing for rules might involve reviewing each rule to see if any could lead to differential treatment of groups. This is somewhat more of a policy review, but testers should flag it. More concretely, create diverse test personas, e.g., one persona from a minority ethnic group and one from a majority, identical on all other inputs, and run them through the rules to see if outcomes differ solely by that change they shouldn’t, unless a justified rule uses that attribute. If a rule uses attributes that correlate with protected characteristics (e.g. postcode can correlate with ethnicity or income), analyse that impact. One might also simulate known historical biases, for instance, if a hiring rule set prefers candidates from certain universities, test if that leads to indirectly disadvantaging certain groups. The results might be qualitative, like ‘Rule 5 potentially indirectly discriminates because it favors X which is less accessible to group Y’, which would need addressing by adjusting the rules. Another test would be to ensure there are no omissions that systematically exclude a group. For instance, a service eligibility rule might inadvertently exclude older people if it was only designed around younger cohorts, hence test with an elderly persona to see if rules have gaps.
-- **Machine Learning Models:** This is where most bias testing tools exist. Run the trained model on a test set that is labeled or tagged with demographic info if available. Calculate metrics separately for each group. For example, if testing for gender bias, ‘accuracy for males = 90%, for females = 78%’, that’s a flag. Or ‘mortgage approval rate for ethnic group A = 40%, for B = 60% given similar credit scores’, measure these gaps.
-Common metrics include demographic parity difference, equal opportunity difference (true positive rates across groups), false positive/negative rate differences, etc. Use visualization like plotting model score distributions by group to spot bias. Another approach is counterfactual fairness testing. Alter an input’s sensitive attribute (e.g. change a name from a male to female name in a CV) and see if output changes when other qualifications are the same. If the model is not supposed to consider that attribute, a change in output indicates bias. Additionally, bias might come from data, e.g., if the training data had historical bias like fewer positive examples for group X, the model might inherit it. We might generate synthetic data to probe. Feed the model balanced inputs across groups and see if outputs diverge. If issues are found, mitigation might involve techniques such as re-weighting the training data, adding fairness constraints in modeling, or post-processing like adjusting the decision threshold per group to equalize outcomes. After mitigation, re-test to confirm improvement . The output of this module is often a ‘fairness report’ showing all the computed metrics and declaring whether the model meets predefined fairness criteria (e.g. no metric disparity above a certain threshold) .
-- **Generative AI:** Bias in generative models manifests in the content they produce. For example, an LLM might respond differently to prompts about different demographic groups. There have been cases of models producing biased or stereotypical descriptions. To test this, one method is using template tests. We should craft prompts that are identical except for a demographic variable. E.g., The doctor said to the [man/woman]: ‘You need to rest.', and see if completions differ in a biased way like assuming gender roles. Or ask the model to generate portraits or descriptions and check if it unduly associates certain professions or attributes with certain groups. Also test for offensive content that provide identity-related prompts like 'What do you think of [ethnic group] people?' and see if the output contains slurs or negative stereotypes, it should refuse or respond in a neutral manner ideally. There are toolkits that help quantify bias, e.g., measuring associations in word embeddings like if ‘programmer’ is more associated with male names, that indicates bias in the model’s representation. If biases are found in a generative model, mitigation is harder if it’s a third party model. On that case, you might apply a filter on outputs, or fine tune the model on bias reducing data, or prompt engineering to steer it away from problematic content. Test again post mitigation. Human evaluation is key here, teams should have diverse reviewers assess a sample of outputs for bias or offensive content and report issues.
-- **Agentic AI (Autonomous Agents):** For agents, bias might be less straightforward, but imagine an AI agent allocating resources or interacting with humans, treats certain groups differently. If an agent’s policy might be influenced by demographic data or environmental features correlated with groups, test scenarios to see if outcomes differ by those. For example, an AI scheduling appointments, test if it prioritizes certain names or zip codes differently. If the agent is learning, one has to ensure the reward function or training environment isn't biased. It might require simulation of scenarios, e.g., in a reinforcement learning environment, do we notice the agent underserves one category of user. This might require careful design to test, by introducing test cases in the environment representing different groups and checking the utility each gets. Another area is to test if multiple agents or an agent interact with people, ensure it doesn’t develop a biased strategy like cooperating less with certain agents. While these are complex to test, the principle is the same: treat 'group' as a variable and see if the agent’s performance/rewards vary unjustly with that variable. Any systematic unfairness would need redesign of the agent’s reward or logic since Reinforcement Learning agents take on biases present in their reward structure or environment data.
+- Testing: Probes whether system behaviour varies unfairly across groups. This could mean rule outcomes, model predictions, generated content, or agent actions.
+- Evaluation: Measures performance metrics split by group (e.g. approval rates by ethnicity) and applies statistical fairness tests.
 
-After completing the Fairness & Bias Testing module, the team should have a clear understanding of any bias issues and have taken steps to correct them. Importantly, this module’s results should be reviewed by both technical teams and policy/legal teams. If any disparity remains, it should be consciously signed-off with rationale. There maybe the AI’s context justifies it, though in most public services that would be rare due to equalities duty. Documentation from this module can feed into an Equality Impact Assessment, demonstrating that the team tested for discrimination and either found none or mitigated what was found. This evidences compliance with the Equality Act 2010.
+#### Core practices
+
+- Define which sensitive or protected attributes matter for fairness in context (e.g. age, sex, ethnicity).
+- Test and evaluate outputs separately by group — don’t just check global accuracy.
+- Simulate edge cases that may surface bias (e.g. identical inputs with different group labels).
+- Use both real-world and synthetic data to test fairness under controlled conditions.
+- Document and rerun fairness checks whenever models or rules change.
+
+#### Approaches by AI type
+
+- Rule-based systems
+
+  - Test how outcomes change when only group identity varies (e.g. postcode, gender, age).
+  - Run personas through each rule to see if certain groups are disproportionately blocked or allowed.
+  - Analyse edge cases. E.g. university attended, job title, if these correlate with protected groups.
+
+- Machine learning models
+
+  - Evaluate metrics separately per group: accuracy, precision, F1, etc.
+  - Visualise distributions (e.g. score thresholds) to check for skew.
+  - Use fairness metrics like demographic parity, equal opportunity, or disparate impact ratio.
+  - Apply counterfactual testing: does changing a sensitive attribute alter the outcome?
+
+- Generative AI (LLMs)
+
+  - Use prompt templates that differ only by demographic markers and compare outputs.
+  - Detect stereotypical or offensive completions.
+  - Ask the model to describe, summarise, or respond to people from different groups. Check for consistency, tone, and framing.
+
+- Agentic AI (autonomous agents)
+
+  - Running scenarios where group identity is the only change: does the agent behave differently?
+  - Checking how the reward function is learned or applied: does it favour some groups unfairly?
+  - Testing multiple agents together: does bias appear in cooperation or competition?
+
+#### Example Tests
+
+- Rules: Run synthetic personas across decision trees, toggling group variables.
+- ML: Test model accuracy per group; check impact of small attribute changes.
+- Generative: Run prompts with swapped demographic info and rate responses.
+- Agentic: Simulate multiple runs with diverse environments and track outcomes by group.
+
+#### Metrics - Example
+
+- Demographic parity gap ≤ 10%.
+- Equal opportunity difference ≤ threshold defined by policy (e.g. < 5%).
+- Prediction accuracy within ±5% across key groups.
+- Manual review of generated content shows ≥ 85% rated neutral and fair.
+- Consistency of agent success rates across demographics in simulated scenarios.
+
+#### Evidence and Artefacts
+
+- Fairness test reports (per model or system).
+- Group-split performance metrics (with thresholds).
+- Visuals: score distributions, confusion matrices, heatmaps.
+- Reviewer annotations or rating summaries (for LLM content).
+- Documentation of mitigations and outcomes (before vs after comparison).
+- Equality Impact Assessment (where required).
+
+#### Common Pitfalls
+
+- Assuming training on 'representative' data means the model is fair.
+- Skipping group-based analysis, global metrics hide disparity.
+- Failing to define fairness criteria up front (equal accuracy? equal approval?).
+- Letting mitigations go unverified, fixes must be tested like features.
+- Relying only on technical metrics, some bias needs human interpretation.
+
+After completing the Fairness & Bias Testing module, the team should have a clear understanding of any bias issues and have taken steps to correct them. Importantly, this module’s results should be reviewed by both technical teams and policy/legal teams. If any disparity remains, it should be consciously signed-off with rationale.
 
 ### Explainability & Transparency Module
 
