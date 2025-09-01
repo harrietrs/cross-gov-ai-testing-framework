@@ -690,18 +690,84 @@ After completing the Fairness & Bias Testing module, the team should have a clea
 
 ### Explainability & Transparency Module
 
-**Objective:** The aim of this module is to ensure the AI system’s decisions and inner workings can be understood, interpreted, and traced by those who need to trust or oversee it. This includes generating explanations for individual decisions, providing insight into how the model works generally, and being transparent about data and design, which is crucial for public sector accountability . In testing, we verify that the explainability mechanisms are effective and that the system produces the necessary information for audit and compliance, e.g., information required under GDPR or for public transparency commitments.
+#### Objective
 
-**Key activities** involve using explainability tools, documentation reviews, and user testing of explanations (do people actually understand them?). Also, checking that logs or audit trails capture decisions.
+This module ensures the AI system’s decisions can be understood, traced, and explained, both by those overseeing the system and by the people affected by it. The aim is to test whether the model’s decisions are inspectable and whether the explanations are accurate, complete, and useful. For the public sector, this directly supports accountability, audit, and compliance requirements.
 
-**Different AI systems require different approaches:**
+#### Testing and Evaluation
 
-- **Rule-Based Systems:** These are inherently more transparent, the logic is explicitly coded and can be read. The task here is to ensure that this transparency is maintained and usable. One aspect is documentation, every rule should have an explanation or justification like why that rule exists, source of that policy . Testing will check that documentation is complete and updated, e.g., randomly pick some rules and see if a tester can find and understand the explanation in the documentation. Another aspect is audit trails, when the system makes a decision, it should be able to output which rules are fired and in what order. Test this by making sample decisions and verifying the system logs something like ‘Rules 5, 7, and 9 applied, leading to decision = Deny’. This confirms that if later someone asks ‘why did the system do X?’, you have a ready answer. Also test any interface that might display reasoning to end users or staff. For instance, if a caseworker interface highlights ‘Application denied due to Rule 7 (insufficient evidence)’, check that it's correctly triggered. Essentially, validate that reading the rules or provided rationale actually matches what happened in the decision.
-- **Machine Learning Models:** ML models are black-boxy, especially complex ones. We can apply post-hoc explainability techniques on a sample of model outputs . For instance, take a set of test instances and run SHAP (Shapley Additive Explanations) to get the top features that influenced the prediction for each. The testing part is interpreting those explanations to see whether they make domain sense. For example, if an AI is scoring health inspection risks and SHAP says ‘Feature: Restaurant ID contributes +0.5 risk’, that’s suspicious because an ID shouldn’t matter . A tester would flag that as a potential issue, maybe a data leak or quirk. Another test is, if the model is supposed to follow known patterns (say, in credit scoring, income should positively affect creditworthiness), see if explanation shows that trend. If not, maybe the model is using weird proxies. Also check global explanations. Some tools provide an overall feature importance ranking, ensure key known factors are ranked reasonably. If an important factor is missing or a nonsensical factor is high, investigate. This module also produces artifacts like a ‘Model Card’, a documented report about the model’s intended use, performance, limitations, etc. Testing for transparency means verifying that model cards or fact sheets are completed and accurate. Perhaps have someone uninvolved read the model card and see if they can understand what the model does and its limitations, if not, improve it. We might measure explanation fidelity, e.g., test how well a simpler surrogate model approximates the complex model’s decisions. If fidelity is low, the explanation might be misleading, so that’s a fail.
-- **Generative AI:** Explainability here is an evolving challenge. We often don’t have clear ways to explain why a particular output was generated since these models use billions of parameters. So transparency focuses on documentation and process. Ensure that we have documented the model’s origin, e.g. ‘This chatbot is based on GPT-4, fine-tuned on dataset XYZ on 2025-01-01’. Provide the model card from the provider if available, listing its capabilities and limitations . Another strategy is prompt transparency. If we use certain system or context prompts to steer the model, keep those accessible for audit. W could even show the user, if appropriate, what guidelines the AI was following. Testing means verifying that such info is indeed stored. For example, test that we can retrieve the conversation log including the prompts from the system for any given session if needed for later review. If we have any safety filters on outputs, explainability might also document when the AI refused an answer due to policy. Tools for generative AI explainability are nascent, one might use prototype methods like ‘trace which training data influenced this output’, not practical yet for large models, so we rely on being transparent about design. architecture, data sources, known bias mitigations applied, etc. Essentially, test that for any question a stakeholder might have (‘What data was this model trained on?’, ‘What version of the algorithm is it using?’, ‘What guidelines was it following?’), we have an answer documented.
-- **Agentic AI (Autonomous Agents):** For autonomous agents, explainability can mean understanding the agent’s policy or value function in human terms. This might involve policy summaries or visualisation of the agent’s strategy. Testing could include techniques like policy distillation into rules, then check if those rules align with domain knowledge. Or simpler, have the agent explain itself if possible, some research does reward models for being able to explain decisions. In absence of that, trace logs are key. Log the states and actions and maybe the internal reward at each step. A tester can then examine a few episodes to see if they understand why the agent took certain actions. If an agent does something unexpected, try to trace back which state or reward led to that. If it’s too opaque, consider adding logging or even altering the design to allow for more observability like intermediate metrics. Also, if using a simulation, you might highlight certain decisions to a subject matter expert to see if they agree (e.g., ‘The drone went around the storm, is that expected?’). If not, either the explanation or the policy might need adjustment. Ensuring transparency for agents may include requiring a human-in-the-loop override on unclear decisions. It is not exactly explanation, but a risk control. So part of testing might be to validate whether the system alert a human when a decision rationale is low-confidence. That overlaps with monitoring, but relevant to transparency as well.
+- Testing: Verifies whether explanations exist, are correct, and are usable by humans (e.g. through user testing or sampling decisions).
+- Evaluation: Measures the completeness, consistency, and accessibility of explanations, both technical and user-facing.
 
-Upon completing the Explainability & Transparency module, the AI system should be accompanied by a suite of artifacts and capabilities that make it inspectable and interpretable. This not only helps developers debug and improve the model, since weird explanations can reveal bugs or data issues, but also is crucial for external oversight. Public sector teams often need to provide an explanation to affected users upon request (for example, under GDPR individuals can ask for ‘meaningful information about logic’ of decisions) , so having a ready mechanism from this module is key. A successful outcome is when decision-makers or auditors can get satisfactory answers to ‘Why did the AI do that?’ without undue effort.
+#### Core practices
+
+- Identify what needs to be explainable (model-level logic, individual decisions, rule triggers, audit trail).
+- Test whether explanations align with actual behaviour (e.g. a rule fires when it says it did, a feature was actually used in scoring).
+- Simulate common queries: 'What data did this decision use?', 'What rule applied?', 'Why was I rejected?'
+- Review documentation and test whether it’s current, correct, and understandable.
+- Run user tests (with developers, policy teams, or front-line staff) to check if explanations make sense.
+
+#### Approaches by AI type
+
+- Rule-based systems
+
+  - Pick a few rules and check that documentation explains why they exist and what they do.
+  - Test audit logs: when a decision is made, does the system log which rules fired?
+  - Check interfaces: do internal users see the rationale? Is the logic traceable for review?
+
+- Machine learning models
+
+  - Use tools like SHAP or LIME to identify which features influenced a sample output.
+  - Check if these explanations align with expectations, e.g. if a model says 'Restaurant ID = high risk', that might be a red flag unless justified.
+  - Evaluate global explanations: does the model card or documentation list intended use, known limitations, and training context?
+  - Check that explanations avoid nonsense: if important factors are missing or junk features dominate, that’s a problem.
+
+- Generative AI (LLMs)
+
+  - Focus on process transparency: What dataset was the model trained on? What guardrails or filters are applied?
+  - Test that you can retrieve conversation history or prompt logs when needed, that’s your audit trail.
+  - Ask: for any prompt-response, can you answer 'What guideline or system behaviour was this following?'
+  - Check whether the model gives inconsistent or unexplained outputs when given similar prompts.
+  - Document any known biases, mitigation strategies, or usage constraints, and test whether those are followed in practice.
+
+- Agentic AI (autonomous agents)
+
+  - Test whether the agent’s decisions are logged with enough context to trace why it acted as it did.
+  - Check whether intermediate outputs (e.g. state, reward, policy choice) are accessible.
+  - If possible, test with scenario replays: does the log explain why it chose Action A in State B?
+
+#### Example Tests
+
+- Rules: Sample decisions, verify audit trail shows which rules triggered in what order.
+- ML: Run SHAP on 50 random outputs and verify if top 3 features make domain sense.
+- LLMs: Review 20 conversation logs. Can prompts and filters be recovered? Are answers consistent with stated constraints?
+- Agents: Simulate 10 decision sequences. Does the logged policy + state explain the action? Do overrides work?
+
+#### Metrics - Example
+
+- Rule audit accuracy: ≥ 95% of sampled decisions have matching rule trace.
+- ML explainability alignment: ≥ 90% of sampled local explanations pass domain review.
+- LLM prompt traceability: 100% of responses can be linked to logged prompts.
+- Agent trace coverage: ≥ 85% of actions have interpretable state/reward context.
+
+#### Evidence and Artefacts
+
+- Explanation logs or audit trails.
+- Sampled SHAP/LIME outputs with reviewer comments.
+- Model cards and system capability docs (versioned).
+- Prompt templates and response samples (LLM).
+- Agent trace logs and annotated decision trees or policy visualisations.
+- User testing feedback on explanation clarity.
+
+#### Common Pitfalls
+
+- Assuming documentation = transparency. If no one understands it, it’s not useful.
+- Over-relying on post-hoc tools for black-box models without validating accuracy.
+- Failing to log decisions in real-world systems. Explanation can’t happen without traceability.
+- Avoiding hard cases, 'that’s too complex to explain' is not acceptable for high-impact systems.
+- Ignoring explainability at the design stage, it’s hard to retrofit later.
+
+Once this module is complete, teams should be confident that the system can answer with evidence, why it behaved the way it did.
 
 ### Robustness & Adversarial Testing Module
 
