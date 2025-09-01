@@ -532,18 +532,81 @@ By the end of this module, the team should have high confidence in the data pipe
 
 ### Model Functionality Testing Module
 
-**Objective:** This module verifies the core functionality of the AI model or algorithm. In simple terms, does the AI do what it is intended to do. This is akin to ‘unit testing’ for the model’s logic. For a predictive model, it means checking that it provides correct or acceptable outputs for a variety of inputs, according to requirements. For a rule-based system, it’s testing each rule’s outcome. We want evidence that before integration, the model/logic itself is sound.
+#### Objective
 
-**Key activities** include creating test scenarios with expected outcomes for the model, evaluating it on hold-out test datasets, and analysing error cases like confusion matrices for ML. It often involves automated test harnesses that run the model on many inputs and compare outputs to expected results or thresholds.
+This module verifies whether the AI model and system works as intended. In simple terms, validate whether it behave correctly when given the inputs it was designed for. For rule-based systems, this means checking each rule produces the right outcome. For predictive or generative models, it means confirming outputs are valid, accurate, and within expectations. Strong functionality testing ensures that before the system is integrated or deployed, the model’s logic is sound.
 
-**Different AI systems require different approaches:**
+#### Testing and Evaluation
 
-- **Rule-Based Systems:** These can be tested much like traditional software. Create unit tests for each rule or logic branch . For example, if there’s a rule ‘IF income < £20k AND savings < £5k THEN eligible for benefit X, craft test scenarios around that one case that meets criteria (expect outcome = eligible), one that just fails the income criterion, one that fails savings criterion, etc. Similarly test combinations of rules especially if multiple rules interact or have precedence. Also test boundary conditions (exactly £20k income, exactly £5k savings, to see if the inequality is correctly implemented as < or ≤, etc.). This ensures the deterministic logic is correct. The expected output is known for each test case, so this is straightforward pass/fail testing. Additionally, test that default or fallback rules trigger appropriately if none of the main rules apply. The outcome of this module for rule systems is basically a full suite of passing logic tests, proving the rule set correctly encodes policy.
-- **Machine Learning Models:** For ML, functionality is measured statistically to test whether the model achieve the required accuracy or error rate on test data. You’ll use a designated test dataset separate from training and validation to evaluate the model . Compute metrics like accuracy, precision/recall, F1, RMSE, etc., and verify they meet targets. A confusion matrix might be examined to ensure the model confuses classes at an acceptable rate. You also test specific scenarios by constructing some targeted test inputs. For instance, edge cases that might not be common in data but are critical to handle. If testing an image classifier, include a dark or blurry image of a known class to see if it still classifies correctly. Automated tests can be created if there are invariant conditions, e.g., if input X is altered in a way that shouldn’t change the prediction like adding a small noise, check the output doesn’t wildly change, as a sanity test for model stability. This is a technique celled metamorphic testing, for when you do not have a simple 'expected outcome'. It involves transforming an input and checking if the model output transforms in an expected way. Tools from MLOps can automate running these performance tests each time the model is retrained. If metrics fall below threshold, the pipeline flags it by failing the build. Essentially, ML functionality testing yields an evaluation report. Unlike rule systems, you might not have expected output for each individual test case unless a ground truth label is available, so it’s more about aggregate metrics and some manual inspection of outputs for reasonableness.
-- **Generative AI:** Testing functionality for generative models is tricky because outputs are open-ended with no single ‘expected answer’. Thus, we use a mix of quantitative and qualitative methods . Quantitatively, if there is a reference like machine translation tasks have reference translations, metrics like BLEU or ROUGE can be used. Often there isn’t a straightforward metric, so we might rely on proxy scores like perplexity, or embedding-based similarity to known good outputs. More importantly, human evaluation is usually needed . For example, for a chatbot, take a sample of prompts (some typical, some adversarial, some edge cases) and have reviewers rate the responses on criteria like relevance, correctness, tone appropriateness, etc. We incorporate test cases such as, (a) prompt: ‘Summarize this article [some text]’, expect: summary that is factually correct and concise. (b) prompt: ‘Generate a description of a cat’, expect: a coherent paragraph about a cat (no obvious errors or disallowed content). Also test consistency: same prompt given multiple times shouldn’t produce wildly divergent styles unless intended. Additionally, functionality includes checking that the model follows instructions, e.g. if the prompt says ‘Answer yes or no’, does it actually answer in yes/no form. There are emerging automated tools to aid this, like generating many prompts and using assertions (e.g., ensure the output contains a certain keyword if the prompt requested it). The outcome here is typically an evaluation summary of generation quality and any failure modes noted like ‘model sometimes gives overly verbose answers beyond requested length, hence needs prompt tuning’.
-- **Agentic AI (Autonomous Agents):** For agentic AI, functionality testing means verifying the agent can achieve its specified goals in a simulated or test environment, and AI agent integration outcomes . We often use episodes or scenarios to test an agent. For example, if it’s a path-planning robot, set up various obstacle courses and see if it reaches the target. We measure success rate, reward achieved vs optimal, etc. Also test the agent’s decision policy for known situations. If there are certain states where a specific action is expected based on design or an oracle policy, verify the agent does that. Because agents can be stochastic, you run multiple episodes and gather statistics (e.g. ‘Agent completes tasks in simulation 9/10 times within time limit’). Functional tests for agents also involve checking that any constraints are respected, e.g., if the agent is not supposed to perform a certain action like exceeding a speed limit, ensure in testing it never does even in pursuit of a goal. Another angle is that if the agent learned from a reward function, test that it truly optimized the intended objective, not some proxy. For instance, if a cleaning robot should clean and then dock, verify it indeed docks after cleaning rather than wandering. This might catch reward hacking where it only cleans continuously because reward is tied to cleaning amount. Logging and analyzing the agent’s behavior is key. Engineers may create behavioral unit tests such as ‘in scenario X, agent should choose Y (safe action) over Z (risky action)’. Success is measured by the agent’s consistency with these expectations. There should also be regression test coverage of a whole Agentic AI, covers what happens when one AI agent fails or has to be stopped due to any issues, and how the Human in the Loop and support processes work etc.
+- Testing (system level): checks whether the AI system behaves as expected across different inputs, edge cases, and failure modes.
+- Evaluation (model level): measures whether the model’s outputs meet performance and quality targets, such as accuracy, F1 score, or stability.
 
-Overall, Model Functionality Testing provides evidence that the AI’s ‘brain’ works correctly in isolation. For ML and agents, it’s often a statistical confidence (‘with X% confidence, performance >= threshold’), while for rule-based, it's near-certainty for each rule. This module’s completion is usually marked by a Model Evaluation Report and (for ML) often an archived artifact of the model and test dataset for reproducibility. It ensures we aren’t integrating or deploying a fundamentally flawed model.
+#### Core practices
+
+- Define clear expected outputs for typical and boundary inputs.
+- Use automated test harnesses where possible to run models at scale.
+- Include both positive cases (where the system should succeed) and negative cases (where it should fail safely).
+- Cover both deterministic outcomes (for rules) and probabilistic behaviour (for ML).
+- Re-test functionality whenever the model is retrained, updated, or fine-tuned.
+
+#### Approaches by AI type
+
+- Rule-based systems
+
+Test each rule in isolation with unit-style tests. Include combinations of conditions, boundary checks (e.g., exactly £20k income), and invalid inputs. Confirm that fallback rules trigger appropriately.
+
+Example: If eligibility is defined as Income < £20k AND Savings < £5k, test cases should include: meets both criteria, fails one, fails both, and boundary cases like exactly £20k.
+
+- Machine learning models
+
+Validate using statistical metrics on hold-out test sets (accuracy, precision/recall, F1, RMSE, etc.). Use confusion matrices to highlight misclassifications. Apply metamorphic testing (e.g., adding small noise to inputs should not change predictions).
+
+Example: If a model classifies medical images, flipping brightness by 5% should not radically change the prediction.
+
+- Generative AI (LLMs)
+
+Since outputs are open-ended, test with both quantitative metrics (e.g., BLEU/ROUGE for translation) and human evaluation (e.g., correctness, tone, relevance). Include adversarial prompts to check resilience.
+
+Example: Prompt 'Summarise this article in one sentence' should return a factual, concise summary, not an irrelevant or unsafe response.
+
+- Agentic AI (autonomous agents)
+
+Verify that the agent achieves its defined goals under varied scenarios. Test reward signals carefully to avoid reward hacking. Simulate environment changes and check whether the agent still behaves consistently and safely.
+
+Example: A cleaning robot should actually clean when rewarded for 'clean floor', not simply stay near the charging dock to exploit the scoring.
+
+#### Example Tests
+
+- Unit-style rule checks (for rule-based systems).
+- Metamorphic tests (ML): add noise or perturbations and confirm stability.
+- Adversarial prompts (LLMs): inject edge cases like “ignore previous instructions.”
+- Scenario runs (agentic AI): simulate extreme or rare cases (e.g., sensor dropout, conflicting goals).
+
+#### Metrics - Example
+
+- Rule pass/fail rate: ≥ 99%.
+- ML metrics: accuracy ≥ target (e.g., 90%), F1 ≥ 0.85, RMSE ≤ defined limit.
+- Stability: prediction variance ≤ 1% under perturbations.
+- Generative: > 80% of sampled outputs rated acceptable by human reviewers.
+- Agentic: success rate ≥ 90% across simulated scenarios.
+
+#### Evidence and Artefacts
+
+- Model evaluation report: includes metrics, thresholds, failures, and fixes.
+- Test logs: automated test results for repeatability.
+- Confusion matrices / error analyses: highlight where the model struggles.
+- Human evaluation notes: for generative outputs.
+- Simulation logs: for agent-based scenarios.
+
+#### Common Pitfalls
+
+- Treating functionality testing as “one and done” rather than continuous.
+- Ignoring boundary conditions, which often reveal flaws.
+- Over-reliance on aggregate metrics without inspecting actual errors.
+- Skipping adversarial or stress tests (e.g., prompt injection, noisy inputs).
+- Reward hacking in agents — the system optimises the wrong goal if signals are poorly designed.
+
+Overall, model functionality module provides evidence that the AI’s ‘brain’ works correctly in isolation. For ML and agents, it’s often a statistical confidence (‘with X% confidence, performance >= threshold’), while for rule-based, it’s near-certainty for each rule. This module ensures we aren’t integrating or deploying a fundamentally flawed model or system functionality.
 
 ### Bias and Fairness Testing Module
 
