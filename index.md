@@ -600,44 +600,174 @@ Example: A cleaning robot should actually clean when rewarded for 'clean floor',
 
 #### Common Pitfalls
 
-- Treating functionality testing as “one and done” rather than continuous.
+- Treating functionality testing as 'one and done' rather than continuous.
 - Ignoring boundary conditions, which often reveal flaws.
 - Over-reliance on aggregate metrics without inspecting actual errors.
 - Skipping adversarial or stress tests (e.g., prompt injection, noisy inputs).
-- Reward hacking in agents — the system optimises the wrong goal if signals are poorly designed.
+- Reward hacking in agents : the system optimises the wrong goal if signals are poorly designed.
 
 Overall, model functionality module provides evidence that the AI’s ‘brain’ works correctly in isolation. For ML and agents, it’s often a statistical confidence (‘with X% confidence, performance >= threshold’), while for rule-based, it’s near-certainty for each rule. This module ensures we aren’t integrating or deploying a fundamentally flawed model or system functionality.
 
 ### Bias and Fairness Testing Module
 
-**Objective:** This module is dedicated to evaluating and ensuring the fairness of the AI system. The AI’s decisions or outputs should not be unjustly biased toward or against particular groups or attributes. In the public sector, this is critical to uphold values of equality and comply with anti-discrimination laws. The focus is on detecting any disparate performance or outcomes and then addressing them.
+#### Objective
 
-**Key activities** include slicing model performance by demographic or sensitive attributes, computing fairness metrics, testing the system with synthetic or specially curated data to probe biases, and reviewing decision logic for any embedded biases, especially in rule-based systems. If biases are found, mitigation strategies are applied and re-tested,.This could involve retraining the model with more balanced data, adjusting thresholds, or implementing post-processing like equalized odds.
+This module ensures the AI system treats individuals and groups fairly. The goal is to detect and address any disparities in how different demographic or protected groups are treated by the model or system. For public sector use, this also supports legal compliance with anti-discrimination laws like the Equality Act 2010.
 
-**Different AI systems require different approaches:**
+#### Testing and Evaluation
 
-- **Rule-Based Systems:** Even though they’re manual logic, they can still embody biases intentionally or inadvertently. Fairness testing for rules might involve reviewing each rule to see if any could lead to differential treatment of groups. This is somewhat more of a policy review, but testers should flag it. More concretely, create diverse test personas, e.g., one persona from a minority ethnic group and one from a majority, identical on all other inputs, and run them through the rules to see if outcomes differ solely by that change they shouldn’t, unless a justified rule uses that attribute. If a rule uses attributes that correlate with protected characteristics (e.g. postcode can correlate with ethnicity or income), analyse that impact. One might also simulate known historical biases, for instance, if a hiring rule set prefers candidates from certain universities, test if that leads to indirectly disadvantaging certain groups. The results might be qualitative, like ‘Rule 5 potentially indirectly discriminates because it favors X which is less accessible to group Y’, which would need addressing by adjusting the rules. Another test would be to ensure there are no omissions that systematically exclude a group. For instance, a service eligibility rule might inadvertently exclude older people if it was only designed around younger cohorts, hence test with an elderly persona to see if rules have gaps.
-- **Machine Learning Models:** This is where most bias testing tools exist. Run the trained model on a test set that is labeled or tagged with demographic info if available. Calculate metrics separately for each group. For example, if testing for gender bias, ‘accuracy for males = 90%, for females = 78%’, that’s a flag. Or ‘mortgage approval rate for ethnic group A = 40%, for B = 60% given similar credit scores’, measure these gaps.
-Common metrics include demographic parity difference, equal opportunity difference (true positive rates across groups), false positive/negative rate differences, etc. Use visualization like plotting model score distributions by group to spot bias. Another approach is counterfactual fairness testing. Alter an input’s sensitive attribute (e.g. change a name from a male to female name in a CV) and see if output changes when other qualifications are the same. If the model is not supposed to consider that attribute, a change in output indicates bias. Additionally, bias might come from data, e.g., if the training data had historical bias like fewer positive examples for group X, the model might inherit it. We might generate synthetic data to probe. Feed the model balanced inputs across groups and see if outputs diverge. If issues are found, mitigation might involve techniques such as re-weighting the training data, adding fairness constraints in modeling, or post-processing like adjusting the decision threshold per group to equalize outcomes. After mitigation, re-test to confirm improvement . The output of this module is often a ‘fairness report’ showing all the computed metrics and declaring whether the model meets predefined fairness criteria (e.g. no metric disparity above a certain threshold) .
-- **Generative AI:** Bias in generative models manifests in the content they produce. For example, an LLM might respond differently to prompts about different demographic groups. There have been cases of models producing biased or stereotypical descriptions. To test this, one method is using template tests. We should craft prompts that are identical except for a demographic variable. E.g., The doctor said to the [man/woman]: ‘You need to rest.', and see if completions differ in a biased way like assuming gender roles. Or ask the model to generate portraits or descriptions and check if it unduly associates certain professions or attributes with certain groups. Also test for offensive content that provide identity-related prompts like 'What do you think of [ethnic group] people?' and see if the output contains slurs or negative stereotypes, it should refuse or respond in a neutral manner ideally. There are toolkits that help quantify bias, e.g., measuring associations in word embeddings like if ‘programmer’ is more associated with male names, that indicates bias in the model’s representation. If biases are found in a generative model, mitigation is harder if it’s a third party model. On that case, you might apply a filter on outputs, or fine tune the model on bias reducing data, or prompt engineering to steer it away from problematic content. Test again post mitigation. Human evaluation is key here, teams should have diverse reviewers assess a sample of outputs for bias or offensive content and report issues.
-- **Agentic AI (Autonomous Agents):** For agents, bias might be less straightforward, but imagine an AI agent allocating resources or interacting with humans, treats certain groups differently. If an agent’s policy might be influenced by demographic data or environmental features correlated with groups, test scenarios to see if outcomes differ by those. For example, an AI scheduling appointments, test if it prioritizes certain names or zip codes differently. If the agent is learning, one has to ensure the reward function or training environment isn't biased. It might require simulation of scenarios, e.g., in a reinforcement learning environment, do we notice the agent underserves one category of user. This might require careful design to test, by introducing test cases in the environment representing different groups and checking the utility each gets. Another area is to test if multiple agents or an agent interact with people, ensure it doesn’t develop a biased strategy like cooperating less with certain agents. While these are complex to test, the principle is the same: treat 'group' as a variable and see if the agent’s performance/rewards vary unjustly with that variable. Any systematic unfairness would need redesign of the agent’s reward or logic since Reinforcement Learning agents take on biases present in their reward structure or environment data.
+- Testing: Probes whether system behaviour varies unfairly across groups. This could mean rule outcomes, model predictions, generated content, or agent actions.
+- Evaluation: Measures performance metrics split by group (e.g. approval rates by ethnicity) and applies statistical fairness tests.
 
-After completing the Fairness & Bias Testing module, the team should have a clear understanding of any bias issues and have taken steps to correct them. Importantly, this module’s results should be reviewed by both technical teams and policy/legal teams. If any disparity remains, it should be consciously signed-off with rationale. There maybe the AI’s context justifies it, though in most public services that would be rare due to equalities duty. Documentation from this module can feed into an Equality Impact Assessment, demonstrating that the team tested for discrimination and either found none or mitigated what was found. This evidences compliance with the Equality Act 2010.
+#### Core practices
+
+- Define which sensitive or protected attributes matter for fairness in context (e.g. age, sex, ethnicity).
+- Test and evaluate outputs separately by group — don’t just check global accuracy.
+- Simulate edge cases that may surface bias (e.g. identical inputs with different group labels).
+- Use both real-world and synthetic data to test fairness under controlled conditions.
+- Document and rerun fairness checks whenever models or rules change.
+
+#### Approaches by AI type
+
+- Rule-based systems
+
+  - Test how outcomes change when only group identity varies (e.g. postcode, gender, age).
+  - Run personas through each rule to see if certain groups are disproportionately blocked or allowed.
+  - Analyse edge cases. E.g. university attended, job title, if these correlate with protected groups.
+
+- Machine learning models
+
+  - Evaluate metrics separately per group: accuracy, precision, F1, etc.
+  - Visualise distributions (e.g. score thresholds) to check for skew.
+  - Use fairness metrics like demographic parity, equal opportunity, or disparate impact ratio.
+  - Apply counterfactual testing: does changing a sensitive attribute alter the outcome?
+
+- Generative AI (LLMs)
+
+  - Use prompt templates that differ only by demographic markers and compare outputs.
+  - Detect stereotypical or offensive completions.
+  - Ask the model to describe, summarise, or respond to people from different groups. Check for consistency, tone, and framing.
+
+- Agentic AI (autonomous agents)
+
+  - Running scenarios where group identity is the only change: does the agent behave differently?
+  - Checking how the reward function is learned or applied: does it favour some groups unfairly?
+  - Testing multiple agents together: does bias appear in cooperation or competition?
+
+#### Example Tests
+
+- Rules: Run synthetic personas across decision trees, toggling group variables.
+- ML: Test model accuracy per group; check impact of small attribute changes.
+- Generative: Run prompts with swapped demographic info and rate responses.
+- Agentic: Simulate multiple runs with diverse environments and track outcomes by group.
+
+#### Metrics - Example
+
+- Demographic parity gap ≤ 10%.
+- Equal opportunity difference ≤ threshold defined by policy (e.g. < 5%).
+- Prediction accuracy within ±5% across key groups.
+- Manual review of generated content shows ≥ 85% rated neutral and fair.
+- Consistency of agent success rates across demographics in simulated scenarios.
+
+#### Evidence and Artefacts
+
+- Fairness test reports (per model or system).
+- Group-split performance metrics (with thresholds).
+- Visuals: score distributions, confusion matrices, heatmaps.
+- Reviewer annotations or rating summaries (for LLM content).
+- Documentation of mitigations and outcomes (before vs after comparison).
+- Equality Impact Assessment (where required).
+
+#### Common Pitfalls
+
+- Assuming training on 'representative' data means the model is fair.
+- Skipping group-based analysis, global metrics hide disparity.
+- Failing to define fairness criteria up front (equal accuracy? equal approval?).
+- Letting mitigations go unverified, fixes must be tested like features.
+- Relying only on technical metrics, some bias needs human interpretation.
+
+After completing the Fairness & Bias Testing module, the team should have a clear understanding of any bias issues and have taken steps to correct them. Importantly, this module’s results should be reviewed by both technical teams and policy/legal teams. If any disparity remains, it should be consciously signed-off with rationale.
 
 ### Explainability & Transparency Module
 
-**Objective:** The aim of this module is to ensure the AI system’s decisions and inner workings can be understood, interpreted, and traced by those who need to trust or oversee it. This includes generating explanations for individual decisions, providing insight into how the model works generally, and being transparent about data and design, which is crucial for public sector accountability . In testing, we verify that the explainability mechanisms are effective and that the system produces the necessary information for audit and compliance, e.g., information required under GDPR or for public transparency commitments.
+#### Objective
 
-**Key activities** involve using explainability tools, documentation reviews, and user testing of explanations (do people actually understand them?). Also, checking that logs or audit trails capture decisions.
+This module ensures the AI system’s decisions can be understood, traced, and explained, both by those overseeing the system and by the people affected by it. The aim is to test whether the model’s decisions are inspectable and whether the explanations are accurate, complete, and useful. For the public sector, this directly supports accountability, audit, and compliance requirements.
 
-**Different AI systems require different approaches:**
+#### Testing and Evaluation
 
-- **Rule-Based Systems:** These are inherently more transparent, the logic is explicitly coded and can be read. The task here is to ensure that this transparency is maintained and usable. One aspect is documentation, every rule should have an explanation or justification like why that rule exists, source of that policy . Testing will check that documentation is complete and updated, e.g., randomly pick some rules and see if a tester can find and understand the explanation in the documentation. Another aspect is audit trails, when the system makes a decision, it should be able to output which rules are fired and in what order. Test this by making sample decisions and verifying the system logs something like ‘Rules 5, 7, and 9 applied, leading to decision = Deny’. This confirms that if later someone asks ‘why did the system do X?’, you have a ready answer. Also test any interface that might display reasoning to end users or staff. For instance, if a caseworker interface highlights ‘Application denied due to Rule 7 (insufficient evidence)’, check that it's correctly triggered. Essentially, validate that reading the rules or provided rationale actually matches what happened in the decision.
-- **Machine Learning Models:** ML models are black-boxy, especially complex ones. We can apply post-hoc explainability techniques on a sample of model outputs . For instance, take a set of test instances and run SHAP (Shapley Additive Explanations) to get the top features that influenced the prediction for each. The testing part is interpreting those explanations to see whether they make domain sense. For example, if an AI is scoring health inspection risks and SHAP says ‘Feature: Restaurant ID contributes +0.5 risk’, that’s suspicious because an ID shouldn’t matter . A tester would flag that as a potential issue, maybe a data leak or quirk. Another test is, if the model is supposed to follow known patterns (say, in credit scoring, income should positively affect creditworthiness), see if explanation shows that trend. If not, maybe the model is using weird proxies. Also check global explanations. Some tools provide an overall feature importance ranking, ensure key known factors are ranked reasonably. If an important factor is missing or a nonsensical factor is high, investigate. This module also produces artifacts like a ‘Model Card’, a documented report about the model’s intended use, performance, limitations, etc. Testing for transparency means verifying that model cards or fact sheets are completed and accurate. Perhaps have someone uninvolved read the model card and see if they can understand what the model does and its limitations, if not, improve it. We might measure explanation fidelity, e.g., test how well a simpler surrogate model approximates the complex model’s decisions. If fidelity is low, the explanation might be misleading, so that’s a fail.
-- **Generative AI:** Explainability here is an evolving challenge. We often don’t have clear ways to explain why a particular output was generated since these models use billions of parameters. So transparency focuses on documentation and process. Ensure that we have documented the model’s origin, e.g. ‘This chatbot is based on GPT-4, fine-tuned on dataset XYZ on 2025-01-01’. Provide the model card from the provider if available, listing its capabilities and limitations . Another strategy is prompt transparency. If we use certain system or context prompts to steer the model, keep those accessible for audit. W could even show the user, if appropriate, what guidelines the AI was following. Testing means verifying that such info is indeed stored. For example, test that we can retrieve the conversation log including the prompts from the system for any given session if needed for later review. If we have any safety filters on outputs, explainability might also document when the AI refused an answer due to policy. Tools for generative AI explainability are nascent, one might use prototype methods like ‘trace which training data influenced this output’, not practical yet for large models, so we rely on being transparent about design. architecture, data sources, known bias mitigations applied, etc. Essentially, test that for any question a stakeholder might have (‘What data was this model trained on?’, ‘What version of the algorithm is it using?’, ‘What guidelines was it following?’), we have an answer documented.
-- **Agentic AI (Autonomous Agents):** For autonomous agents, explainability can mean understanding the agent’s policy or value function in human terms. This might involve policy summaries or visualisation of the agent’s strategy. Testing could include techniques like policy distillation into rules, then check if those rules align with domain knowledge. Or simpler, have the agent explain itself if possible, some research does reward models for being able to explain decisions. In absence of that, trace logs are key. Log the states and actions and maybe the internal reward at each step. A tester can then examine a few episodes to see if they understand why the agent took certain actions. If an agent does something unexpected, try to trace back which state or reward led to that. If it’s too opaque, consider adding logging or even altering the design to allow for more observability like intermediate metrics. Also, if using a simulation, you might highlight certain decisions to a subject matter expert to see if they agree (e.g., ‘The drone went around the storm, is that expected?’). If not, either the explanation or the policy might need adjustment. Ensuring transparency for agents may include requiring a human-in-the-loop override on unclear decisions. It is not exactly explanation, but a risk control. So part of testing might be to validate whether the system alert a human when a decision rationale is low-confidence. That overlaps with monitoring, but relevant to transparency as well.
+- Testing: Verifies whether explanations exist, are correct, and are usable by humans (e.g. through user testing or sampling decisions).
+- Evaluation: Measures the completeness, consistency, and accessibility of explanations, both technical and user-facing.
 
-Upon completing the Explainability & Transparency module, the AI system should be accompanied by a suite of artifacts and capabilities that make it inspectable and interpretable. This not only helps developers debug and improve the model, since weird explanations can reveal bugs or data issues, but also is crucial for external oversight. Public sector teams often need to provide an explanation to affected users upon request (for example, under GDPR individuals can ask for ‘meaningful information about logic’ of decisions) , so having a ready mechanism from this module is key. A successful outcome is when decision-makers or auditors can get satisfactory answers to ‘Why did the AI do that?’ without undue effort.
+#### Core practices
+
+- Identify what needs to be explainable (model-level logic, individual decisions, rule triggers, audit trail).
+- Test whether explanations align with actual behaviour (e.g. a rule fires when it says it did, a feature was actually used in scoring).
+- Simulate common queries: 'What data did this decision use?', 'What rule applied?', 'Why was I rejected?'
+- Review documentation and test whether it’s current, correct, and understandable.
+- Run user tests (with developers, policy teams, or front-line staff) to check if explanations make sense.
+
+#### Approaches by AI type
+
+- Rule-based systems
+
+  - Pick a few rules and check that documentation explains why they exist and what they do.
+  - Test audit logs: when a decision is made, does the system log which rules fired?
+  - Check interfaces: do internal users see the rationale? Is the logic traceable for review?
+
+- Machine learning models
+
+  - Use tools like SHAP or LIME to identify which features influenced a sample output.
+  - Check if these explanations align with expectations, e.g. if a model says 'Restaurant ID = high risk', that might be a red flag unless justified.
+  - Evaluate global explanations: does the model card or documentation list intended use, known limitations, and training context?
+  - Check that explanations avoid nonsense: if important factors are missing or junk features dominate, that’s a problem.
+
+- Generative AI (LLMs)
+
+  - Focus on process transparency: What dataset was the model trained on? What guardrails or filters are applied?
+  - Test that you can retrieve conversation history or prompt logs when needed, that’s your audit trail.
+  - Ask: for any prompt-response, can you answer 'What guideline or system behaviour was this following?'
+  - Check whether the model gives inconsistent or unexplained outputs when given similar prompts.
+  - Document any known biases, mitigation strategies, or usage constraints, and test whether those are followed in practice.
+
+- Agentic AI (autonomous agents)
+
+  - Test whether the agent’s decisions are logged with enough context to trace why it acted as it did.
+  - Check whether intermediate outputs (e.g. state, reward, policy choice) are accessible.
+  - If possible, test with scenario replays: does the log explain why it chose Action A in State B?
+
+#### Example Tests
+
+- Rules: Sample decisions, verify audit trail shows which rules triggered in what order.
+- ML: Run SHAP on 50 random outputs and verify if top 3 features make domain sense.
+- LLMs: Review 20 conversation logs. Can prompts and filters be recovered? Are answers consistent with stated constraints?
+- Agents: Simulate 10 decision sequences. Does the logged policy + state explain the action? Do overrides work?
+
+#### Metrics - Example
+
+- Rule audit accuracy: ≥ 95% of sampled decisions have matching rule trace.
+- ML explainability alignment: ≥ 90% of sampled local explanations pass domain review.
+- LLM prompt traceability: 100% of responses can be linked to logged prompts.
+- Agent trace coverage: ≥ 85% of actions have interpretable state/reward context.
+
+#### Evidence and Artefacts
+
+- Explanation logs or audit trails.
+- Sampled SHAP/LIME outputs with reviewer comments.
+- Model cards and system capability docs (versioned).
+- Prompt templates and response samples (LLM).
+- Agent trace logs and annotated decision trees or policy visualisations.
+- User testing feedback on explanation clarity.
+
+#### Common Pitfalls
+
+- Assuming documentation = transparency. If no one understands it, it’s not useful.
+- Over-relying on post-hoc tools for black-box models without validating accuracy.
+- Failing to log decisions in real-world systems. Explanation can’t happen without traceability.
+- Avoiding hard cases, 'that’s too complex to explain' is not acceptable for high-impact systems.
+- Ignoring explainability at the design stage, it’s hard to retrofit later.
+
+Once this module is complete, teams should be confident that the system can answer with evidence, why it behaved the way it did.
 
 ### Robustness & Adversarial Testing Module
 
