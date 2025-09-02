@@ -874,7 +874,7 @@ This module checks whether the AI system runs fast enough, scales effectively, a
 #### Core practices
 
 - Load test the system under realistic and peak conditions — simulate multiple users or requests.
-- Measure key metrics: latency (avg, p95), throughput (reqs/sec), resource usage (CPU, GPU, RAM).
+- Measure key metrics: latency (avg, p95), throughput (requests/sec), resource usage (CPU, GPU, RAM).
 - Profile performance under different deployment setups (e.g. single-threaded vs multi-threaded).
 - Check cold start times (how long to spin up model or container).
 - Monitor energy or battery use if the model runs on edge or mobile devices.
