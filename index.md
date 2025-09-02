@@ -32,9 +32,9 @@
    - [Explainability & Transparency](#explainability--transparency-module)
    - [Robustness & Adversarial Testing](#robustness--adversarial-testing-module)
    - [Performance & Efficiency Testing](#performance--efficiency-testing-module)
-   - [Integration & System Testing](#integration--system-testing-module)
-   - [User Acceptance & Ethical Review](#user-acceptance--ethical-review-module)
-   - [Continuous Monitoring & Improvement](#continuous-monitoring--improvement-module)
+   - [Integration & System Testing](#integration--system-testing-module) ![WIP](https://img.shields.io/badge/status-work%20in%20progress-yellow)
+   - [User Acceptance & Ethical Review](#user-acceptance--ethical-review-module) ![WIP](https://img.shields.io/badge/status-work%20in%20progress-yellow)
+   - [Continuous Monitoring & Improvement](#continuous-monitoring--improvement-module) ![WIP](https://img.shields.io/badge/status-work%20in%20progress-yellow)
 
 7. [Tools and Resources for Testing](#tools-and-resources-for-testing)
 8. [Conclusion](#conclusion)
