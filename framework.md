@@ -1156,7 +1156,7 @@ Deploying AI isn’t the end of assurance, it’s the beginning of live operatio
   - Maintain an incident response plan: Who investigates?, What triggers rollback?, When is public disclosure needed?
   - Track trends: do errors cluster in specific use cases, user groups, or time periods?
 
-- Regular Model Re-evaluatio
+- Regular Model Re-evaluation
   - Retest models with recent data (e.g. quarterly).
   - Run the full test suite with new inputs especially fairness, bias, and performance tests.
   - Incorporate this into CI/CD via MLOps. Retrain and redeploy on a cycle (e.g. every 3 months) with validation at each step.
