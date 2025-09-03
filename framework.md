@@ -1024,5 +1024,8 @@ The responsible deployment of Artificial Intelligence in public services require
 |               |4. **David Rutter-Close**   <br> Lead Test Engineer - DfE  | 19/6/2025  |
 |               |5. **Adam Byfield**   <br> Principal Technical Assurance Specialist - NHS England | 19/6/2025  |
 |               |6. **Matthew Dyson**   <br> Principal Test Assurance Manager - National Highways(DfT) | 30/6/2025  |
+|Review|1. **Nayyab Naqvi**   <br> Principal Technologist for AI in the Public Sector - DSIT  | 27/8/2025  |
+|      |2. **Bharathi Sudanagunta**   <br> Test Manager - MHRA  | 27/8/2025  |
+|      |3. **Carla Chiodi**   <br> Senior AI Engineer - 2i Testing | 31/7/2025  |
 
 >An initiative by the Cross Government Testing Community (UK)
