@@ -33,8 +33,8 @@
    - [Robustness & Adversarial Testing](#robustness--adversarial-testing-module)
    - [Performance & Efficiency Testing](#performance--efficiency-testing-module)
    - [Integration & System Testing](#integration--system-testing-module)
-   - [User Acceptance & Ethical Review](#user-acceptance--ethical-review-module) ![WIP](https://img.shields.io/badge/status-work%20in%20progress-yellow)
-   - [Continuous Monitoring & Improvement](#continuous-monitoring--improvement-module) ![WIP](https://img.shields.io/badge/status-work%20in%20progress-yellow)
+   - [User Acceptance & Ethical Review](#user-acceptance--ethical-review-module)
+   - [Continuous Monitoring & Improvement](#continuous-monitoring--improvement-module)
 
 7. [Tools and Resources for Testing](#tools-and-resources-for-testing)
 8. [Conclusion](#conclusion)
@@ -1128,19 +1128,109 @@ When this module is complete, you should have high confidence that real users ca
 
 ### Continuous Monitoring & Improvement Module
 
-Deploying the AI system is not the end of the assurance process, it’s actually the beginning of a new phase. This section emphasizes that continuous monitoring and improvement is essential to sustain the AI system’s quality over time. AI systems can change (models drift, data patterns evolve, user behavior shifts) and new risks can emerge (e.g., adversaries find new exploits, or a model’s performance slowly degrades). Thus, a systematic approach to monitor, maintain, and enhance the AI post deployment is required.
+#### Objective
 
-**Key components of continuous monitoring & improvement:**
+Deploying AI isn’t the end of assurance, it’s the beginning of live operations. This module ensures that after deployment, the system is actively monitored, maintained, and improved. AI systems change over time, data drifts, user behaviour shifts, performance degrades, and new risks emerge.
 
-- **Performance Monitoring in Production:** As mentioned earlier, set up dashboards and alerts for key metrics . This includes technical metrics (response times, error rates, system uptime) and AI specific metrics (prediction accuracy on cases where ground truth later becomes available, drift in input data distribution, etc.). For example, if it’s a model that approves applications, as actual outcomes (like repayment rates for loans) come in, compare model predictions to real outcomes to gauge if accuracy is holding up. If the model confidence on inputs starts dropping or the distribution of inputs shifts significantly from training, these are signs to investigate. Define thresholds for alerts: e.g., 'If monthly average accuracy drops below 85%, alert the data science team,' or 'If any fairness metric diverges beyond X, flag it.' Some organizations implement automatic retraining triggers if drift is detected (though that itself should be governed).
-- **Error and Incident Logging:** Any errors or unexpected system behaviors in production should be logged and analyzed. For example, if the AI component ever crashes or returns an exception, capture the input that caused it so the team can fix that case or improve validation. Similarly, maintain a log of any incidents (e.g., a user complaint that the AI made a wrong or biased decision). Establish an incident response plan: who investigates, how to mitigate immediately (maybe switching the AI off or into a safe mode if a serious issue is found), and how to communicate if needed (transparency demands that if a significant error affected the public, the department might have to disclose it). Continuous improvement means learning from each incident and updating testing or processes to prevent it in future.
-- **Regular Model Re-evaluation:** Over time, the AI model might drift or become less effective as new data comes in (concept drift) . So the framework should schedule periodic re-evaluations. For instance, every quarter (or appropriate interval), re-run the validation tests with fresh data from the last quarter to see if performance or fairness degraded. Alternatively, retrain the model with the latest data and run the full test suite before deploying the new version. Essentially adopt MLOps practices: treat model updates similar to software updates with version control, testing, and deployment pipelines . The continuous aspect means these cycles are planned and routine, not ad hoc. A metric might be 'model refresh frequency', e.g., target to update the model every 3 months, and measure whether that’s achieved . If not, maybe the process is too slow; if concept drift is faster, maybe increase frequency.
-- **Feedback Loops:** Encourage and capture feedback from users and stakeholders continuously. For example, in the UI, maybe allow users to flag if an AI decision seems wrong. That feedback should be reviewed by the team and possibly used as additional test cases or training examples in the future. If, say, multiple users flag that the AI’s advice in situation X is bad, that’s a sign to improve either the model or how results are presented. Also monitor external changes, e.g., if laws or policies change, the AI might need updating (this is part of governance to watch for).
-- **Continuous Compliance Checks:** The regulatory environment may evolve (e.g., new AI regulations might come into force or new guidance from central bodies). Teams should consider relevant regulations (such as GDPR or, where applicable, the EU AI Act) when planning assurance activities. The monitoring phase should include staying updated on such changes and doing a compliance review periodically. For example, if a new standard says all high risk AI must undergo annual third party audit, the team plans that. Or if the ATRS becomes mandatory to update annually, ensure that is done. Also ensure ongoing compliance with data retention policies: e.g., logs with personal data shouldn’t be kept longer than allowed, implement auto deletion and check it works (so run audits to ensure old data is indeed being purged).
-- **Model and Data Management:** Over time, many versions of model and data will accumulate. Have a strategy (and test it) for archiving models and data sets. This is important if later an investigation or FOI request requires showing what the AI was like at a certain time. So, continuous ops should include archiving each model version and the training data snapshot for it, along with all relevant test results and approvals (almost like configuration management for the AI). We test that we can roll back if needed: e.g., simulate deploying an older model if the current one has issues, ensure that’s possible and the older model is stored securely.
-- **Ongoing Ethical Oversight:** In addition to technical monitoring, maintain ethical oversight. Perhaps the ethics board reconvenes at intervals to review how the AI is performing in the real world. They might look at metrics like number of complaints or appeals of AI driven decisions, any unintended societal impacts, etc. The ATRS record might be updated if the AI’s scope or performance changes significantly. This could also tie to external transparency: maybe publish summary information about how the AI has been used and performed (some agencies do annual transparency reports).
-- **Continuous Improvement Process:** Use all the above inputs to drive enhancements. This might not just be model updates; it could be improvements to the user interface based on user feedback, or adjustments to thresholds to reduce false positives/negatives, etc. Essentially treat the AI service as you would a product that undergoes regular improvement cycles. Importantly, incorporate any new best practices or tools that emerge in the AI assurance field (for instance, if a new bias detection technique becomes available, consider adopting it in the next evaluation round). The framework remains a living one – teams should update their testing approaches as lessons are learned. A lesson learned register is a good idea: after major milestones or incidents, note what was learned and update internal guidance.
-- **Retirement Planning:** Though it might be years out, part of continuous oversight is knowing when to decommission the AI. Criteria might be set (like if the AI becomes obsolete or a better system emerges, or if maintenance is too costly vs benefit). When retirement time comes, ensure a plan: export needed data, retrain new model or transition to manual process, and shut down gracefully so no dependency is broken. This includes notifying stakeholders, archiving the final state, and deleting data as required .
+- Monitoring: Detects signs of failure, degradation, or misuse, both technical and behavioural.
+- Improvement: Uses that information to fix, tune, or evolve the AI system and make the next version better.
+
+#### Core practices
+
+- Performance Monitoring in Production
+  - Set up dashboards and alerts for:
+
+    - Technical metrics (latency, throughput, uptime, errors)
+    - AI-specific metrics (accuracy, fairness, confidence levels, drift indicators)
+
+  - Define thresholds for alerting
+    - Drop in monthly approval accuracy >X%
+    - Fairness score diverges by >X% across groups
+
+  - Compare real-world outcomes (e.g. loan approvals) against model predictions.
+  - Flag input distribution shifts and investigate early signs of drift.
+
+- Error and Incident Logging
+  - Log all AI errors and unexpected behaviours.
+  - Tag incidents with root cause (e.g. input error, model mismatch, integration fault).
+  - Maintain an incident response plan: Who investigates?, What triggers rollback?, When is public disclosure needed?
+  - Track trends: do errors cluster in specific use cases, user groups, or time periods?
+
+- Regular Model Re-evaluatio
+  - Retest models with recent data (e.g. quarterly).
+  - Run the full test suite with new inputs especially fairness, bias, and performance tests.
+  - Incorporate this into CI/CD via MLOps. Retrain and redeploy on a cycle (e.g. every 3 months) with validation at each step.
+
+- Feedback Loops
+  - Collect feedback from users, operators, and impacted stakeholders.
+  - Build in UI level flags like 'this output seems wrong' or 'Did this help?'
+  - Review flagged cases during retros or sprint planning, prioritise those for retesting or adjustment.
+  - Watch for qualitative patterns:
+    - 'Users misinterpret this output'
+    - 'System response too slow under stress'
+    - 'Chatbot tone inappropriate for this audience'
+
+- Continuous Compliance Checks
+  - Stay aligned with evolving regulations (e.g. GDPR, Equality Act, new AI standards).
+  - Check if new legal guidance affects retraining, logging, or audit frequency.
+  - Ensure logs meet retention standards and delete or archive safely (e.g. auto-delete personal data after expiry).
+
+- Model & Data Lifecycle Management
+  - Archive past model versions and training datasets with version tags.
+  - Capture metadata: who approved it, what test results it passed, what data was used.
+  - Be able to roll back a model if needed (e.g. last version was flawed).
+  - Consider storing output logs where needed for future FOI, audits, or investigations.
+
+- Ongoing Ethical Oversight
+  - Regularly review societal impact:
+    - Have complaint rates risen?
+    - Are marginalised groups being disproportionately affected?
+
+  - Track real-world impact beyond accuracy — trust, harm, usability, bias.
+  - Update your AI risk register and ethics documentation.
+
+- Continuous Improvement Process
+  - Use monitoring and feedback to:
+    - Refine prompts, thresholds, outputs, and models
+    - Simplify workflows
+    - Reduce false positives/negatives
+
+  - Consider team retros after live incidents or errors — what was learned, and how will it change the next update?
+
+- Retirement Planning
+  - Know when to decommission a model:
+    - Obsolete
+    - Outperformed
+    - Risk exceeds benefit
+  - Export final data, archive decisions, and shut down responsibly.
+  - Notify stakeholders and users before switch-off.
+
+#### Metrics - Example
+
+- Drift alerts triggered: ≤ 2 per quarter (investigated and explained).
+- Re-test success rate: ≥ 95% when model is evaluated with new data.
+- Incident resolution time: ≤ 48 hours for priority 1 issues.
+- User feedback loop closure rate: ≥ 80% acknowledged and actioned.
+- Ethics re-review cycle: Annual or triggered by major system change.
+
+#### Evidence and Artefacts
+
+- Monitoring dashboards and alert thresholds
+- Model version history, approvals, and training data snapshots
+- Ethics oversight logs or review boards’ sign-offs
+- Incident logs with resolution timelines and mitigation actions
+- User feedback records and change tickets
+- Archived data and decommissioning plans
+
+#### Common Pitfalls
+
+- Treating deployment as the end: ignoring performance and trust decay over time
+- Not setting thresholds or alerts: issues only found when users complain
+- Logging without analysing: data is only useful if someone acts on it
+- Skipping re-testing: assuming a model that worked last year still works now
+- Failing to plan for decommissioning: especially when AI use is long-term
+
+When this module is embedded into your operating model, AI becomes a live service, not a frozen product. It’s how you keep your system effective, lawful, and trustworthy, even as everything around it changes.
 
 > While automation and AI reduce manual effort, they may inadvertently contribute to the degradation of critical human skills over time. This risk can compromise Human in the Loop (HITL) systems, where effective oversight relies on staff retaining domain knowledge and decision making ability. Organisations should assess the risk of skill loss, particularly in areas where: Staff serve as safety backstops (e.g. validating AI outputs), Manual recovery may be needed (e.g. outages or model failures)
 
