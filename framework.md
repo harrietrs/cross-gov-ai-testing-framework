@@ -32,7 +32,7 @@
    - [Explainability & Transparency](#explainability--transparency-module)
    - [Robustness & Adversarial Testing](#robustness--adversarial-testing-module)
    - [Performance & Efficiency Testing](#performance--efficiency-testing-module)
-   - [Integration & System Testing](#integration--system-testing-module) ![WIP](https://img.shields.io/badge/status-work%20in%20progress-yellow)
+   - [Integration & System Testing](#integration--system-testing-module)
    - [User Acceptance & Ethical Review](#user-acceptance--ethical-review-module) ![WIP](https://img.shields.io/badge/status-work%20in%20progress-yellow)
    - [Continuous Monitoring & Improvement](#continuous-monitoring--improvement-module) ![WIP](https://img.shields.io/badge/status-work%20in%20progress-yellow)
 
@@ -952,20 +952,91 @@ When this module is done properly, it gives assurance that the AI system won’t
 
 ### Integration & System Testing Module
 
-**Objective:** This module verifies that the AI component works correctly as part of the larger system and that the end to end workflow (from user input to AI output to final service outcome) functions as intended. Integration testing focuses on the interfaces and interactions between the AI and other system components (databases, APIs, user interfaces, business logic), while system testing validates the overall system behavior against requirements. Essentially, we want to ensure that after adding the AI into the tech stack, everything still operates smoothly and meets both functional and non functional requirements in a production like environment.
+#### Objective
 
-**Key activities** include end to end test scenarios (often mirroring real user journeys), compatibility testing (does the AI output format match what downstream expects?), and regression testing on the whole system (to ensure the AI didn’t break existing features). We also test failure handling in an integrated context (if the AI fails or returns an error, does the system handle it gracefully?). User Acceptance Testing (UAT) often overlaps here, where actual users test the system in a staging environment to see if it meets their needs.
+This module verifies that the AI component works correctly as part of a wider system, not just on its own. It checks that the full end-to-end workflow from user input to AI output to final outcome, behaves as expected, and that all interfaces and dependencies work correctly. It ensures the AI’s integration with services like APIs, databases, user interfaces, business logic, and identity/auth flows is seamless and safe, especially under real-world conditions.
 
-**Different AI systems require different approaches:**
+#### Testing and Evaluation
 
-- **Rule-Based Systems:** For a rule engine embedded in an application, test that the application correctly calls the rule engine with the right inputs and handles the outputs. For example, if a web form collects data and then invokes the rule engine to decide eligibility, fill out the form in a test environment, submit, and verify that the response (approval/denial message) matches the rule logic. Check edge case integration: if the rule engine throws an exception (maybe due to an input it couldn’t handle), does the system catch it and show a friendly error to the user? If the rules are stored in a separate service or file, test what happens if that’s unreachable or the rules file has an error, the system should detect and not misbehave. Also ensure that any data passed to rules uses consistent units/formats (integration issues often come if, say, one component expects a date format and another gives a different format). Because rule based outcomes may feed into other processes (like triggering emails or updating a case status), follow through those sequences. For example: rule says 'flag case for review', test that indeed a review task is created in the case management system. Basically, simulate real multi step scenarios, now including the AI’s place in them .
-- **Machine Learning Models:** Here, integration points often include an API or microservice that hosts the model. We need to test the API contract – e.g., if the system calls the model API with a certain JSON payload, is the model receiving it correctly and returning exactly what the system expects (field names, data types, etc.) ? A common integration bug is mismatched field names or missing fields causing runtime errors. Also test performance in integration: perhaps individually the model was fine, but when integrated, maybe network latency or serialization overhead causes slowdowns, measure end to end latency. If the model is part of a pipeline (data -> model -> database), ensure each step passes correct data (for example, confirm that predictions are correctly saved to the database with proper reference IDs). Check error pathways: if the model service times out or returns an error code, does the rest of the system handle that (maybe by retrying or using a default decision)? If not, that’s a needed fix. Integration tests should also include security aspects: ensure that appropriate authentication is in place for the model service calls (the system should have credentials or network permissions to call the model). Test what happens if auth fails. Additionally, test concurrency under integration: e.g., have multiple simultaneous user actions that invoke the model? does anything deadlock or queue improperly? Sometimes integration tests are done in a staging environment with realistic load patterns to see if any bottlenecks appear that unit tests wouldn’t catch (like database contention if every prediction triggers a DB write). Compatibility tests might involve deploying the model service on different environments (test, staging, prod) to ensure environment differences (library versions, etc.) don’t break it.
-- **Generative AI:** Integration testing a generative model often means ensuring the UI/UX can handle the variable output. If the AI writes a paragraph, does the UI display it nicely? Test for edge cases: extremely long output, does it overflow the UI or cause performance issues in the front end? If images are generated, does the front end correctly fetch and show them? Also, the integration might include moderation: e.g., the system might route AI output through a filter before showing to the user, we need to test that pipeline. Possibly integrate a step where if AI output contains a disallowed phrase, the system replaces it or shows a warning. Deliberately cause that (maybe by an override test prompt) to see if the filter kicks in. If using external APIs for AI, integration test should include simulating API failure or slow response (maybe by mocking) to ensure the system doesn’t hang indefinitely – implement and test a timeout fallback ('Sorry, AI is not available, try later' message). If the AI is used to draft content that humans then edit, test that workflow: generate content, allow editing, save – ensure nothing weird like the content exceeding database field sizes or losing encoding (e.g., emoji produced by AI are saved correctly). Also, consider multi-turn interactions: integration test a whole conversation to make sure context is maintained across calls if it should be (like session IDs for chatbot). Check state management: if one user’s prompt accidentally shares state with another (shouldn’t happen if properly isolated) – maybe test by simulating two parallel chats and ensure no cross-talk.
-- **Agentic AI (Autonomous Agents):** If the agent is controlling or part of a larger system (like a robotics platform or a business process chain), we test the entire system with the agent in the loop. For a physical agent, integration means real or simulated hardware tests: does the command sent by the agent actually cause the real actuator to move correctly? If using a simulator previously, now test on an actual device (or high-fidelity sim) to catch any reality gaps. For a software agent (like an AI scheduler integrated in an enterprise system), test its integration by running a full scenario: e.g., a new task comes in, the agent assigns resources, and checks that those assignments correctly go through the system and notify relevant parts. Make sure the agent’s actions don’t violate any global constraints, integration is where you see if the agent’s decisions make sense in the wider context. For multi agent or human agent systems, test interactions: e.g., the agent outputs a recommendation and a human can override, does the system log that override and does the agent get that feedback if needed? If the agent relies on data from other components (sensors, databases), simulate data dropouts or errors to ensure the agent or an intermediary handles it (like stale sensor data shouldn’t crash the agent). Essentially, integration tests for agents often involve scenario based testing in a staging environment that mirrors deployment, often with human operators observing to sign off that 'Yes, the agent’s behavior integrated is acceptable.' If any part of the chain fails (like the agent says 'open door' but the door system doesn’t get the message due to API mismatch), fix and re-test.
+- Testing: Simulate realistic user journeys and system level failures. Observe how the full stack behaves with the AI in place.
+- Evaluation: Confirm all functional and non-functional requirements are met, including error handling, data flow, latency, and user acceptance.
 
-Throughout integration & system testing, we also incorporate User Acceptance Testing (UAT) (especially if the AI system has end users). UAT means actual end users (or representative users) interact with the system in a test environment and provide feedback . For example, if it’s an internal AI tool for caseworkers, let a few caseworkers use it on sample cases to see if it fits their workflow and the outputs are understandable. Their feedback might highlight integration issues like 'The explanation text from AI is too technical for us' or 'The process now takes longer with the AI step, which is a problem.' This informs adjustments either in the AI or in process integration (maybe UI changes or additional training for users). We record metrics from UAT such as success rate of tasks with AI vs without, or user satisfaction ratings (which was also touched in module 6.8 below).
+#### Core practices
 
-The result of Integration & System Testing is typically a 'green light' that the system as a whole is ready. It ensures that the addition of AI hasn’t broken anything and indeed adds the expected value. Any defects found (often interface mismatches or data flow issues) are fixed, and then all critical end to end scenarios pass. We also verify that non functional requirements like overall system throughput, security compliance, and failover are still met with the AI in place . In a formal sense, this module may culminates in a System Test Report and a UAT Report that together support a major / strategic change go live decision by the project stakeholders.
+- Run end-to-end tests in an environment that mirrors production, including UAT (User Acceptance Testing) when applicable.
+- Trigger AI decisions through real entry points (forms, APIs, data inputs).
+- Test how AI interacts with downstream systems. E.g. APIs, DBs, queues, external services.
+- Simulate failures: invalid inputs, slow model responses, or missing data, and check that the system recovers or degrades gracefully.
+- Check integration state management, cross-component logic, security boundaries, and API contract adherence.
+- Measure end-to-end latency and system throughput with AI in the loop.
+
+#### Approaches by AI type
+
+- Rule-based systems
+
+  - Trigger rule logic through the full application flow, e.g. submit a form, invoke the rule engine, and validate the response (approve/deny/etc).
+  - Check edge cases where rules fail, throw exceptions, or return unexpected results. Verify if the system catch and report those errors cleanly.
+  - Test integration of the rule result into the wider flow. E.g. does the approval message display correctly? Is it saved to the database?
+  - Validate data types, API payloads, and contract correctness. E.g. if a rule rejects an application due to Rule 5, check that the user gets the correct message, and the rejection is logged properly downstream.
+
+- Machine learning models
+
+  - Test full-stack integration: data ingestion, model call, output parsing, downstream use.
+  - Check API payload contracts: are fields named and typed correctly?
+  - Test malformed or missing fields: does the system throw, retry, or recover?
+  - Profile latency through the full flow: model inference + serialisation + DB save time.
+  - Validate side effects: e.g. If a prediction triggers a status update, does the update happen?
+  - Test model error states: if it returns an error or empty result, does the system fail gracefully or retry?
+
+- Generative AI (LLMs)
+
+  - Test how the frontend handles variable output lengths: e.g. does a paragraph overflow the UI?
+  - Run prompt pipelines with image or text generation: does the output render correctly? Are any safety filters triggered?
+  - Simulate blocked outputs (e.g. moderation fails): does the system degrade cleanly? Does it show a fallback message? E.g. a chatbot refuses to respond due to a bad prompt, does the UI crash or show 'Sorry, the AI is unavailable?'
+  - For tools using AI to draft content (emails, reports, UI copy), ensure generated text is editable, storable, and free of encoding issues.
+  - Check state handling. E.g. if a user restarts midway, is the AI state lost or persisted correctly?
+
+- Agentic AI (autonomous agents)
+
+  - If the agent controls or triggers real-world actions, test the full command chain. E.g. scheduler agent generates a task, system sends to DB, triggers notification, task appears in staff UI. Does every step work
+  - Test with real or simulated actuators: does the agent’s command actually cause the expected real-world action?
+  - Observe agent integration with humans: e.g. does it update a dashboard, notify a team, hand off to a person when needed?
+  - For multi-agent systems, test for cross-talk: do agents interfere, duplicate, or miss actions?
+  - Handle AI decision misalignment: e.g. agent thinks the door should open, but the physical lock doesn’t respond. Can the system recover?.
+
+#### Example Tests with Steps
+
+- Rules: Submit a form, rule engine, approval/denial, database save, user message.
+- ML: Send live JSON, model API, receive prediction, check DB and UI reflect it correctly.
+- Generative: User prompt, LLM, long output, test display in UI, test moderation layer.
+- Agentic: Simulate task assignment by agent, track whether task is acted on, verify feedback loop completion.
+
+#### Metrics - Example
+
+- End-to-end success rate: ≥ 95% for common flows.
+- Latency: ≤ 2s from input to full system response.
+- Integration failure rate: ≤ 1% of API calls return unexpected errors.
+- UAT pass rate: ≥ 90% of tasks successfully completed with AI in place.
+- Error recovery coverage: ≥ 90% of failures trigger retry or fallback, not system crash.
+
+#### Evidence and Artefacts
+
+- Full integration test suite results.
+- Logs from full-stack simulations (inputs, model outputs, downstream actions).
+- UAT feedback and success/failure logs.
+- Screenshots or videos of system behaviour under edge conditions.
+- Contracts and schemas used for API payloads or DB integration.
+- Test reports covering regression and cross-environment compatibility (test/stage/prod).
+
+#### Common Pitfalls
+
+- Only testing the AI in isolation, hence missing integration bugs.
+- Skipping malformed input or failure scenarios.
+- Poor state handling, e.g. user refreshes browser and AI session is lost.
+- Failing to check downstream effects, e.g. prediction result isn’t saved or propagated.
+- Assuming AI outputs are always “safe”. Test system response to inappropriate or incomplete AI content.
+
+When this module is done properly, this gives you confidence the AI can be deployed without disrupting the end-to-end user or system journey.
 
 ### User Acceptance & Ethical Review Module
 
