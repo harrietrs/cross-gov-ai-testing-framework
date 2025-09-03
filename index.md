@@ -1040,14 +1040,91 @@ When this module is done properly, this gives you confidence the AI can be deplo
 
 ### User Acceptance & Ethical Review Module
 
-**Objective:** This module serves a dual purpose at the final validation stage: (1) User Acceptance Testing (UAT) to ensure the AI system is accepted by and works well for the end users (be they citizens, government staff, or other stakeholders), and (2) an Ethical Review to formally evaluate and sign off that the AI system meets ethical standards and legal requirements prior to full deployment. Essentially, it’s the human centric check: do people find the system usable, useful, and trustworthy, and do oversight bodies concur that it’s being deployed responsibly?
-This stage often involves stakeholders beyond the core development/test team, including actual users in a pilot, ethics or compliance boards, data privacy officers, etc. It is both about gathering qualitative feedback and doing a final risk benefit assessment from an ethical standpoint.
+#### Objective
 
-**Key activities** include (a) Run a pilot or beta release with real users and collect their feedback on the AI’s functionality, usability, and impact., (b) Conduct training or briefing for users (if needed) and see if they understand how to use the AI and interpret its outputs., (c) Possibly run an ethical impact assessment or algorithmic transparency assessment as a formal step, if not done already.
-This results in either an approval to go live (maybe with conditions or monitoring requirements) or a request for changes if something is deemed unacceptable.
+This module is the final gate before deployment. It has two purposes:
 
-The result of User Acceptance & Ethical Review is essentially the human green light. It ensures that the people using the AI are on-board and prepared, and that the organization has fulfilled its duty of care about the AI’s societal and ethical impact. In documentation, this could be captured in an UAT report summarizing user feedback and how issues were resolved, and an Ethics Approval document or a meeting minutes excerpt that lists any remaining risks and how they’re mitigated or accepted.
-By passing this module, the AI project moves from testing into operational deployment with confidence that both technical and human factors are accounted for. It’s the final gate reinforcing that the AI is not only technically sound but also appropriate and responsible to deploy in the real world.
+- User Acceptance Testing (UAT): to verify that the AI system works for the people it’s built for (e.g. citizens, staff, operators).
+- Ethical Review: to confirm the system meets legal, ethical, and societal expectations.
+
+At this stage, the focus shifts from technical readiness to real world fitness. Do people find the AI system usable, understandable, and trustworthy? Can oversight bodies sign off on its responsible deployment?
+
+#### Testing and Evaluation
+
+- Testing: Pilot the system with real users and gather direct feedback on usability, outcomes, and comprehension.
+- Evaluation: Conduct ethical risk assessments, transparency reviews, and verify that any residual concerns have been addressed.
+
+#### Core practices
+
+- Run a pilot or beta phase with representative users, using real scenarios and real tasks.
+- Capture structured feedback on:
+  - Usability
+  - Comprehension of AI outputs
+  - Perceived fairness, reliability, and trust
+- Conduct briefings or training to see if users can correctly interpret and act on AI decisions.
+- Facilitate an Ethical Review (if not already done earlier):
+  - AI transparency and explainability
+  - Bias and fairness risks
+  - Data privacy implications
+  - Impact on human roles or workflows
+- Hold a sign-off session with relevant stakeholders (e.g. ethics board, data privacy office, domain leaders) to review any outstanding risks.
+
+#### Approaches by AI type
+
+- Rule-based systems
+
+  - Validate that rule outcomes are understandable to end users.
+  - Test if users know why a decision was made and whether they trust it. E.g. in a staff-facing system, users should understand and agree with “This was rejected due to Rule 4: Insufficient documentation.”
+
+- Machine learning models
+
+  - Ensure users are shown explanations alongside outputs (if needed), and check if they understand them.
+  - Review human-AI decision boundaries: when does a human need to override or question the model?. E.g. A caseworker should know what to do if the model recommends denial, but the facts suggest approval.
+
+- Generative AI (LLMs)
+
+  - Test with non-technical users — can they tell when the AI is hallucinating, biased, or off-topic?
+  - Verify if prompts and outputs are appropriate, understandable, and safe for their intended context.
+
+- Agentic AI
+
+  - Confirm that human supervisors can understand agent behaviour and override or intervene when necessary.
+  - Validate that agents follow human preferences or constraints, and that outcomes are acceptable across varied scenarios. E.g. A scheduling agent must prioritise urgent tasks appropriately and not ignore user-defined constraints.
+
+#### Example Activities
+
+- Pilot testing with a defined group of users (internal or external).
+- Surveys or interviews after using the AI: 'Did the system make sense?', 'Would you trust it?', 'Were you able to act on the AI’s recommendation?'
+- Ethics panel review, including sign-off or conditional approval.
+- User walkthroughs where users explain what they think the AI is doing: check for misunderstandings or gaps.
+- Training material validation: do the guides and help prompts work for your user base?
+
+#### Metrics - Example
+
+- Task success rate (with vs without AI): ≥ 90%.
+- User comprehension score: ≥ 80% of users correctly interpret AI recommendations.
+- Trust/acceptance rating: ≥ 75% of users say they’d use the AI again.
+- Ethics review status: Signed off, or conditions agreed.
+- Residual risks: Documented and accepted or mitigated (none critical outstanding)
+
+#### Evidence and Artefacts
+
+- Pilot test plans, logs, and feedback summaries.
+- UAT success/failure data.
+- Recordings or transcripts of user walkthroughs.
+- Training materials and documentation.
+- Ethics review notes and sign-off record.
+- Final risk and impact assessment (ethical and operational).
+
+#### Common Pitfalls
+
+- Skipping this stage or treating it as a tick-box exercise.
+- Using technical users as stand-ins for actual end users.
+- Failing to provide guidance or support — especially for AI systems with open-ended outputs.
+- Not documenting residual risks or ethical concerns — these must be formally acknowledged.
+- Ignoring qualitative feedback, especially about usability or clarity.
+
+When this module is complete, you should have high confidence that real users can work with the AI system safely and effectively.
 
 ### Continuous Monitoring & Improvement Module
 
