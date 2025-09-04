@@ -1234,6 +1234,32 @@ When this module is embedded into your operating model, AI becomes a live servic
 
 > While automation and AI reduce manual effort, they may inadvertently contribute to the degradation of critical human skills over time. This risk can compromise Human in the Loop (HITL) systems, where effective oversight relies on staff retaining domain knowledge and decision making ability. Organisations should assess the risk of skill loss, particularly in areas where: Staff serve as safety backstops (e.g. validating AI outputs), Manual recovery may be needed (e.g. outages or model failures)
 
+## Mapping AI Quality Attributes to Lifecycle and Assurance Modules
+
+| Quality Attribute     | Lifecycle Stages                                                      | Testing Modules                                      |
+|-----------------------|------------------------------------------------------------------------|------------------------------------------------------|
+| Autonomy              | Model Dev & Training, Validation & Verification, Operational Readiness | Robustness & Adversarial Testing, System Testing     |
+| Fairness              | Data Collection & Preparation, Validation & Verification, Monitoring          | Bias & Fairness Testing, Continuous Monitoring       |
+| Safety                | Model Dev & Training, Validation & Verification, Operational Readiness | Robustness & Adversarial Testing, Performance Testing|
+| Ethical Compliance    | Planning & Design, Validation, Deployment                              | User Acceptance & Ethical Review, Continuous Monitoring|
+| Side Effects & Reward Hacking   | Model Dev & Training, Validation & Verification, Operational Readiness | Robustness & Adversarial Testing, Ethical Review     |
+| Security              | Validation & Verification, Deployment, Monitoring                      | Robustness & Adversarial Testing, Continuous Monitoring|
+| Transparency          | Planning & Design, Dev & Training, Validation, Operational Readiness   | Explainability & Transparency, Continuous Monitoring |
+| Explainability        | Dev & Training, Validation & Verification                              | Explainability & Transparency                        |
+| Accountability        | Planning & Design, Validation & Verification                           | Explainability & Transparency, Ethical Review        |
+| Compliance            | Planning & Design, Validation, Monitoring                              | Continuous Monitoring, Ethical Review                |
+| Functional Suitability| Validation & Verification                                              | System & Integration Testing                         |
+| Performance Efficiency| Dev & Training, Validation, Operational Readiness                      | Performance & Efficiency Testing                     |
+| Reliability           | Validation & Verification, Operational Readiness                       | Robustness & Adversarial Testing, Performance Testing|
+| Maintainability       | Dev & Training, Monitoring                                              | Continuous Monitoring & Improvement                  |
+| Evolution             | Operational Readiness, Monitoring                                      | Continuous Monitoring & Improvement                  |
+| Usability             | Validation & Verification, Deployment                                  | User Acceptance & Ethical Review, System Testing     |
+| Accessibility         | Validation & Verification                                              | System & Integration Testing                         |
+| Compatibility         | Deployment                                                             | System & Integration Testing                         |
+| Portability           | Operational Readiness                                                  | Performance & Efficiency Testing                     |
+| Adaptability          | Monitoring & Continuous Assurance                                      | Continuous Monitoring & Improvement                  |
+| Data Correctness      | Data Collection & Preparation                                          | Bias & Fairness Testing                              |
+
 ## Tools and Resources for Testing
 
 This framework does not mandate specific tools. Departments should select tools that align with their testing needs, guided by appropriate governance, risk assessments, and testing goals.
