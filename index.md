@@ -1255,7 +1255,7 @@ When this module is embedded into your operating model, AI becomes a live servic
 | Maintainability       | Dev & Training, Monitoring                                              | Continuous Monitoring & Improvement                  |
 | Evolution             | Operational Readiness, Monitoring                                      | Continuous Monitoring & Improvement                  |
 | Usability             | Validation & Verification, Deployment                                  | User Acceptance & Ethical Review, System Testing     |
-| Accessibility         | Validation & Verification                                              | System & Integration Testing                         |
+| Accessibility         | Planning & Design, Validation & Verification                                              | System & Integration Testing                         |
 | Compatibility         | Validation & Verification                                                             | System & Integration Testing                         |
 | Portability           | Operational Readiness                                                  | Performance & Efficiency Testing                     |
 | Adaptability          | Monitoring & Continuous Assurance                                      | Continuous Monitoring & Improvement                  |
