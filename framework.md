@@ -36,9 +36,10 @@
    - [User Acceptance & Ethical Review](#user-acceptance--ethical-review-module)
    - [Continuous Monitoring & Improvement](#continuous-monitoring--improvement-module)
 
-7. [Tools and Resources for Testing](#tools-and-resources-for-testing)
-8. [Conclusion](#conclusion)
-9. [Review Log](#review-log)
+7. [Mapping AI Quality Attributes to Lifecycle and Assurance Modules](#mapping-ai-quality-attributes-to-lifecycle-and-assurance-modules)
+8. [Tools and Resources for Testing](#tools-and-resources-for-testing)
+9. [Conclusion](#conclusion)
+10. [Review Log](#review-log)
 
 ## Executive Summary
 
@@ -1236,7 +1237,7 @@ When this module is embedded into your operating model, AI becomes a live servic
 
 ## Mapping AI Quality Attributes to Lifecycle and Assurance Modules
 
-| Quality Attribute     | Lifecycle Stages                                                      | Testing Modules                                      |
+| Quality Attribute     | Lifecycle Stages                                                      | Testing/Evaluation Modules                                      |
 |-----------------------|------------------------------------------------------------------------|------------------------------------------------------|
 | Autonomy              | Model Dev & Training, Validation & Verification, Operational Readiness | Robustness & Adversarial Testing, System Testing     |
 | Fairness              | Data Collection & Preparation, Validation & Verification, Monitoring          | Bias & Fairness Testing, Continuous Monitoring       |
@@ -1255,7 +1256,7 @@ When this module is embedded into your operating model, AI becomes a live servic
 | Evolution             | Operational Readiness, Monitoring                                      | Continuous Monitoring & Improvement                  |
 | Usability             | Validation & Verification, Deployment                                  | User Acceptance & Ethical Review, System Testing     |
 | Accessibility         | Validation & Verification                                              | System & Integration Testing                         |
-| Compatibility         | Deployment                                                             | System & Integration Testing                         |
+| Compatibility         | Validation & Verification                                                             | System & Integration Testing                         |
 | Portability           | Operational Readiness                                                  | Performance & Efficiency Testing                     |
 | Adaptability          | Monitoring & Continuous Assurance                                      | Continuous Monitoring & Improvement                  |
 | Data Correctness      | Data Collection & Preparation                                          | Bias & Fairness Testing                              |
