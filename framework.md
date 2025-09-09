@@ -496,7 +496,6 @@ The table below shows where each quality attribute is covered across the modular
 | **Adaptability**          |                          |                        |                          |                               |                               |                               |                             |                        | ✅                                   |
 | **Data Correctness**      | ✅                        |                        |                          |                               |                               |                               |                             |                        | ✅                                   |
 
-
 There are 9 modules in this framework:
 
 - [Data & Input Validation](#data--input-validation-module)
