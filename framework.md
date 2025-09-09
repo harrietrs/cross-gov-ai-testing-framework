@@ -36,10 +36,9 @@
    - [User Acceptance & Ethical Review](#user-acceptance--ethical-review-module)
    - [Continuous Monitoring & Improvement](#continuous-monitoring--improvement-module)
 
-7. [Mapping AI Quality Attributes to Lifecycle and Assurance Modules](#mapping-ai-quality-attributes-to-lifecycle-and-assurance-modules)
-8. [Tools and Resources for Testing](#tools-and-resources-for-testing)
-9. [Conclusion](#conclusion)
-10. [Review Log](#review-log)
+7. [Tools and Resources for Testing](#tools-and-resources-for-testing)
+8. [Conclusion](#conclusion)
+9. [Review Log](#review-log)
 
 ## Executive Summary
 
@@ -242,6 +241,32 @@ These principles encourage testers and project teams to look at AI quality from 
 Assuring an AI system’s quality is not a one-time event, it must be woven through the entire AI development lifecycle. In this framework, we adopt a continuous defensive assurance model, identifying key testing activities and deliverables at each phase of an AI project. Below provides an overview of each phase, what the testing/assurance focus is, and examples of metrics or outcomes to measure:
 
 ![Defensive model for AI testing framework](assets/img/defensive delivery.png)
+
+The table below shows where in the lifecycle each quality attribute should be considered. It helps you identify when to test, and validate specific characteristics of your AI system.
+
+| Quality Attribute          | Planning/Design | Data Collection/Prep | Model Dev & Training | Validation/Verification | Operational Readiness | Deployment | Monitoring/Continuous Assurance |
+|---------------------------|-------------------|-------------------------|-----------------------|---------------------------|------------------------|------------|----------------------------------|
+| **Autonomy**              |                   |                         | ✅                    | ✅                        | ✅                     |            |                                  |
+| **Fairness**              |                   | ✅                       |                       | ✅                        |                        |            | ✅                                |
+| **Safety**                |                   |                         | ✅                    | ✅                        | ✅                     |            |                                  |
+| **Ethical Compliance**    | ✅                 |                         |                       | ✅                        |                        | ✅         |                                  |
+| **Side Effects / Hacking**|                   |                         | ✅                    | ✅                        | ✅                     |            |                                  |
+| **Security**              | ✅                  |                         |                       | ✅                        |                        | ✅         | ✅                                |
+| **Transparency**          | ✅                 |                         | ✅                    | ✅                        | ✅                     |            | ✅                                |
+| **Explainability**        |                   |                         | ✅                    | ✅                        |                        |            |                                  |
+| **Accountability**        | ✅                 |                         |                       | ✅                        |                        |            | ✅                                |
+| **Compliance**            | ✅                 |                         |                       | ✅                        |                        | ✅         | ✅                                |
+| **Functional Suitability**|                   |                         |                       | ✅                        |                        |            |                                  |
+| **Performance Efficiency**|                   |                         | ✅                    | ✅                        | ✅                     |            |                                  |
+| **Reliability**           |                   |                         |                       | ✅                        | ✅                     |            |                                  |
+| **Maintainability**       |                   |                         | ✅                    |                           |                        |            | ✅                                |
+| **Evolution**             |                   |                         |                       |                           | ✅                     |            | ✅                                |
+| **Usability**             |                   |                         |                       | ✅                        |                        | ✅         |                                  |
+| **Accessibility**         | ✅                 |                         |                       | ✅                        |                        |            |                                  |
+| **Compatibility**         |                   |                         |                       | ✅                        |                        |            |                                  |
+| **Portability**           |                   |                         |                       |                           | ✅                     |            |                                  |
+| **Adaptability**          |                   |                         |                       |                           | ✅                     |            | ✅                                |
+| **Data Correctness**      |                   | ✅                       |                       | ✅                        |                        |            | ✅                                |
 
 The framework covers both the build phase (data preparation, model training, and validation, where models are developed and weights may change) and the use phase (deployment and ongoing monitoring, where models operate in real-world conditions and need continuous evaluation for drift, bias, and robustness). Together, these ensure AI systems remain safe, fair, and accountable across their entire lifecycle.
 
@@ -1235,32 +1260,6 @@ When this module is embedded into your operating model, AI becomes a live servic
 
 > While automation and AI reduce manual effort, they may inadvertently contribute to the degradation of critical human skills over time. This risk can compromise Human in the Loop (HITL) systems, where effective oversight relies on staff retaining domain knowledge and decision making ability. Organisations should assess the risk of skill loss, particularly in areas where: Staff serve as safety backstops (e.g. validating AI outputs), Manual recovery may be needed (e.g. outages or model failures)
 
-## Mapping AI Quality Attributes to Lifecycle and Assurance Modules
-
-| Quality Attribute     | Lifecycle Stages                                                      | Testing/Evaluation Modules                                      |
-|-----------------------|------------------------------------------------------------------------|------------------------------------------------------|
-| Autonomy              | Model Dev & Training, Validation & Verification, Operational Readiness | Robustness & Adversarial Testing, System Testing     |
-| Fairness              | Data Collection & Preparation, Validation & Verification, Monitoring          | Bias & Fairness Testing, Continuous Monitoring       |
-| Safety                | Model Dev & Training, Validation & Verification, Operational Readiness | Robustness & Adversarial Testing, Performance Testing|
-| Ethical Compliance    | Planning & Design, Validation, Deployment                              | User Acceptance & Ethical Review, Continuous Monitoring|
-| Side Effects & Reward Hacking   | Model Dev & Training, Validation & Verification, Operational Readiness | Robustness & Adversarial Testing, Ethical Review     |
-| Security              | Validation & Verification, Deployment, Monitoring                      | Robustness & Adversarial Testing, Continuous Monitoring|
-| Transparency          | Planning & Design, Dev & Training, Validation, Operational Readiness   | Explainability & Transparency, Continuous Monitoring |
-| Explainability        | Dev & Training, Validation & Verification                              | Explainability & Transparency                        |
-| Accountability        | Planning & Design, Validation & Verification                           | Explainability & Transparency, Ethical Review        |
-| Compliance            | Planning & Design, Validation, Monitoring                              | Continuous Monitoring, Ethical Review                |
-| Functional Suitability| Validation & Verification                                              | System & Integration Testing                         |
-| Performance Efficiency| Dev & Training, Validation, Operational Readiness                      | Performance & Efficiency Testing                     |
-| Reliability           | Validation & Verification, Operational Readiness                       | Robustness & Adversarial Testing, Performance Testing|
-| Maintainability       | Dev & Training, Monitoring                                              | Continuous Monitoring & Improvement                  |
-| Evolution             | Operational Readiness, Monitoring                                      | Continuous Monitoring & Improvement                  |
-| Usability             | Validation & Verification, Deployment                                  | User Acceptance & Ethical Review, System Testing     |
-| Accessibility         | Planning & Design, Validation & Verification                                              | System & Integration Testing                         |
-| Compatibility         | Validation & Verification                                                             | System & Integration Testing                         |
-| Portability           | Operational Readiness                                                  | Performance & Efficiency Testing                     |
-| Adaptability          | Monitoring & Continuous Assurance                                      | Continuous Monitoring & Improvement                  |
-| Data Correctness      | Data Collection & Preparation                                          | Bias & Fairness Testing                              |
-
 ## Tools and Resources for Testing
 
 This framework does not mandate specific tools. Departments should select tools that align with their testing needs, guided by appropriate governance, risk assessments, and testing goals.
@@ -1282,7 +1281,7 @@ The responsible deployment of Artificial Intelligence in public services require
 
 | Action | Name                 |  Date          |
 |:-------|:---------------------|:---------------|
-|Author | **Mibin Boban**   <br> X-Gov Testing Community Chair / Head of Quality Engineering - GDS | 5/6/2025|
+|Author | **Mibin Boban**   <br> xGov Testing Community Chair / Head of Quality Engineering - GDS | 5/6/2025|
 |Working Group Review|1. **Dinesh KTJ**   <br> Principal Test Engineer - Home Office  | 16/6/2025  |
 |               |2. **David Lee**   <br> Lead Technical Architect - GDS  | 17/6/2025  |
 |               |3. **Vas Ntokas**   <br> Lead Test Engineer - DWP  | 18/6/2025  |
