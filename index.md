@@ -243,6 +243,32 @@ Assuring an AI system’s quality is not a one-time event, it must be woven thro
 
 ![Defensive model for AI testing framework](assets/img/defensive delivery.png)
 
+The table below shows where in the lifecycle each quality attribute should be considered. It helps you identify when to test, and validate specific characteristics of your AI system.
+
+| Quality Attribute          | Planning/Design | Data Collection/Prep | Model Dev & Training | Validation/Verification | Operational Readiness | Deployment | Monitoring/Continuous Assurance |
+|---------------------------|-------------------|-------------------------|-----------------------|---------------------------|------------------------|------------|----------------------------------|
+| **Autonomy**              |                   |                         | ✅                    | ✅                        | ✅                     |            |                                  |
+| **Fairness**              |                   | ✅                       |                       | ✅                        |                        |            | ✅                                |
+| **Safety**                |                   |                         | ✅                    | ✅                        | ✅                     |            |                                  |
+| **Ethical Compliance**    | ✅                 |                         |                       | ✅                        |                        | ✅         |                                  |
+| **Side Effects / Hacking**|                   |                         | ✅                    | ✅                        | ✅                     |            |                                  |
+| **Security**              | ✅                  |                         |                       | ✅                        |                        | ✅         | ✅                                |
+| **Transparency**          | ✅                 |                         | ✅                    | ✅                        | ✅                     |            | ✅                                |
+| **Explainability**        |                   |                         | ✅                    | ✅                        |                        |            |                                  |
+| **Accountability**        | ✅                 |                         |                       | ✅                        |                        |            | ✅                                |
+| **Compliance**            | ✅                 |                         |                       | ✅                        |                        | ✅         | ✅                                |
+| **Functional Suitability**|                   |                         |                       | ✅                        |                        |            |                                  |
+| **Performance Efficiency**|                   |                         | ✅                    | ✅                        | ✅                     |            |                                  |
+| **Reliability**           |                   |                         |                       | ✅                        | ✅                     |            |                                  |
+| **Maintainability**       |                   |                         | ✅                    |                           |                        |            | ✅                                |
+| **Evolution**             |                   |                         |                       |                           | ✅                     |            | ✅                                |
+| **Usability**             |                   |                         |                       | ✅                        |                        | ✅         |                                  |
+| **Accessibility**         | ✅                 |                         |                       | ✅                        |                        |            |                                  |
+| **Compatibility**         |                   |                         |                       | ✅                        |                        |            |                                  |
+| **Portability**           |                   |                         |                       |                           | ✅                     |            |                                  |
+| **Adaptability**          |                   |                         |                       |                           | ✅                     |            | ✅                                |
+| **Data Correctness**      |                   | ✅                       |                       | ✅                        |                        |            | ✅                                |
+
 The framework covers both the build phase (data preparation, model training, and validation, where models are developed and weights may change) and the use phase (deployment and ongoing monitoring, where models operate in real-world conditions and need continuous evaluation for drift, bias, and robustness). Together, these ensure AI systems remain safe, fair, and accountable across their entire lifecycle.
 
 ### Planning and Design
@@ -1282,7 +1308,7 @@ The responsible deployment of Artificial Intelligence in public services require
 
 | Action | Name                 |  Date          |
 |:-------|:---------------------|:---------------|
-|Author | **Mibin Boban**   <br> X-Gov Testing Community Chair / Head of Quality Engineering - GDS | 5/6/2025|
+|Author | **Mibin Boban**   <br> xGov Testing Community Chair / Head of Quality Engineering - GDS | 5/6/2025|
 |Working Group Review|1. **Dinesh KTJ**   <br> Principal Test Engineer - Home Office  | 16/6/2025  |
 |               |2. **David Lee**   <br> Lead Technical Architect - GDS  | 17/6/2025  |
 |               |3. **Vas Ntokas**   <br> Lead Test Engineer - DWP  | 18/6/2025  |
