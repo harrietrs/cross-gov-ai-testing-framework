@@ -472,7 +472,7 @@ While the defensive assurance approach tells us when to perform testing activiti
 
 The table below shows where each quality attribute is covered across the modular AI testing approach. It helps align your assurance effort across all modules.
 
-| Quality Attribute          | Data & Input Validation | Functionality Testing | Bias & Fairness Testing | Explainability & Transparency | Robustness & Adversarial Testing | Performance & Efficiency Testing | System & Integration Testing | UAT & Ethical Review | Continuous Monitoring & Improvement |
+| Quality Attribute          | Data&Input Validation | Functionality Testing | Bias&Fairness Testing | Explainability &Transparency | Robustness &Adversarial Testing | Performance &Efficiency Testing | System &Integration Testing | UAT &Ethical Review | Continuous Monitoring &Improvement |
 |---------------------------|--------------------------|------------------------|--------------------------|-------------------------------|-------------------------------|-------------------------------|-----------------------------|----------------------|-------------------------------------|
 | **Autonomy**              |                          |                        |                          |                               | ✅                             |                               | ✅                           |                        |                                     |
 | **Fairness**              |                          |                        | ✅                        |                               |                               |                               |                             |                        | ✅                                   |
