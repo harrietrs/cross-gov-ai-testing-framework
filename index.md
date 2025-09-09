@@ -36,10 +36,9 @@
    - [User Acceptance & Ethical Review](#user-acceptance--ethical-review-module)
    - [Continuous Monitoring & Improvement](#continuous-monitoring--improvement-module)
 
-7. [Mapping AI Quality Attributes to Lifecycle and Assurance Modules](#mapping-ai-quality-attributes-to-lifecycle-and-assurance-modules)
-8. [Tools and Resources for Testing](#tools-and-resources-for-testing)
-9. [Conclusion](#conclusion)
-10. [Review Log](#review-log)
+7. [Tools and Resources for Testing](#tools-and-resources-for-testing)
+8. [Conclusion](#conclusion)
+9. [Review Log](#review-log)
 
 ## Executive Summary
 
@@ -1260,32 +1259,6 @@ Deploying AI isn’t the end of assurance, it’s the beginning of live operatio
 When this module is embedded into your operating model, AI becomes a live service, not a frozen product. It’s how you keep your system effective, lawful, and trustworthy, even as everything around it changes.
 
 > While automation and AI reduce manual effort, they may inadvertently contribute to the degradation of critical human skills over time. This risk can compromise Human in the Loop (HITL) systems, where effective oversight relies on staff retaining domain knowledge and decision making ability. Organisations should assess the risk of skill loss, particularly in areas where: Staff serve as safety backstops (e.g. validating AI outputs), Manual recovery may be needed (e.g. outages or model failures)
-
-## Mapping AI Quality Attributes to Lifecycle and Assurance Modules
-
-| Quality Attribute     | Lifecycle Stages                                                      | Testing/Evaluation Modules                                      |
-|-----------------------|------------------------------------------------------------------------|------------------------------------------------------|
-| Autonomy              | Model Dev & Training, Validation & Verification, Operational Readiness | Robustness & Adversarial Testing, System Testing     |
-| Fairness              | Data Collection & Preparation, Validation & Verification, Monitoring          | Bias & Fairness Testing, Continuous Monitoring       |
-| Safety                | Model Dev & Training, Validation & Verification, Operational Readiness | Robustness & Adversarial Testing, Performance Testing|
-| Ethical Compliance    | Planning & Design, Validation, Deployment                              | User Acceptance & Ethical Review, Continuous Monitoring|
-| Side Effects & Reward Hacking   | Model Dev & Training, Validation & Verification, Operational Readiness | Robustness & Adversarial Testing, Ethical Review     |
-| Security              | Validation & Verification, Deployment, Monitoring                      | Robustness & Adversarial Testing, Continuous Monitoring|
-| Transparency          | Planning & Design, Dev & Training, Validation, Operational Readiness   | Explainability & Transparency, Continuous Monitoring |
-| Explainability        | Dev & Training, Validation & Verification                              | Explainability & Transparency                        |
-| Accountability        | Planning & Design, Validation & Verification                           | Explainability & Transparency, Ethical Review        |
-| Compliance            | Planning & Design, Validation, Monitoring                              | Continuous Monitoring, Ethical Review                |
-| Functional Suitability| Validation & Verification                                              | System & Integration Testing                         |
-| Performance Efficiency| Dev & Training, Validation, Operational Readiness                      | Performance & Efficiency Testing                     |
-| Reliability           | Validation & Verification, Operational Readiness                       | Robustness & Adversarial Testing, Performance Testing|
-| Maintainability       | Dev & Training, Monitoring                                              | Continuous Monitoring & Improvement                  |
-| Evolution             | Operational Readiness, Monitoring                                      | Continuous Monitoring & Improvement                  |
-| Usability             | Validation & Verification, Deployment                                  | User Acceptance & Ethical Review, System Testing     |
-| Accessibility         | Planning & Design, Validation & Verification                                              | System & Integration Testing                         |
-| Compatibility         | Validation & Verification                                                             | System & Integration Testing                         |
-| Portability           | Operational Readiness                                                  | Performance & Efficiency Testing                     |
-| Adaptability          | Monitoring & Continuous Assurance                                      | Continuous Monitoring & Improvement                  |
-| Data Correctness      | Data Collection & Preparation                                          | Bias & Fairness Testing                              |
 
 ## Tools and Resources for Testing
 
