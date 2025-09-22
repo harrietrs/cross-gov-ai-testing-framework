@@ -1,4 +1,4 @@
-![Public Beta](https://img.shields.io/badge/Phase-Public%20Beta-blue)
+![Live](https://img.shields.io/badge/Phase-Live-green)
 
 # AI Testing and Assurance Framework for Public Sector
 
