@@ -1317,5 +1317,6 @@ The responsible deployment of Artificial Intelligence in public services require
 |Review|1. **Nayyab Naqvi**   <br> Principal Technologist for AI in the Public Sector - DSIT  | 27/8/2025  |
 |      |2. **Bharathi Sudanagunta**   <br> Test Manager - MHRA  | 27/8/2025  |
 |      |3. **Carla Chiodi**   <br> Senior AI Engineer - 2i Testing | 31/7/2025  |
+|      |4. **Zane Roett**   <br> Lead Test Manager - DfE | 31/7/2025  |
 
 >An initiative by the Cross Government Testing Community (UK)
