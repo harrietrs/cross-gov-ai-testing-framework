@@ -36,6 +36,7 @@ This framework supports the goal to ensure AI systems are ethical, transparent, 
 |Review|1. **Nayyab Naqvi**   <br> Principal Technologist for AI in the Public Sector - DSIT  | 27/8/2025  |
 |      |2. **Bharathi Sudanagunta**   <br> Test Manager - MHRA  | 27/8/2025  |
 |      |3. **Carla Chiodi**   <br> Senior AI Engineer - 2i Testing | 31/7/2025  |
+|      |4. **Zane Roett**   <br> Lead Test Manager - DfE | 31/7/2025  |
 
 ## 📄 Licence
 
