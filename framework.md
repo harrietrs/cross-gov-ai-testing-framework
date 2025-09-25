@@ -1297,7 +1297,7 @@ We encourage teams to refer to the UK Government AI Playbook, which provides pra
 - [Secure AI System Development](https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development)
 - [GenAI Top10 Risks and Mitigations](https://genai.owasp.org/llm-top-10/)
 - [GOV.UK AI Insights](https://www.gov.uk/government/publications/ai-insights)
-- [DSIT Introdction to AI Assurance](https://assets.publishing.service.gov.uk/media/65ccf508c96cf3000c6a37a1/Introduction_to_AI_Assurance.pdf)
+- [DSIT Introduction to AI Assurance](https://assets.publishing.service.gov.uk/media/65ccf508c96cf3000c6a37a1/Introduction_to_AI_Assurance.pdf)
 
 ## Conclusion
 
